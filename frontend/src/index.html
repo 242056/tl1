@@ -1,0 +1,954 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ВТБ MVP: Диалог и Анти-Гугл</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <style>
+      :root {
+        --bg: #f2f7fb;
+        --card: #ffffff;
+        --ink: #1a2b3a;
+        --muted: #5e7488;
+        --accent: #0f5ea8;
+        --accent2: #00a3a3;
+        --warn: #b85800;
+        --danger: #b0303a;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+        background: radial-gradient(circle at 15% 10%, #dceefb 0%, var(--bg) 40%, #e8f4ef 100%);
+        color: var(--ink);
+      }
+      .wrap {
+        max-width: 980px;
+        margin: 16px auto;
+        padding: 0 16px;
+        display: grid;
+        gap: 16px;
+        grid-template-columns: 1fr 1fr;
+      }
+      .card {
+        background: var(--card);
+        border-radius: 14px;
+        box-shadow: 0 12px 28px rgba(16, 44, 70, 0.12);
+        padding: 14px;
+      }
+      h1, h2 { margin: 0 0 12px; }
+      h1 { font-size: 18px; }
+      h2 { font-size: 16px; }
+      textarea, input, select, button {
+        width: 100%;
+        padding: 9px 10px;
+        border-radius: 10px;
+        border: 1px solid #c9d7e3;
+        font-size: 13px;
+      }
+      button {
+        background: linear-gradient(90deg, var(--accent), var(--accent2));
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      button:disabled {
+        cursor: not-allowed;
+        opacity: 0.75;
+      }
+      .btn-loading {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+      .spinner {
+        width: 14px;
+        height: 14px;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        border-top-color: #ffffff;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+      .row { display: grid; gap: 10px; margin-bottom: 10px; }
+      .reply {
+        background: #edf5ff;
+        border-left: 4px solid var(--accent);
+        padding: 10px;
+        border-radius: 10px;
+        margin-top: 10px;
+        white-space: pre-wrap;
+      }
+      .muted { color: var(--muted); font-size: 13px; }
+      .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+      .chip {
+        background: #e5eef7;
+        color: #214765;
+        padding: 6px 10px;
+        border-radius: 16px;
+        font-size: 12px;
+      }
+      .chip-btn {
+        border: none;
+        cursor: pointer;
+      }
+      .section { border-top: 1px solid #e1eaf2; margin-top: 6px; padding-top: 6px; }
+      .section > ul, .section > strong + ul { margin: 0; padding-left: 16px; }
+      .section > strong { display: block; margin-bottom: 2px; }
+      ul { padding-left: 16px; margin: 0; }
+      .section ul { margin: 0; }
+      .section strong { display: block; margin-top: 2px; }
+      .disc { font-size: 12px; color: #34495c; background: #f6fbff; padding: 10px; border-radius: 10px; }
+      .sources a { color: var(--accent); text-decoration: none; }
+      .sources li { margin-bottom: 6px; }
+      .pill { display: inline-block; margin-right: 6px; padding: 3px 8px; border-radius: 999px; font-size: 11px; background: #eef8f8; color: #156666; }
+      .warn { color: var(--warn); }
+      .danger { color: var(--danger); }
+      .chat-shell {
+        border: 1px solid #d6e3ee;
+        border-radius: 14px;
+        overflow: hidden;
+        background: #f7fbff;
+      }
+      .chat-log {
+        height: 360px;
+        overflow-y: auto;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .chart-bubble {
+        align-self: flex-start;
+        width: 100%;
+        max-width: 100%;
+        background: #f0f6ff;
+        border-radius: 14px;
+        padding: 10px 12px;
+        margin-top: 4px;
+      }
+      .chart-bubble canvas {
+        width: 100% !important;
+        height: 180px !important;
+      }
+      .chart-title {
+        font-size: 12px;
+        font-weight: 600;
+        color: #1a2b3a;
+        margin-bottom: 6px;
+      }
+      .scenario-layout {
+        display: grid;
+        gap: 8px;
+      }
+      .impact-wrap {
+        background: #f7fbff;
+        border: 1px solid #d8e7f5;
+        border-radius: 10px;
+        padding: 8px;
+      }
+      .impact-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 12px;
+        margin-bottom: 6px;
+        color: #3d556b;
+      }
+      .impact-track {
+        position: relative;
+        height: 10px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #f3b4ba 0%, #f6f8fb 50%, #bde9ca 100%);
+        overflow: hidden;
+      }
+      .impact-marker {
+        position: absolute;
+        top: -3px;
+        width: 2px;
+        height: 16px;
+        background: #11334f;
+        border-radius: 2px;
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.9);
+      }
+      .impact-note {
+        margin-top: 6px;
+        font-size: 11px;
+        color: #5d7182;
+      }
+      .msg {
+        max-width: 84%;
+        border-radius: 14px;
+        padding: 6px 8px;
+        line-height: 1.2;
+        font-size: 13px;
+      }
+      .msg.user { white-space: pre-wrap; }
+      .msg.bot { white-space: normal; }
+      .msg.user {
+        align-self: flex-end;
+        background: linear-gradient(90deg, var(--accent), var(--accent2));
+        color: #fff;
+      }
+      .msg.bot {
+        align-self: flex-start;
+        background: #e8f1fb;
+        color: #1b2f43;
+      }
+      .chat-compose {
+        border-top: 1px solid #d6e3ee;
+        padding: 10px;
+        background: #fff;
+        display: grid;
+        gap: 8px;
+      }
+      .chat-row {
+        display: grid;
+        grid-template-columns: 1fr 130px;
+        gap: 8px;
+      }
+      .typing {
+        align-self: flex-start;
+        background: #e8f1fb;
+        color: #1b2f43;
+        border-radius: 14px;
+        padding: 8px 10px;
+        font-size: 13px;
+      }
+      .action-btn {
+        border: none;
+        border-radius: 999px;
+        padding: 7px 12px;
+        font-size: 12px;
+        background: #e5eef7;
+        color: #214765;
+        cursor: pointer;
+      }
+      .sources-wrap {
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(-4px);
+        transition: max-height .35s ease, opacity .25s ease, transform .25s ease;
+      }
+      .sources-wrap.open {
+        max-height: 280px;
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .toast-box {
+        position: fixed;
+        top: 14px;
+        right: 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        z-index: 9999;
+      }
+      .toast {
+        background: #163d5f;
+        color: #fff;
+        border-radius: 10px;
+        padding: 10px 12px;
+        min-width: 220px;
+        box-shadow: 0 10px 24px rgba(14, 36, 58, 0.28);
+        opacity: 0;
+        transform: translateY(-6px);
+        transition: opacity .2s ease, transform .2s ease;
+        font-size: 13px;
+      }
+      .toast.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .loading-note {
+        margin-top: 8px;
+        padding: 8px 10px;
+        border-radius: 10px;
+        background: #eef6ff;
+        color: #1e4a73;
+        font-size: 13px;
+        display: none;
+        align-items: center;
+        gap: 8px;
+      }
+      .loading-note.active {
+        display: inline-flex;
+      }
+      .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #1e4a73;
+        animation: pulse 1s ease-in-out infinite;
+      }
+      .dot:nth-child(2) { animation-delay: 0.15s; }
+      .dot:nth-child(3) { animation-delay: 0.30s; }
+      @keyframes pulse {
+        0%, 100% { opacity: 0.25; transform: translateY(0); }
+        50% { opacity: 1; transform: translateY(-2px); }
+      }
+      @media (max-width: 900px) {
+        .wrap { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="toastBox" class="toast-box"></div>
+    <div class="wrap">
+      <section class="card">
+        <h1>Диалоговое окно</h1>
+        <p class="muted">BACKTEST и SCENARIO в формате обычного чата.</p>
+        <div class="row" style="margin-bottom:8px">
+          <input id="sessionId" value="session-1" />
+        </div>
+        <div class="chat-shell">
+          <div id="chatLog" class="chat-log"></div>
+          <div class="chat-compose">
+            <div class="chat-row">
+              <textarea id="chatInput" rows="2" placeholder="Напиши сообщение..."></textarea>
+              <button id="chatSend">Отправить</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h1>Анти-Гугл</h1>
+        <p class="muted">Математический паспорт актива с источниками и дисклеймером.</p>
+        <div class="row">
+          <select id="assetType">
+            <option value="bpif">БПИФ</option>
+            <option value="opif">ОПИФ</option>
+            <option value="zpif">ЗПИФ</option>
+            <option value="deposit">Вклад</option>
+            <option value="account">Счёт</option>
+            <option value="precious_metal">Драгметалл</option>
+            <option value="iszh">ИСЖ</option>
+            <option value="nszh">НСЖ</option>
+            <option value="intellect">Интеллект</option>
+            <option value="pds">ПДС</option>
+            <option value="alternative">Альтернатива</option>
+          </select>
+          <select id="assetId"></select>
+          <button id="analyzeBtn">Анализ от ИИ</button>
+          <div id="assetLoading" class="loading-note">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span>Формирую анализ, подожди...</span>
+          </div>
+        </div>
+        <div id="assetOutput"></div>
+      </section>
+    </div>
+
+    <script>
+      // ── DOM refs ──────────────────────────────────────────────────────────
+      const chatLog    = document.getElementById("chatLog");
+      const assetOutput = document.getElementById("assetOutput");
+      const analyzeBtn  = document.getElementById("analyzeBtn");
+      const assetLoading = document.getElementById("assetLoading");
+      const toastBox    = document.getElementById("toastBox");
+
+      function renderChips(actions) {
+        return `<div class="chips">${(actions || []).map((a) => `<button type="button" class="chip chip-btn" data-chat-action="${a}">${a}</button>`).join("")}</div>`;
+      }
+
+      function pushMessage(role, text, actionsHtml = "", extraHtml = "") {
+        const msg = document.createElement("div");
+        msg.className = `msg ${role === "user" ? "user" : "bot"}`;
+        const cleanText = text ? text.replace(/\n\s*\n/g, '\n').trim() : "";
+        msg.innerHTML = `${cleanText}${actionsHtml ? `<div style="margin-top:6px">${actionsHtml}</div>` : ""}${extraHtml ? `<div style="margin-top:6px">${extraHtml}</div>` : ""}`;
+        chatLog.appendChild(msg);
+        chatLog.scrollTop = chatLog.scrollHeight;
+      }
+
+      function addTyping() {
+        const t = document.createElement("div");
+        t.className = "typing";
+        t.id = "typingIndicator";
+        t.textContent = "Печатает...";
+        chatLog.appendChild(t);
+        chatLog.scrollTop = chatLog.scrollHeight;
+      }
+
+      function removeTyping() {
+        const t = document.getElementById("typingIndicator");
+        if (t) t.remove();
+      }
+
+      function fmtPct(v) {
+        if (v === null || v === undefined) return "Нет данных";
+        return `${(v * 100).toFixed(1)}%`;
+      }
+
+      function escHtml(s) {
+        return String(s ?? "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function stripCitationMarkers(s) {
+        return String(s ?? "")
+          .replace(/\[\s*\d+(?:\s*[,;]\s*\d+)*\s*\]/g, "")
+          .replace(/[ \t]{2,}/g, " ")
+          .trim();
+      }
+
+      function formatMetricValue(v, key) {
+        if (v === null || v === undefined) return "—";
+        if (typeof v === "object") return escHtml(JSON.stringify(v));
+        const lvlMap = { low: "Низкая", medium: "Средняя", high: "Высокая", unknown: "Нет данных" };
+        if (typeof v === "string") {
+          v = stripCitationMarkers(v);
+          if (!v) return "—";
+          const low = v.trim().toLowerCase();
+          if (["нет данных", "н/д", "n/a", "unknown", "-", "null"].includes(low)) return "—";
+          if (lvlMap[low]) return lvlMap[low];
+          if (/%|₽|млрд|млн|лет|год|да|нет/i.test(v)) return escHtml(stripCitationMarkers(v));
+          const num = parseFloat(v.replace(",", ".").replace("%", ""));
+          if (!Number.isNaN(num) && key && /return|yield|fee|rate|drawdown|ter|alpha|cofinancing/i.test(key)) {
+            return fmtPct(v.includes("%") || num > 1 ? num / 100 : num);
+          }
+          return escHtml(v);
+        }
+        if (typeof v === "number") {
+          if (key && /return|yield|fee|rate|drawdown|ter|alpha|cofinancing|management_fee/i.test(key)) {
+            return fmtPct(v > 1 && v <= 100 ? v / 100 : v);
+          }
+          return escHtml(String(v));
+        }
+        return escHtml(v);
+      }
+
+      function renderAssetMetrics(keyMetrics, labels) {
+        if (!keyMetrics || typeof keyMetrics !== "object") return "";
+        const entries = labels
+          ? Object.entries(labels)
+          : Object.entries(keyMetrics);
+        const rows = entries
+          .map(([key, label]) => `<li>${escHtml(label)}: ${formatMetricValue(keyMetrics[key], key)}</li>`)
+          .join("");
+        return `<div class="section"><strong>Ключевые показатели</strong><ul>${rows}</ul></div>`;
+      }
+
+      function renderAssetSources(sources) {
+        if (!Array.isArray(sources) || !sources.length) return "";
+        const items = sources
+          .slice(0, 3)
+          .map((src) => {
+            if (typeof src === "string") {
+              return `<li><a href="${escHtml(src)}" target="_blank" rel="noreferrer">${escHtml(src)}</a></li>`;
+            }
+            if (!src || typeof src !== "object") return "";
+            const url = src.url || "";
+            const title = src.title || url;
+            const typePill = src.type ? `<span class="pill">${escHtml(src.type)}</span>` : "";
+            const updated = src.updatedAt ? ` <span class="muted">(${escHtml(src.updatedAt)})</span>` : "";
+            if (!url) return `<li>${typePill}${escHtml(title)}${updated}</li>`;
+            return `<li>${typePill}<a href="${escHtml(url)}" target="_blank" rel="noreferrer">${escHtml(title)}</a>${updated}</li>`;
+          })
+          .filter(Boolean)
+          .join("");
+        if (!items) return "";
+        return `<div id="assetSourcesWrap" class="section sources-wrap sources"><strong>Источники</strong><ul>${items}</ul></div>`;
+      }
+      function showToast(text) {
+        const el = document.createElement("div");
+        el.className = "toast";
+        el.textContent = text;
+        toastBox.appendChild(el);
+        requestAnimationFrame(() => el.classList.add("show"));
+        setTimeout(() => {
+          el.classList.remove("show");
+          setTimeout(() => el.remove(), 220);
+        }, 2600);
+      }
+
+      // Важно: не уничтожаем chart-ы при построении новых.
+      // Иначе предыдущие графики в уже отрисованных сообщениях могут стать пустыми.
+
+      function renderBacktestChart(data) {
+        const chartId = "backtestChart_" + Date.now();
+        const bubble = document.createElement("div");
+        bubble.className = "chart-bubble";
+        bubble.innerHTML = `
+          <div class="chart-title">Динамика портфеля vs IMOEX (нормировано от 1.0)</div>
+          <canvas id="${chartId}"></canvas>
+        `;
+        chatLog.appendChild(bubble);
+        chatLog.scrollTop = chatLog.scrollHeight;
+
+        const formatLabel = (d) => {
+          const dt = new Date(d);
+          return dt.toLocaleDateString("ru-RU", { month: "short", year: "2-digit" });
+        };
+
+        const currentDates = data?.dates || [];
+        const currentPortfolioValues = data?.portfolio_values || [];
+        const currentBenchmarkValues = data?.benchmark_values || [];
+
+        const prev = data?.previous;
+        const hasPrev =
+          prev &&
+          Array.isArray(prev.dates) &&
+          Array.isArray(prev.portfolio_values) &&
+          Array.isArray(prev.benchmark_values) &&
+          prev.dates.length > 1;
+
+        const prevDates = hasPrev ? prev.dates : [];
+        const prevPortfolioValues = hasPrev ? prev.portfolio_values : [];
+        const prevBenchmarkValues = hasPrev ? prev.benchmark_values : [];
+
+        const labels = hasPrev
+          ? prevDates.slice(0, -1).concat(currentDates).map(formatLabel)
+          : currentDates.map(formatLabel);
+
+        const currentPortfolioNorm = currentPortfolioValues.map((v) => +Number(v).toFixed(4));
+        const currentBenchmarkNorm = currentBenchmarkValues.map((v) => +Number(v).toFixed(4));
+        const portfolioPrevNorm = hasPrev ? prevPortfolioValues.slice(0, -1).map((v) => +Number(v).toFixed(4)) : [];
+        const benchmarkPrevNorm = hasPrev ? prevBenchmarkValues.slice(0, -1).map((v) => +Number(v).toFixed(4)) : [];
+
+        const ctx = document.getElementById(chartId).getContext("2d");
+        const datasets = [];
+        if (hasPrev) {
+          const prefixLen = prevDates.length - 1;
+          const curLen = currentDates.length;
+          const nullPrefix = new Array(prefixLen).fill(null);
+          const nullSuffix = new Array(curLen).fill(null);
+
+          datasets.push({
+            label: "Портфель (прошлый период)",
+            data: portfolioPrevNorm.concat(nullSuffix),
+            borderColor: "#0f5ea8",
+            backgroundColor: "rgba(15,94,168,0.08)",
+            borderWidth: 2,
+            pointRadius: 3,
+            pointHoverRadius: 5,
+            fill: false,
+            tension: 0.35,
+            borderDash: [6, 4],
+          });
+
+          datasets.push({
+            label: "Портфель (текущий период)",
+            data: nullPrefix.concat(currentPortfolioNorm),
+            borderColor: "#0f5ea8",
+            backgroundColor: "rgba(15,94,168,0.10)",
+            borderWidth: 2.5,
+            pointRadius: 3,
+            pointHoverRadius: 5,
+            fill: true,
+            tension: 0.35,
+          });
+
+          datasets.push({
+            label: "IMOEX (прошлый период)",
+            data: benchmarkPrevNorm.concat(nullSuffix),
+            borderColor: "#00a3a3",
+            backgroundColor: "rgba(0,163,163,0.07)",
+            borderWidth: 1.8,
+            pointRadius: 3,
+            pointHoverRadius: 5,
+            fill: false,
+            tension: 0.35,
+            borderDash: [6, 4],
+          });
+
+          datasets.push({
+            label: "IMOEX (текущий период)",
+            data: nullPrefix.concat(currentBenchmarkNorm),
+            borderColor: "#00a3a3",
+            backgroundColor: "rgba(0,163,163,0.08)",
+            borderWidth: 2,
+            pointRadius: 3,
+            pointHoverRadius: 5,
+            fill: true,
+            tension: 0.35,
+            borderDash: [5, 3],
+          });
+        } else {
+          datasets.push({
+            label: "Портфель",
+            data: currentPortfolioNorm,
+            borderColor: "#0f5ea8",
+            backgroundColor: "rgba(15,94,168,0.10)",
+            borderWidth: 2.5,
+            pointRadius: 3,
+            pointHoverRadius: 5,
+            fill: true,
+            tension: 0.35,
+          });
+          datasets.push({
+            label: "IMOEX",
+            data: currentBenchmarkNorm,
+            borderColor: "#00a3a3",
+            backgroundColor: "rgba(0,163,163,0.07)",
+            borderWidth: 2,
+            pointRadius: 3,
+            pointHoverRadius: 5,
+            fill: true,
+            tension: 0.35,
+            borderDash: [5, 3],
+          });
+        }
+
+        new Chart(ctx, {
+          type: "line",
+          data: {
+            labels,
+            datasets,
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: "index", intersect: false },
+            plugins: {
+              legend: {
+                position: "top",
+                labels: { font: { size: 11 }, boxWidth: 14, padding: 10 },
+              },
+              tooltip: {
+                callbacks: {
+                  label: (ctx) => {
+                    const y = ctx.parsed?.y;
+                    const yText = typeof y === "number" ? y.toFixed(3) : "Нет данных";
+                    return ` ${ctx.dataset.label}: ${yText}`;
+                  },
+                },
+              },
+            },
+            scales: {
+              x: {
+                grid: { color: "rgba(0,0,0,0.05)" },
+                ticks: { font: { size: 10 }, maxRotation: 0 },
+              },
+              y: {
+                grid: { color: "rgba(0,0,0,0.05)" },
+                ticks: {
+                  font: { size: 10 },
+                  callback: (v) => Number(v).toFixed(2),
+                },
+              },
+            },
+          },
+        });
+      }
+
+      function renderScenarioChart(data) {
+        const chartId = "scenarioChart_" + Date.now();
+        const impact = Number(data?.total_impact_percent ?? 0);
+        const losers = Array.isArray(data?.top_losers) ? data.top_losers : [];
+        const winners = Array.isArray(data?.top_winners) ? data.top_winners : [];
+        const merged = [
+          ...losers.map((x) => ({ name: x.asset_name, value: Number(x.impact_percent || 0) })),
+          ...winners.map((x) => ({ name: x.asset_name, value: Number(x.impact_percent || 0) })),
+        ].slice(0, 6);
+        if (!merged.length) return;
+
+        const bubble = document.createElement("div");
+        bubble.className = "chart-bubble";
+        bubble.innerHTML = `
+          <div class="scenario-layout">
+            <div class="chart-title">Влияние сценария по активам</div>
+            <canvas id="${chartId}"></canvas>
+            <div class="impact-wrap">
+              <div class="impact-head">
+                <span>Общий эффект по портфелю</span>
+                <strong>${impact > 0 ? "+" : ""}${impact.toFixed(1)}%</strong>
+              </div>
+              <div class="impact-track">
+                <div class="impact-marker" id="${chartId}_marker"></div>
+              </div>
+              <div class="impact-note">Шкала от -30% до +30%</div>
+            </div>
+          </div>
+        `;
+        chatLog.appendChild(bubble);
+        chatLog.scrollTop = chatLog.scrollHeight;
+
+        const labels = merged.map((x) => x.name);
+        const values = merged.map((x) => x.value);
+        const colors = values.map((v) => (v < 0 ? "rgba(176,48,58,0.85)" : "rgba(26,122,74,0.85)"));
+        const borders = values.map((v) => (v < 0 ? "#9f2a33" : "#16683f"));
+
+        const marker = document.getElementById(`${chartId}_marker`);
+        const bounded = Math.max(-30, Math.min(30, impact));
+        marker.style.left = `${((bounded + 30) / 60) * 100}%`;
+
+        const ctx = document.getElementById(chartId).getContext("2d");
+        new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels,
+            datasets: [
+              {
+                data: values,
+                backgroundColor: colors,
+                borderColor: borders,
+                borderWidth: 1.2,
+                borderRadius: 6,
+                maxBarThickness: 34,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  label: (ctx) => `${ctx.parsed.y > 0 ? "+" : ""}${ctx.parsed.y.toFixed(1)}%`,
+                },
+              },
+            },
+            scales: {
+              x: {
+                grid: { display: false },
+                ticks: { font: { size: 10 }, color: "#425a70" },
+              },
+              y: {
+                grid: { color: "rgba(0,0,0,0.06)" },
+                ticks: {
+                  font: { size: 10 },
+                  callback: (v) => `${v}%`,
+                },
+              },
+            },
+          },
+        });
+      }
+
+      async function sendChatMessage(customText = null) {
+        const sessionId = document.getElementById("sessionId").value;
+        const input = document.getElementById("chatInput");
+        const sendBtn = document.getElementById("chatSend");
+        const message = (customText ?? input.value).trim();
+        if (!message) return;
+        input.value = "";
+        pushMessage("user", message);
+        sendBtn.disabled = true;
+        addTyping();
+        let data;
+        try {
+          const res = await fetch("/api/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ sessionId, message })
+          });
+          data = await res.json();
+        } catch (_e) {
+          removeTyping();
+          sendBtn.disabled = false;
+          pushMessage("bot", "Ошибка сети или сервера. Повтори попытку.");
+          return;
+        }
+        removeTyping();
+        sendBtn.disabled = false;
+
+        if (!data?.success) {
+          pushMessage("bot", data?.reply || data?.message || "Не удалось выполнить расчет.", renderChips(data?.actions));
+          return;
+        }
+
+        let extra = "";
+        if (data.data?.metrics) {
+          const worstDate = data.data.metrics.portfolio.worst_drawdown_date
+            ? new Date(data.data.metrics.portfolio.worst_drawdown_date).toLocaleDateString("ru-RU")
+            : "Нет данных";
+          extra += `<div class="section"><strong>Ключевые метрики</strong><ul><li>Доходность портфеля: ${fmtPct(data.data.metrics.portfolio.annual_return)}</li><li>Доходность IMOEX: ${fmtPct(data.data.metrics.benchmark.annual_return)}</li><li>Макс. просадка: ${fmtPct(data.data.metrics.portfolio.max_drawdown)}</li><li>Дата пика просадки: ${worstDate}</li><li>Sharpe: ${data.data.metrics.portfolio.sharpe_ratio}</li></ul></div>`;
+        }
+        if (data.data?.total_impact_percent !== undefined) {
+          const impact = data.data.total_impact_percent;
+          const sign = impact > 0 ? "+" : "";
+          const cls = impact < 0 ? "danger" : impact > 0 ? "" : "muted";
+          const losers = (data.data.top_losers || []).map(l => `<li>${l.asset_name}: <span class="danger">${l.impact_percent}%</span></li>`).join("");
+          const winners = (data.data.top_winners || []).map(w => `<li>${w.asset_name}: <span style="color:#1a7a4a">+${w.impact_percent}%</span></li>`).join("");
+          const losersHtml = losers ? `<strong style="font-size:12px">Аутсайдеры</strong><ul>${losers}</ul>` : "";
+          const winnersHtml = winners ? `<strong style="font-size:12px">Лидеры</strong><ul>${winners}</ul>` : "";
+          extra += `<div class="section"><strong>Влияние сценария</strong><ul><li>Общее влияние: <span class="${cls}">${sign}${impact}%</span></li><li>Факторы: ${data.data.explanation_factors}</li></ul>${losersHtml}${winnersHtml}</div>`;
+        }
+        pushMessage("bot", data.reply || data.message || "Ошибка", renderChips(data.actions), extra);
+
+        // Render backtest chart after message is added to DOM
+        if (data.portfolio?.products?.length) {
+          const items = data.portfolio.products
+            .map(
+              (p) =>
+                `<li>${escHtml(p.productName)} — ${(Number(p.weight) * 100).toFixed(0)}%` +
+                `${p.amount != null ? ` (${Number(p.amount).toLocaleString("ru-RU")} ₽)` : ""}</li>`
+            )
+            .join("");
+          extra += `<div class="section"><strong>Состав портфеля</strong><ul>${items}</ul></div>`;
+        }
+        if (data.data?.dates && data.data?.portfolio_values) {
+          renderBacktestChart(data.data);
+        }
+        if (data.data?.total_impact_percent !== undefined) {
+          renderScenarioChart(data.data);
+        }
+      }
+
+      document.getElementById("chatSend").addEventListener("click", async () => {
+        await sendChatMessage();
+      });
+
+      document.getElementById("chatInput").addEventListener("keydown", async (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+          e.preventDefault();
+          await sendChatMessage();
+        }
+      });
+
+      chatLog.addEventListener("click", async (e) => {
+        const target = e.target;
+        if (!(target instanceof HTMLElement)) return;
+        const action = target.getAttribute("data-chat-action");
+        if (!action) return;
+        await sendChatMessage(action);
+      });
+
+      function setAnalyzeLoading(isLoading) {
+        analyzeBtn.disabled = isLoading;
+        analyzeBtn.innerHTML = isLoading
+          ? `<span class="btn-loading"><span class="spinner"></span>Загружаю анализ...</span>`
+          : "Анализ от ИИ";
+        assetLoading.classList.toggle("active", isLoading);
+      }
+
+      async function runAssetAnalysis() {
+        if (analyzeBtn.disabled) return;
+        const asset_id = document.getElementById("assetId").value;
+        const asset_type = document.getElementById("assetType").value;
+        const startAt = Date.now();
+        assetOutput.innerHTML = "";
+        setAnalyzeLoading(true);
+
+        try {
+          const res = await fetch("/api/asset-analysis", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ asset_id, asset_type, user_id: "current", period_days: 30 })
+          });
+          const data = await res.json();
+
+          if (!data.success) {
+            assetOutput.innerHTML = `<div class="reply warn">${data.message || data.detail || "Не удалось подготовить анализ"}</div>`;
+            return;
+          }
+
+          const s = data.data;
+          const tickerRaw = s.ticker == null ? "" : String(s.ticker).trim();
+          const tickerIsMissing = !tickerRaw || ["нет данных", "unknown", "n/a", "-", "null"].includes(tickerRaw.toLowerCase());
+          let titleLine = "Математический паспорт актива";
+          if (s.asset_name && !tickerIsMissing) titleLine = `${s.asset_name} (${tickerRaw})`;
+          else if (s.asset_name) titleLine = String(s.asset_name);
+          else if (!tickerIsMissing) titleLine = tickerRaw;
+          const updatedLabel = s.updated_at
+            ? new Date(s.updated_at).toLocaleString("ru-RU")
+            : "—";
+          const pos = Array.isArray(s.positive_factors) ? s.positive_factors : [];
+          const neg = Array.isArray(s.negative_factors) ? s.negative_factors : [];
+
+          let html = `
+            <div class="reply"><strong>${escHtml(titleLine)}</strong><br/>Обновлено: ${escHtml(updatedLabel)}</div>
+            <div class="section"><strong>Краткое резюме</strong><div>${escHtml(s.summary ?? "")}</div></div>
+            <div class="section"><strong>Позитивный фон</strong><ul>${pos.map((f) => `<li>${escHtml(f)}</li>`).join("")}</ul></div>
+            <div class="section"><strong>Негативный фон / риски</strong><ul>${neg.map((f) => `<li>${escHtml(f)}</li>`).join("")}</ul></div>`;
+
+          html += renderAssetMetrics(s.key_metrics, s.key_metrics_labels);
+          html += renderAssetSources(s.sources);
+          html += `
+            <div class="section"><strong>Быстрые действия</strong>
+              <div class="chips">
+                <button type="button" class="action-btn" data-action="buy">Купить</button>
+                <button type="button" class="action-btn" data-action="add">Добавить в портфель</button>
+                <button type="button" class="action-btn" data-action="sources">Показать отчетность</button>
+                <button type="button" class="action-btn" data-action="refresh">Обновить анализ</button>
+              </div>
+            </div>
+            <div class="section disc">${escHtml(s.disclaimer ?? "")}</div>
+          `;
+
+          assetOutput.innerHTML = html;
+
+          assetOutput.querySelectorAll("[data-action]").forEach((btn) => {
+            btn.addEventListener("click", async () => {
+              const action = btn.getAttribute("data-action");
+              if (action === "buy") {
+                showToast("Переход к покупке открыт");
+              }
+              if (action === "add") {
+                showToast("Инструмент добавлен в портфель");
+              }
+              if (action === "sources") {
+                const wrap = document.getElementById("assetSourcesWrap");
+                if (wrap) {
+                  wrap.classList.toggle("open");
+                  btn.textContent = wrap.classList.contains("open") ? "Скрыть отчетность" : "Показать отчетность";
+                }
+              }
+              if (action === "refresh") {
+                await runAssetAnalysis();
+              }
+            });
+          });
+        } catch (_e) {
+          assetOutput.innerHTML = `<div class="reply warn">Ошибка сети или сервера. Повтори попытку.</div>`;
+        } finally {
+          const elapsed = Date.now() - startAt;
+          const minDuration = 700;
+          if (elapsed < minDuration) {
+            await new Promise((r) => setTimeout(r, minDuration - elapsed));
+          }
+          setAnalyzeLoading(false);
+        }
+      }
+
+      let productCatalog = [];
+
+      async function loadProductUniverse() {
+        try {
+          const res = await fetch("/api/products/universe");
+          const body = await res.json();
+          if (!body.success || !Array.isArray(body.data)) return;
+          productCatalog = body.data;
+          const assetTypeEl = document.getElementById("assetType");
+          const knownKinds = new Set([...assetTypeEl.options].map((o) => o.value));
+          const extraKinds = [...new Set(productCatalog.map((p) => p.kind).filter(Boolean))]
+            .filter((k) => !knownKinds.has(k));
+          for (const kind of extraKinds) {
+            const opt = document.createElement("option");
+            opt.value = kind;
+            opt.textContent = kind;
+            assetTypeEl.appendChild(opt);
+          }
+          updateAssetOptionsByType();
+        } catch (_e) {
+          updateAssetOptionsByType();
+        }
+      }
+
+      function updateAssetOptionsByType() {
+        const selectedType = document.getElementById("assetType").value;
+        const assetSelect = document.getElementById("assetId");
+        const options = productCatalog.filter((p) => p.kind === selectedType);
+        const list = options.length ? options : productCatalog;
+        assetSelect.innerHTML = list
+          .map((p) => `<option value="${escHtml(p.productName)}">${escHtml(p.productName)}</option>`)
+          .join("");
+      }
+
+      document.getElementById("assetType").addEventListener("change", updateAssetOptionsByType);
+      loadProductUniverse();
+
+      analyzeBtn.addEventListener("click", runAssetAnalysis);
+    </script>
+  </body>
+</html>
