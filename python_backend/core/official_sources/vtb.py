@@ -4,7 +4,6 @@ from __future__ import annotations
 import logging
 import os
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
 from typing import Any, Dict, List
 
 from ..clients import ExternalApiClient
@@ -29,13 +28,54 @@ def _extract_metrics_from_payload(data: Dict[str, Any]) -> Dict[str, Any]:
         return out
 
     flat_candidates = {
-        "return_1y": ("return1y", "return_1y", "yield1y"),
-        "return_3y": ("return3y", "return_3y", "yield3y"),
+        "nav_per_share": ("navPerShare", "sharePrice", "price", "nav_per_share"),
+        "price_change": ("priceChange", "oneYearChange", "dayChange"),
         "nav_aum": ("nav", "aum", "netAssetValue", "scha"),
-        "ter_fee": ("ter", "terFee", "managementFee"),
-        "alpha": ("alpha",),
-        "interest_rate": ("rate", "interestRate", "annualRate"),
-        "nav_per_share": ("navPerShare", "sharePrice", "price"),
+        "min_investment": ("minInvestment", "minAmount", "min_investment"),
+        "ter": ("ter", "terFee", "expenseRatio", "managementFee"),
+        "market_price": ("marketPrice", "lastPrice", "price"),
+        "dividend_yield_12m": ("dividendYield", "yield12m"),
+        "dividend_per_share": ("dividendPerShare", "lastDividend"),
+        "trading_volume": ("tradingVolume", "volume", "avgVolume"),
+        "fund_lifetime": ("fundLifetime", "maturityDate", "inceptionDate"),
+        "bid_price": ("bidPrice", "bid"),
+        "ask_price": ("askPrice", "ask"),
+        "bank_spread": ("bankSpread", "spread"),
+        "daily_range": ("dailyRange", "highLow"),
+        "period_change_pct": ("periodChange", "oneYearChange"),
+        "historical_return": ("historicalReturn", "return1y", "return_1y"),
+        "min_subscription": ("minSubscription", "minAmount"),
+        "risk_profile": ("riskProfile", "riskLevel"),
+        "recommended_horizon": ("recommendedHorizon", "investmentHorizon"),
+        "management_fee": ("managementFee", "successFee", "ter"),
+        "participation_coef": ("participationCoef", "participationRate"),
+        "benchmark_name": ("benchmarkName", "underlyingIndex"),
+        "contract_term": ("contractTerm", "term"),
+        "capital_guarantee": ("capitalGuarantee", "guaranteedReturn"),
+        "income_fixation_period": ("incomeFixationPeriod", "fixationPeriod"),
+        "maturity_payout": ("maturityPayout", "insuranceAmount"),
+        "regular_contribution": ("regularContribution", "contribution"),
+        "program_term": ("programTerm", "insuranceTerm"),
+        "covered_risks": ("coveredRisks", "riskCoverage"),
+        "additional_income_ytd": ("additionalIncome", "did"),
+        "cofinancing_threshold": ("cofinancingThreshold", "stateCofinancing"),
+        "tax_deduction": ("taxDeduction", "taxBenefit"),
+        "total_savings": ("totalSavings", "balance"),
+        "years_to_payout": ("yearsToPayout", "participationTerm"),
+        "fund_investment_income": ("fundInvestmentIncome", "npfReturn"),
+        "carat_weight": ("caratWeight", "weight"),
+        "color_clarity_grade": ("colorClarity", "certification4c"),
+        "list_price_index": ("listPrice", "priceIndex"),
+        "has_certificate": ("hasCertificate", "certified"),
+        "buyback_discount": ("buybackDiscount", "buyBackSpread"),
+        "daily_volume": ("dailyVolume", "volume"),
+        "return_1y": ("return1y", "return_1y", "yield1y", "oneYearChange"),
+        "isin": ("isin", "ISIN"),
+        "interest_rate": ("rate", "interestRate", "nominalRate"),
+        "placement_term": ("placementTerm", "depositTerm", "term"),
+        "balance_limits": ("balanceLimits", "minBalance", "maxBalance"),
+        "interest_payout": ("interestPayout", "capitalization"),
+        "deposit_flexibility": ("depositFlexibility", "flexibility"),
     }
     for target, keys in flat_candidates.items():
         for k in keys:
@@ -55,12 +95,10 @@ async def fetch_vtb_sources(
     asset_type: str,
     period_days: int,
 ) -> VtbFetchResult:
-    today = datetime.now(timezone.utc).date().isoformat()
     token = os.getenv("SOURCES_API_TOKEN")
     params = {"asset_id": asset_id, "asset_type": asset_type, "period_days": period_days, "product_name": asset_id}
 
     metrics: Dict[str, Any] = {}
-    sources: List[Dict[str, str]] = []
     lines: List[str] = []
     errors: List[Dict[str, str]] = []
     card_ok = False
@@ -71,14 +109,6 @@ async def fetch_vtb_sources(
         try:
             data = await api.get(card_url, token, params)
             metrics.update(_extract_metrics_from_payload(data))
-            sources.append(
-                {
-                    "title": "Карточка инструмента ВТБ",
-                    "url": card_url,
-                    "type": "vtb_instrument_card",
-                    "updatedAt": today,
-                }
-            )
             lines.append("ВТБ: данные карточки инструмента получены.")
             card_ok = True
         except Exception as exc:
@@ -90,14 +120,6 @@ async def fetch_vtb_sources(
             data = await api.get(research_url, token, params)
             payload_metrics = _extract_metrics_from_payload(data)
             metrics.update(payload_metrics)
-            sources.append(
-                {
-                    "title": "Аналитика ВТБ",
-                    "url": research_url,
-                    "type": "vtb_research",
-                    "updatedAt": today,
-                }
-            )
             lines.append("ВТБ: аналитический обзор получен.")
             research_ok = True
         except Exception as exc:
@@ -106,17 +128,9 @@ async def fetch_vtb_sources(
     reports_url = os.getenv("SRC_FIN_REPORTS_URL", "").strip()
     if reports_url:
         try:
-            data = await api.get(reports_url, token, params)
-            sources.append(
-                {
-                    "title": "Отчётность эмитента / продукта",
-                    "url": reports_url,
-                    "type": "financial_report",
-                    "updatedAt": today,
-                }
-            )
+            await api.get(reports_url, token, params)
             lines.append("ВТБ: отчётность доступна.")
         except Exception as exc:
             errors.append({"source": "vtb_reports", "error": str(exc)})
 
-    return VtbFetchResult(card_ok, research_ok, metrics, sources, lines, errors)
+    return VtbFetchResult(card_ok, research_ok, metrics, [], lines, errors)

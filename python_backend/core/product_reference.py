@@ -6,6 +6,9 @@ from typing import Any, Dict, List, Optional
 # Категории, где LLM даёт нестабильный текст/цифры — фиксируем эталоном.
 STABLE_KINDS = frozenset({"iszh", "nszh", "precious_metal", "deposit", "account", "pds"})
 
+# ОПИФ/ЗПИФ без биржевого парсера — не доверяем числам от LLM, только эталон + официальные парсеры.
+REFERENCE_METRICS_KINDS = frozenset({"opif", "zpif"})
+
 KindTemplate = Dict[str, Any]
 ProductProfile = Dict[str, Any]
 
@@ -94,155 +97,220 @@ _KIND_DEFAULTS: Dict[str, KindTemplate] = {
             "Итоговая доходность зависит от выбранного портфеля",
         ],
     },
+    "opif": {
+        "summary": (
+            "ОПИФ УК «ВИМ Сбережения» — паевой фонд без биржевого тикера; "
+            "актуальные СЧА и стоимость пая публикуются управляющей компанией."
+        ),
+        "positive_factors": [
+            "Профессиональное управление и диверсификация внутри фонда",
+            "Прозрачная отчётность УК на e-disclosure",
+            "Доступность через линейку продуктов ВТБ",
+        ],
+        "negative_factors": [
+            "Ликвидность ниже, чем у биржевых БПИФ",
+            "Чувствительность к ставкам и кредитному риску эмитентов",
+            "Комиссии управляющей компании снижают чистую доходность",
+        ],
+    },
+    "zpif": {
+        "summary": (
+            "ЗПИФ — закрытый паевой фонд с ограниченным обращением паёв; "
+            "метрики зависят от отчётности управляющей компании."
+        ),
+        "positive_factors": [
+            "Специализированные стратегии (недвижимость, рентный доход)",
+            "Длительный инвестиционный горизонт",
+            "Отчётность на e-disclosure",
+        ],
+        "negative_factors": [
+            "Низкая ликвидность до окончания срока фонда",
+            "Сложнее оценить справедливую стоимость пая",
+            "Зависимость от качества активов фонда",
+        ],
+    },
 }
 
 # productId → дополнения к шаблону kind (метрики и тексты).
 _PRODUCT_PROFILES: Dict[str, ProductProfile] = {
     "iszh_basis": {
         "metrics": {
-            "guaranteed_return": "гарантируется по правилам программы",
-            "expected_return": "участие в доходе эмитента",
+            "participation_coef": "по условиям программы",
+            "benchmark_name": "базовый индекс программы",
             "contract_term": "от 5 лет",
-            "insurance_amount": "по условиям договора",
-            "fees": "включены в структуру продукта",
+            "capital_guarantee": "100%",
+            "income_fixation_period": "по правилам договора",
         },
         "summary": "ИСЖ «Базис Актив 2.0» сочетает гарантию и участие в доходе; результат зависит от срока.",
     },
     "iszh_driver": {
         "metrics": {
-            "guaranteed_return": "фиксируется в договоре",
-            "expected_return": "ограничена условиями программы",
+            "participation_coef": "по условиям программы",
+            "benchmark_name": "базовый актив программы",
             "contract_term": "от 3 лет",
-            "insurance_amount": "по выбранной программе",
-            "fees": "по тарифам страховщика",
+            "capital_guarantee": "100%",
+            "income_fixation_period": "ежегодно",
         },
         "summary": "ИСЖ «Драйвер Гарантия» делает акцент на гарантированной части при страховой защите.",
     },
     "iszh_maximum": {
         "metrics": {
-            "guaranteed_return": "минимальный уровень в договоре",
-            "expected_return": "повышенное участие в доходе",
+            "participation_coef": "повышенное участие в доходе",
+            "benchmark_name": "индекс акций / смешанный бенчмарк",
             "contract_term": "от 5 лет",
-            "insurance_amount": "по условиям договора",
-            "fees": "по тарифам программы",
+            "capital_guarantee": "100%",
+            "income_fixation_period": "ежеквартально",
         },
         "summary": "ИСЖ «Максимум» ориентирован на более высокое участие в доходе при сохранении защиты.",
     },
     "iszh_fixed_income": {
         "metrics": {
-            "guaranteed_return": "фиксированная ставка в договоре",
-            "expected_return": "не применяется",
+            "participation_coef": "не применяется",
+            "benchmark_name": "фиксированная ставка",
             "contract_term": "от 3 лет",
-            "insurance_amount": "по условиям договора",
-            "fees": "включены в продукт",
+            "capital_guarantee": "100%",
+            "income_fixation_period": "в конце срока",
         },
         "summary": "ИСЖ «Фиксированный доход» ориентирован на заранее определённые условия доходности.",
     },
     "nszh_future": {
         "metrics": {
-            "insurance_amount": "по выбранному пакету рисков",
-            "maturity_return": "по правилам программы накопления",
-            "insurance_term": "от 5 лет",
-            "contribution": "регулярный или единовременный",
-            "risk_coverage": "жизнь, инвалидность, критические заболевания",
+            "maturity_payout": "по выбранному пакету рисков",
+            "regular_contribution": "регулярный или единовременный",
+            "program_term": "от 5 лет",
+            "covered_risks": "жизнь, инвалидность, критические заболевания",
+            "additional_income_ytd": "по итогам деятельности СК",
         },
         "summary": "НСЖ «Забота о будущем» нацелен на накопление к целевой дате при страховой защите.",
     },
     "nszh_family": {
         "metrics": {
-            "insurance_amount": "семейный пакет покрытия",
-            "maturity_return": "по условиям программы",
-            "insurance_term": "от 5 лет",
-            "contribution": "гибкий график взносов",
-            "risk_coverage": "жизнь и здоровье застрахованных",
+            "maturity_payout": "семейный пакет покрытия",
+            "regular_contribution": "гибкий график взносов",
+            "program_term": "от 5 лет",
+            "covered_risks": "жизнь и здоровье застрахованных",
+            "additional_income_ytd": "по итогам деятельности СК",
         },
         "summary": "НСЖ «Забота о семье» объединяет защиту близких и накопительную составляющую.",
     },
     "nszh_ultra": {
         "metrics": {
-            "insurance_amount": "расширенное покрытие рисков",
-            "maturity_return": "по правилам продукта",
-            "insurance_term": "от 3 лет",
-            "contribution": "по выбранному тарифу",
-            "risk_coverage": "расширенный набор рисков",
+            "maturity_payout": "расширенное покрытие рисков",
+            "regular_contribution": "по выбранному тарифу",
+            "program_term": "от 3 лет",
+            "covered_risks": "расширенный набор рисков",
+            "additional_income_ytd": "по итогам деятельности СК",
         },
         "summary": "НСЖ «На всякий случай Ультра» усиливает страховое покрытие при накоплении.",
     },
     "gold_oms": {
         "metrics": {
-            "metal_price": "по курсу ЦБ РФ на дату операции",
-            "return_period": "зависит от динамики золота",
-            "spread": "банковский спред покупка/продажа",
-            "storage_fee": "комиссия за ведение ОМС",
-            "liquidity": "medium",
+            "bid_price": "по курсу ЦБ РФ (выкуп)",
+            "ask_price": "по курсу ЦБ РФ (продажа)",
+            "bank_spread": "банковский спред ВТБ",
+            "daily_range": "по котировкам ЦБ на дату",
+            "period_change_pct": "зависит от динамики золота",
         },
         "summary": "Золото на ОМС — обезличенный металл на счёте; цена следует котировкам ЦБ.",
     },
     "gold_coins": {
         "metrics": {
-            "metal_price": "цена монеты по прайсу банка",
-            "return_period": "зависит от рынка золота",
-            "spread": "спред к биржевой котировке",
-            "storage_fee": "не применяется при выдаче",
-            "liquidity": "medium",
+            "bid_price": "цена обратного выкупа банком",
+            "ask_price": "цена продажи по прайсу банка",
+            "bank_spread": "спред к биржевой котировке",
+            "daily_range": "по прайс-листу банка",
+            "period_change_pct": "зависит от рынка золота",
         },
         "summary": "Инвестиционные монеты — физическое золото с премией к спот-цене металла.",
     },
     "gold_bars": {
         "metrics": {
-            "metal_price": "по весу и котировке металла",
-            "return_period": "зависит от рынка золота",
-            "spread": "спред покупка/продажа",
-            "storage_fee": "опционально в хранилище банка",
-            "liquidity": "medium",
+            "bid_price": "цена выкупа слитка",
+            "ask_price": "цена продажи по весу и котировке",
+            "bank_spread": "спред покупка/продажа",
+            "daily_range": "по прайс-листу банка",
+            "period_change_pct": "зависит от рынка золота",
         },
         "summary": "Слитки — прямое владение металлом; ликвидность ниже биржевых инструментов.",
     },
     "palladium_oms": {
         "metrics": {
-            "metal_price": "по курсу ЦБ РФ на дату операции",
-            "return_period": "зависит от динамики палладия",
-            "spread": "банковский спред покупка/продажа",
-            "storage_fee": "комиссия за ведение ОМС",
-            "liquidity": "low",
+            "bid_price": "по курсу ЦБ РФ (выкуп)",
+            "ask_price": "по курсу ЦБ РФ (продажа)",
+            "bank_spread": "банковский спред ВТБ",
+            "daily_range": "по котировкам ЦБ на дату",
+            "period_change_pct": "зависит от динамики палладия",
         },
         "summary": "Палладий на ОМС — нишевый драгметалл с повышенной волатильностью спроса.",
     },
     "platinum_oms": {
         "metrics": {
-            "metal_price": "по курсу ЦБ РФ на дату операции",
-            "return_period": "зависит от динамики платины",
-            "spread": "банковский спред покупка/продажа",
-            "storage_fee": "комиссия за ведение ОМС",
-            "liquidity": "low",
+            "bid_price": "по курсу ЦБ РФ (выкуп)",
+            "ask_price": "по курсу ЦБ РФ (продажа)",
+            "bank_spread": "банковский спред ВТБ",
+            "daily_range": "по котировкам ЦБ на дату",
+            "period_change_pct": "зависит от динамики платины",
         },
         "summary": "Платина на ОМС — драгметалл промышленного спроса с умеренной ликвидностью.",
     },
     "deposit_vtb": {
         "metrics": {
             "interest_rate": "по тарифам на дату открытия",
-            "min_amount": "от 10 000 ₽",
-            "deposit_term": "от 2 месяцев",
-            "capitalization": "да",
-            "flexibility": "пополнение по условиям тарифа",
+            "placement_term": "от 2 месяцев",
+            "balance_limits": "от 10 000 ₽",
+            "interest_payout": "ежемесячно с капитализацией",
+            "deposit_flexibility": "пополнение по условиям тарифа",
         },
     },
     "account_vtb": {
         "metrics": {
             "interest_rate": "по действующей ставке банка",
-            "min_amount": "от 0 ₽",
-            "account_term": "бессрочно",
-            "capitalization": "да",
-            "flexibility": "снятие и пополнение без ограничений",
+            "placement_term": "бессрочно",
+            "balance_limits": "от 0 ₽",
+            "interest_payout": "ежедневное начисление",
+            "deposit_flexibility": "снятие и пополнение без ограничений",
         },
     },
     "pds": {
         "metrics": {
-            "state_cofinancing": "до 36 000 ₽/год",
-            "participation_term": "от 15 лет",
-            "expected_return": "зависит от инвестиционного портфеля",
-            "early_exit": "с потерей господдержки",
-            "tax_benefit": "вычет 13% в пределах лимитов",
+            "cofinancing_threshold": "до 36 000 ₽/год",
+            "tax_deduction": "до 52 000 / 60 000 ₽/год",
+            "total_savings": "в личном кабинете ПДС",
+            "years_to_payout": "15 лет или возраст 55/60",
+            "fund_investment_income": "зависит от портфеля НПФ",
+        },
+    },
+    "opif_vim_save": {
+        "summary": (
+            "Консервативный облигационный ОПИФ с фокусом на ОФЗ и корпоративные облигации; "
+            "стоимость пая и СЧА — в отчётности УК «ВИМ Сбережения»."
+        ),
+        "metrics": {
+            "nav_per_share": "уточняйте на e-disclosure / у УК",
+            "price_change": "публикуется в отчётности фонда",
+            "nav_aum": "публикуется в отчётности фонда",
+            "min_investment": "от 1 000 ₽",
+            "ter": "до 2.5% по правилам УК",
+        },
+    },
+    "opif_vim_key": {
+        "summary": "ОПИФ «Ключевой+» — смешанная стратегия УК «ВИМ Сбережения»; детали — в отчётности фонда.",
+        "metrics": {
+            "nav_per_share": "уточняйте на e-disclosure / у УК",
+            "price_change": "публикуется в отчётности фонда",
+            "nav_aum": "публикуется в отчётности фонда",
+            "min_investment": "от 1 000 ₽",
+            "ter": "по правилам УК",
+        },
+    },
+    "opif_vim_rentier": {
+        "summary": "ОПИФ «Сбережения. Рантье» ориентирован на регулярные выплаты; метрики — в отчётности УК.",
+        "metrics": {
+            "nav_per_share": "уточняйте на e-disclosure / у УК",
+            "price_change": "публикуется в отчётности фонда",
+            "nav_aum": "публикуется в отчётности фонда",
+            "min_investment": "от 1 000 ₽",
+            "ter": "по правилам УК",
         },
     },
 }
@@ -270,6 +338,10 @@ def reference_profile(product_id: str | None, kind: str) -> Dict[str, Any]:
 
 def is_stable_kind(kind: str) -> bool:
     return (kind or "").strip().lower() in STABLE_KINDS
+
+
+def uses_reference_metrics_without_parser(kind: str) -> bool:
+    return (kind or "").strip().lower() in REFERENCE_METRICS_KINDS
 
 
 def resolve_product_id(asset_id: str, product: Optional[Dict[str, str]]) -> str:

@@ -17,7 +17,8 @@ _LIQUIDITY_MAP = {
 }
 
 _PERCENT_KEYS_RE = re.compile(
-    r"return|yield|fee|rate|drawdown|ter|alpha|cofinancing|management_fee|guaranteed|expected|maturity",
+    r"return|yield|fee|rate|drawdown|ter|spread|discount|deduction|change|coef|guarantee|"
+    r"participation|premium|nominal|effective|vat|income|dividend|buyback",
     re.I,
 )
 

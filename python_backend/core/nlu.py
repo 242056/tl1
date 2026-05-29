@@ -1,14 +1,24 @@
 import re
+from typing import Optional
 from urllib.parse import urlparse, urlunparse
 
 from .models import Intent, PortfolioKind, ScenarioType
+
+# Явные запросы сценария — без одиночных «индекс/рубль/рынок» (они есть в названиях продуктов).
+_SCENARIO_INTENT_RE = re.compile(
+    r"^сценар|сценар\s|что если|"
+    r"рост\s+став|падени\w*\s+индекс|индекс\w*\s+(?:упад|сниз|пад)|"
+    r"(?:упад|сниз|обвал).*(?:индекс|рынок|мосбирж)|"
+    r"(?:рубл|доллар|валют).*(?:ослаб|шок)|ослаб\w*\s+(?:рубл|доллар)",
+    re.I,
+)
 
 
 def detect_intent(text: str) -> Intent:
     v = text.lower()
     if re.search(r"бэ?к[\s\-]?тест|бектест|истори|испытание временем", v):
         return "BACKTEST"
-    if re.search(r"что если|сценар|ставк|рынок|индекс|доллар|рубл|валют", v):
+    if _SCENARIO_INTENT_RE.search(v):
         return "SCENARIO"
     return "UNKNOWN"
 
@@ -54,6 +64,46 @@ def extract_portfolio(text: str):
     return None
 
 
+def is_compare_portfolio_request(text: str) -> bool:
+    v = text.lower()
+    if re.search(r"сравн\w*.*портфел|портфел.*сравн", v):
+        return True
+    if re.search(r"друг\w*\s+портфел", v):
+        return True
+    if re.search(r"то же самое", v) and re.search(r"портфел|друг", v):
+        return True
+    if re.search(r"переключ\w*.*портфел|на друг\w*\s+портфел", v):
+        return True
+    if "с другим портфелем" in v or "с другой портфел" in v:
+        return True
+    if "сравнить с другим портфелем" in v:
+        return True
+    return False
+
+
+def is_same_operation_other_portfolio(text: str) -> bool:
+    v = text.lower()
+    return bool(re.search(r"то же самое", v) and re.search(r"портфел|друг", v))
+
+
+def flip_portfolio(portfolio_id: Optional[PortfolioKind]) -> PortfolioKind:
+    if portfolio_id == "current":
+        return "proposed"
+    return "current"
+
+
+def portfolio_label(portfolio_id: Optional[str]) -> str:
+    if portfolio_id == "proposed":
+        return "предложенный"
+    return "текущий"
+
+
+def portfolio_phrase(portfolio_id: Optional[str]) -> str:
+    if portfolio_id == "proposed":
+        return "На предложенном портфеле"
+    return "На текущем портфеле"
+
+
 def is_yes(text: str) -> bool:
     v = text.strip().lower()
     return v in {"да", "угу", "ок", "хорошо", "yes"} or "да, показать" in v or "да, 5 лет" in v
@@ -86,4 +136,4 @@ def is_valid_http_url(url: str) -> bool:
 
 def clean_public_url(url: str) -> str:
     p = urlparse(url.strip())
-    return urlunparse((p.scheme, p.netloc, p.path, "", "", ""))
+    return urlunparse((p.scheme, p.netloc, p.path, p.params, p.query, ""))

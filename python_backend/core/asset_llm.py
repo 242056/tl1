@@ -69,9 +69,10 @@ class AssetLlmClient:
                 "Не ставь has_any_data: false для продуктов из каталога ВТБ только из-за отсутствия биржевого тикера.",
                 "ОПИФ и ЗПИФ УК ВИМ: ищи данные на сайте УК, e-disclosure, открытых отчётах фонда; null в метриках — только если число не найдено.",
                 "Не давай прямых рекомендаций покупать/продавать — нейтральные формулировки.",
-                "ЗАПРЕЩЕНО дублировать key_metrics в positive_factors/negative_factors: никаких %, СЧА, TER, доходности, комиссий, альфы, цены пая.",
-                "Не вставляй ссылочные метки [1], [2], [5] ни в summary, ни в key_metrics, ни в факторы — источники только в sources.",
-                "В sources укажи реальные URL и человекочитаемые title для каждого источника, который использовал.",
+                "ЗАПРЕЩЕНО дублировать key_metrics в positive_factors/negative_factors: никаких %, цен, объёмов, ISIN, комиссий и котировок из метрик.",
+                "Не вставляй ссылочные метки [1], [2], [5] ни в summary, ни в key_metrics, ни в факторы.",
+                "Не включай URL и поле sources в ответ — ссылки пользователю не показываются.",
+                "data_status.has_recent_30d_data: false — только если за последние 30 дней нет значимых новостей/событий по активу и нет официальных данных для анализа.",
             ],
             "schema": {
                 "asset_name": "string — полное наименование продукта (как в линейке ВТБ)",
@@ -82,16 +83,8 @@ class AssetLlmClient:
                 "key_metrics": metrics_schema,
                 "data_status": {
                     "has_any_data": "boolean — true, если есть summary, факторы или хотя бы 2 заполненных key_metrics; для продуктов каталога ВТБ (ОПИФ, ЗПИФ, страхование, вклады) ставь true при любой публичной информации об УК/продукте",
-                    "has_recent_30d_data": "boolean — ставь true, если сформированы summary/факторы/метрики/источники; false только если анализ полностью невозможен",
+                    "has_recent_30d_data": "boolean — false, если за последние 30 дней не найдено значимых новостей/событий по активу; true, если новости или официальные обновления есть",
                 },
-                "sources": [
-                    {
-                        "title": "string",
-                        "url": "string",
-                        "type": "string (опционально)",
-                        "updatedAt": "string ISO date (опционально)",
-                    }
-                ],
                 "updated_at": "string ISO 8601 — момент актуальности сводки по твоей оценке",
             },
             "asset_id": asset_id,
@@ -110,7 +103,7 @@ class AssetLlmClient:
                 )
             if official_context.get("search_queries"):
                 prompt["rules"].append(
-                    "Обязательно выполни поиск по verified_official_data.search_queries и recommended_sources."
+                    "Используй verified_official_data.search_queries для поиска фактов."
                 )
             stable = official_context.get("stable_profile") or {}
             if stable.get("stable_kind"):
@@ -118,9 +111,8 @@ class AssetLlmClient:
                 prompt["rules"].extend(
                     [
                         "deterministic_mode: summary и факторы будут взяты из stable_profile на сервере — не трать на них усилия.",
-                        "Главная задача: заполнить key_metrics — для каждого null в prefilled_key_metrics найди значение на vtb.ru / cbr.ru / viminvest.ru.",
+                        "Главная задача: заполнить key_metrics — для каждого null в prefilled_key_metrics найди значение в официальных источниках.",
                         "Не оставляй null, если на официальном сайте есть число, процент, срок или сумма.",
-                        "Добавь 1–3 реальных URL в sources.",
                     ]
                 )
         body: Dict[str, Any] = {
@@ -201,7 +193,7 @@ class AssetLlmClient:
             "key_metrics_schema": schema,
             "rules": [
                 "Верни JSON вида {\"key_metrics\": {...}} только с ключами из missing_keys.",
-                "Используй search_queries и recommended_sources из verified_official_data.",
+                "Используй search_queries из verified_official_data.",
                 "Приоритет: vtb.ru, viminvest.ru, e-disclosure.ru, cbr.ru.",
                 "Если точного числа нет — null, не выдумывай.",
                 "Проценты строкой с символом %, суммы с ₽.",

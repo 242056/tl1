@@ -7,13 +7,17 @@ import httpx
 from fastapi import HTTPException
 
 from .asset_llm import ASSET_DISCLAIMER, AssetLlmClient
+from .asset_policy import check_asset_type_supported, check_recent_news_required
 from .asset_stabilizer import stabilize_passport
 from .asset_text import sanitize_factors, strip_citation_markers
 from .clients import ExternalApiClient
 from .metric_format import normalize_metric_values
 from .metric_values import is_concrete_metric
 from .official_sources import OfficialDataCollector
-from .product_metrics import metrics_labels_for_kind, normalize_key_metrics
+from .product_metrics import metrics_labels_for_kind, metrics_keys, normalize_key_metrics
+from .product_reference import is_stable_kind, resolve_product_id, uses_reference_metrics_without_parser
+from .products import product_by_id, product_by_name
+from .source_validator import candidate_limit, filter_display_sources, select_reachable_sources
 
 _SUMMARY_MAX_CHARS = 130
 _SUMMARY_MAX_SENTENCES = 2
@@ -79,31 +83,23 @@ def _as_dict(value: Any) -> Dict[str, Any]:
     return value if isinstance(value, dict) else {}
 
 
-def _as_sources(value: Any) -> List[Any]:
-    if not isinstance(value, list):
-        return []
-    return _top_sources(value, limit=3)
+def _source_url(item: Any) -> str:
+    if isinstance(item, str):
+        return item.strip()
+    if isinstance(item, dict):
+        return str(item.get("url") or "").strip()
+    return ""
 
 
-def _merge_sources_lists(primary: List[Any], secondary: List[Any], limit: int = 3) -> List[Any]:
-    seen: set[str] = set()
-    out: List[Any] = []
-    for src in list(primary) + list(secondary):
-        if isinstance(src, str):
-            u = src.strip()
-            if not u or u in seen:
-                continue
-            seen.add(u)
-            out.append(src)
-        elif isinstance(src, dict):
-            u = str(src.get("url") or "").strip()
-            if not u or u in seen:
-                continue
-            seen.add(u)
-            out.append(src)
-        if len(out) >= limit:
-            break
-    return out
+def _official_display_sources(
+    official_sources: List[Any],
+    *,
+    product_id: str | None = None,
+    limit: int = 3,
+) -> List[Any]:
+    """Только URL из белого списка — карточки инструментов, без generic/home/API."""
+    ranked = _top_sources(official_sources, limit=candidate_limit())
+    return filter_display_sources(ranked, product_id=product_id)[:limit]
 
 
 def _merge_key_metrics(
@@ -217,6 +213,63 @@ def _analysis_is_viable(
     return any(_metric_has_value(v) for v in merged.values())
 
 
+def _official_parsers_verified(coverage: Dict[str, bool], asset_type: str) -> bool:
+    k = (asset_type or "").strip().lower()
+    if k == "bpif":
+        return bool(coverage.get("investing") or coverage.get("moex"))
+    if k in ("opif", "zpif"):
+        return bool(coverage.get("investing"))
+    if k == "precious_metal":
+        return bool(coverage.get("investing") or coverage.get("cbr"))
+    return bool(coverage.get("moex") or coverage.get("vtb_card"))
+
+
+def _merge_stable_precious_metrics(
+    official_metrics: Dict[str, Any],
+    llm_metrics: Dict[str, Any],
+    reference_metrics: Dict[str, Any],
+) -> Dict[str, Any]:
+    """Цена/доходность — из ЦБ; банковские условия — из эталона, без LLM-цифр."""
+    out: Dict[str, Any] = {}
+    ref = reference_metrics or {}
+    llm = llm_metrics or {}
+    official = official_metrics or {}
+
+    for key in ("bid_price", "ask_price", "bank_spread", "period_change_pct"):
+        for bucket in (official, llm, ref):
+            val = bucket.get(key)
+            if is_concrete_metric(val):
+                out[key] = val
+                break
+
+    for key in ("daily_range",):
+        for bucket in (ref, official, llm):
+            val = bucket.get(key)
+            if val is not None and str(val).strip():
+                out[key] = val
+                break
+
+    return out
+
+
+def _metrics_from_official_and_reference(
+    official_metrics: Dict[str, Any],
+    reference_metrics: Dict[str, Any],
+    asset_type: str,
+) -> Dict[str, Any]:
+    out: Dict[str, Any] = {}
+    ref = reference_metrics or {}
+    for key in metrics_keys(asset_type):
+        off_val = official_metrics.get(key)
+        if is_concrete_metric(off_val):
+            out[key] = off_val
+        elif ref.get(key):
+            out[key] = ref[key]
+        else:
+            out[key] = None
+    return normalize_metric_values(out, asset_type)
+
+
 def _llm_failure_response(exc: Exception) -> Dict[str, Any]:
     if isinstance(exc, httpx.HTTPStatusError):
         code = exc.response.status_code
@@ -271,8 +324,14 @@ class AssetService:
         self.official = OfficialDataCollector(api or ExternalApiClient())
 
     async def analyze(self, asset_id: str, asset_type: str, period_days: int) -> Dict[str, Any]:
+        unsupported = check_asset_type_supported(asset_type)
+        if unsupported:
+            return unsupported
+
         official = await self.official.collect(asset_id, asset_type, period_days)
         stable_profile = self.official.stable_profile_for(asset_id, asset_type)
+        product = product_by_name(asset_id) or product_by_id(asset_id)
+        catalog_product_id = resolve_product_id(asset_id, product)
         official_ctx = {
             "prefilled_key_metrics": official.metrics,
             "context_text": official.context_text(),
@@ -280,7 +339,6 @@ class AssetService:
             "source_errors": official.errors,
             "stable_profile": stable_profile,
             "search_queries": official.search_queries,
-            "recommended_sources": official.sources[:4],
         }
 
         try:
@@ -290,8 +348,18 @@ class AssetService:
         except Exception as exc:
             return _llm_failure_response(exc)
 
-        ranked_sources = _merge_sources_lists(official.sources, _as_sources(raw.get("sources")))
-        viable = _analysis_is_viable(raw, ranked_sources, asset_type, official.metrics) or bool(
+        raw.pop("sources", None)
+
+        no_news = check_recent_news_required(raw, asset_type, stable_profile, official.coverage)
+        if no_news:
+            return no_news
+
+        source_candidates = _official_display_sources(
+            official.sources,
+            product_id=catalog_product_id,
+            limit=candidate_limit(),
+        )
+        viable = _analysis_is_viable(raw, source_candidates, asset_type, official.metrics) or bool(
             stable_profile.get("summary")
         )
 
@@ -303,11 +371,62 @@ class AssetService:
                 "error_code": "no_data_overall",
             }
 
+        ranked_sources = await select_reachable_sources(
+            source_candidates,
+            limit=3,
+            product_id=catalog_product_id,
+        )
+        ranked_sources = [
+            s
+            for s in ranked_sources
+            if isinstance(s, dict)
+            and str(s.get("parser_origin") or "").lower() in {"moex", "investing", "cbr", "vtb", "wealthim"}
+        ]
+
         merged_metrics = normalize_metric_values(
             _merge_key_metrics(official.metrics, raw.get("key_metrics"), asset_type),
             asset_type,
         )
-        missing_keys = [k for k, v in merged_metrics.items() if not is_concrete_metric(v)]
+        parsers_verified = _official_parsers_verified(official.coverage, asset_type)
+        ref_metrics = stable_profile.get("metrics") or {}
+
+        if is_stable_kind(asset_type) and asset_type == "precious_metal":
+            merged_metrics = normalize_metric_values(
+                _merge_stable_precious_metrics(official.metrics, merged_metrics, ref_metrics),
+                asset_type,
+            )
+            missing_keys = []
+            compact_summary = _compact_summary(stable_profile.get("summary") or raw.get("summary"))
+            compact_pos = _compact_factors(
+                sanitize_factors(_clean_text_list(_as_list(stable_profile.get("positive_factors") or raw.get("positive_factors"))))
+            )
+            compact_neg = _compact_factors(
+                sanitize_factors(_clean_text_list(_as_list(stable_profile.get("negative_factors") or raw.get("negative_factors"))))
+            )
+        elif uses_reference_metrics_without_parser(asset_type) and not parsers_verified:
+            merged_metrics = _metrics_from_official_and_reference(
+                official.metrics,
+                ref_metrics,
+                asset_type,
+            )
+            missing_keys: List[str] = []
+            compact_summary = _compact_summary(stable_profile.get("summary") or raw.get("summary"))
+            compact_pos = _compact_factors(
+                sanitize_factors(_clean_text_list(_as_list(stable_profile.get("positive_factors") or raw.get("positive_factors"))))
+            )
+            compact_neg = _compact_factors(
+                sanitize_factors(_clean_text_list(_as_list(stable_profile.get("negative_factors") or raw.get("negative_factors"))))
+            )
+        else:
+            missing_keys = [k for k, v in merged_metrics.items() if not is_concrete_metric(v)]
+            compact_summary = _compact_summary(raw.get("summary"))
+            compact_pos = _compact_factors(
+                sanitize_factors(_clean_text_list(_as_list(raw.get("positive_factors"))))
+            )
+            compact_neg = _compact_factors(
+                sanitize_factors(_clean_text_list(_as_list(raw.get("negative_factors"))))
+            )
+
         if len(missing_keys) >= 2:
             try:
                 gap_metrics = await self.llm.fill_metric_gaps(
@@ -324,17 +443,8 @@ class AssetService:
                         _merge_key_metrics(official.metrics, patched, asset_type),
                         asset_type,
                     )
-                    gap_sources = _as_sources(raw.get("sources"))
-                    ranked_sources = _merge_sources_lists(official.sources, gap_sources)
             except Exception:
                 pass
-        compact_summary = _compact_summary(raw.get("summary"))
-        compact_pos = _compact_factors(
-            sanitize_factors(_clean_text_list(_as_list(raw.get("positive_factors"))))
-        )
-        compact_neg = _compact_factors(
-            sanitize_factors(_clean_text_list(_as_list(raw.get("negative_factors"))))
-        )
 
         stable = stabilize_passport(
             asset_id=asset_id,

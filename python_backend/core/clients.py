@@ -1,4 +1,6 @@
+import math
 import os
+import random
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Union
 
@@ -63,15 +65,36 @@ class VtbModelClient:
     def get_current_portfolio(self) -> Dict[str, Any]:
         return dict(self.current_portfolio)
 
-    def _series(self, annual_return: float, years: int) -> List[float]:
-        """Normalized index series: starts at 1.0."""
+    def _series(
+        self,
+        annual_return: float,
+        years: int,
+        *,
+        vol: float = 0.15,
+        seed_offset: int = 0,
+    ) -> List[float]:
+        """Normalized index: 1.0 → (1+r)^years with realistic volatility."""
         points = 8
-        result = []
-        for i in range(points):
-            t = years * i / (points - 1)
-            value = round((1 + annual_return) ** t, 4)
-            result.append(value)
-        return result
+        months = max(12, years * 12)
+        seed = ((int(round(annual_return * 1e4)) ^ years * 7919) + seed_offset) & 0xFFFFFFFF
+        rng = random.Random(seed)
+
+        mu = math.log(1 + annual_return)
+        monthly_vol = vol / math.sqrt(12)
+        monthly_mu = mu / 12 - 0.5 * monthly_vol * monthly_vol
+
+        path = [1.0]
+        for _ in range(months):
+            z = rng.gauss(0, 1)
+            path.append(path[-1] * math.exp(monthly_mu + monthly_vol * z))
+
+        target = (1 + annual_return) ** years
+        path[-1] = max(path[-1], 1e-6)
+        scale = target / path[-1]
+        path = [v * scale for v in path]
+
+        idxs = [round(i * months / (points - 1)) for i in range(points)]
+        return [round(path[i], 4) for i in idxs]
 
     async def generate_portfolio(self, variant: Optional[int]) -> Dict[str, Any]:
         idx = (variant or 0) % len(self.portfolios)
@@ -115,12 +138,12 @@ class VtbModelClient:
             "success": True,
             "data": {
                 "dates": dates,
-                "portfolio_values": self._series(r, period_years),
-                "benchmark_values": self._series(b, period_years),
+                "portfolio_values": self._series(r, period_years, vol=0.19, seed_offset=0),
+                "benchmark_values": self._series(b, period_years, vol=0.14, seed_offset=9001),
                 "previous": {
                     "dates": dates_prev,
-                    "portfolio_values": self._series(r_prev, period_years),
-                    "benchmark_values": self._series(b_prev, period_years),
+                    "portfolio_values": self._series(r_prev, period_years, vol=0.19, seed_offset=42),
+                    "benchmark_values": self._series(b_prev, period_years, vol=0.14, seed_offset=9043),
                     "metrics": {
                         "portfolio": {
                             "annual_return": r_prev,

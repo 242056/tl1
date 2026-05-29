@@ -3,10 +3,11 @@ from typing import Any, Dict
 
 from fastapi import APIRouter
 
+from .agent_service import AgentService
 from .asset_llm import AssetLlmClient
 from .asset_service import AssetService
 from .clients import ExternalApiClient, VtbModelClient
-from .models import AssetRequest, ChatRequest, PortfolioRequest
+from .models import AgentRequest, AssetRequest, ChatRequest, PortfolioRequest
 from .products import universe_for_api
 from .product_metrics import metrics_labels_for_kind, metrics_spec_for_kind
 from .services import DialogService
@@ -18,6 +19,7 @@ _vtb = VtbModelClient()
 _asset_llm = AssetLlmClient(_api)
 _dialog = DialogService(_vtb)
 _asset = AssetService(_asset_llm, _api)
+_agent = AgentService(_dialog, _asset)
 
 
 @router.get("/health")
@@ -73,7 +75,12 @@ async def generate_portfolio(req: PortfolioRequest) -> Dict[str, Any]:
 
 @router.post("/chat")
 async def chat(req: ChatRequest) -> Dict[str, Any]:
-    return await _dialog.handle_chat(req.sessionId, req.message)
+    return await _agent.handle(req.sessionId, req.message)
+
+
+@router.post("/agent")
+async def agent(req: AgentRequest) -> Dict[str, Any]:
+    return await _agent.handle(req.sessionId, req.message)
 
 
 @router.post("/asset-analysis")

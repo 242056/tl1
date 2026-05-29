@@ -40,18 +40,13 @@ PRODUCT_UNIVERSE: List[Dict[str, str]] = [
 _BY_ID = {p["productId"]: p for p in PRODUCT_UNIVERSE}
 _BY_NAME = {p["productName"]: p for p in PRODUCT_UNIVERSE}
 
-# Тикеры MOEX / Profinansy для БПИФ (официальные источники).
+# Тикеры MOEX для БПИФ (официальные источники).
 MOEX_TICKER_BY_PRODUCT: Dict[str, str] = {
     "bpif_gold_exchange": "GOLD",
     "bpif_liquidity": "LQDT",
     "bpif_moex_index": "TMOS",
     "bpif_ru_bonds": "SBMX",
     "bpif_esg_ru": "ESG",
-}
-
-# Коды profinansy.ru для ОПИФ/ЗПИФ/БПИФ (пробуются также варианты с суффиксом -MOEX).
-PROFINANSY_CODE_BY_PRODUCT: Dict[str, str] = {
-    **{pid: code for pid, code in MOEX_TICKER_BY_PRODUCT.items()},
 }
 
 

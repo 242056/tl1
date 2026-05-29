@@ -7,12 +7,14 @@ from typing import Any, List
 # Perplexity / sonar: [1], [3][6], [1, 2]
 _CITATION_MARKERS_RE = re.compile(r"\[\s*\d+(?:\s*[,;]\s*\d+)*\s*\]")
 _MULTI_SPACE_RE = re.compile(r"[ \t]{2,}")
+_HTTP_URL_RE = re.compile(r"https?://\S+", re.I)
 
 
 def strip_citation_markers(text: Any) -> Any:
     if not isinstance(text, str):
         return text
     cleaned = _CITATION_MARKERS_RE.sub("", text)
+    cleaned = _HTTP_URL_RE.sub("", cleaned)
     cleaned = _MULTI_SPACE_RE.sub(" ", cleaned)
     cleaned = re.sub(r"\s+([.,;:])", r"\1", cleaned)
     return cleaned.strip()
