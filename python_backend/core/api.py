@@ -7,7 +7,19 @@ from .agent_service import AgentService
 from .asset_llm import AssetLlmClient
 from .asset_service import AssetService
 from .clients import ExternalApiClient, VtbModelClient
-from .models import AgentRequest, AssetRequest, ChatRequest, PortfolioRequest
+from .copilot_service import CopilotService
+from .models import (
+    AgentRequest,
+    AssetRequest,
+    ChatRequest,
+    CopilotAssetRequest,
+    CopilotConfirmRequest,
+    CopilotInitRequest,
+    CopilotPresetRequest,
+    CopilotRecalculateRequest,
+    CopilotSessionRequest,
+    PortfolioRequest,
+)
 from .products import universe_for_api
 from .product_metrics import metrics_labels_for_kind, metrics_spec_for_kind
 from .services import DialogService
@@ -19,7 +31,8 @@ _vtb = VtbModelClient()
 _asset_llm = AssetLlmClient(_api)
 _dialog = DialogService(_vtb)
 _asset = AssetService(_asset_llm, _api)
-_agent = AgentService(_dialog, _asset)
+_copilot = CopilotService(_vtb)
+_agent = AgentService(_dialog, _asset, _copilot)
 
 
 @router.get("/health")
@@ -86,3 +99,49 @@ async def agent(req: AgentRequest) -> Dict[str, Any]:
 @router.post("/asset-analysis")
 async def asset_analysis(req: AssetRequest) -> Dict[str, Any]:
     return await _asset.analyze(req.asset_id, req.asset_type, req.period_days)
+
+
+@router.get("/copilot/scenarios")
+async def copilot_scenarios() -> Dict[str, Any]:
+    return {"success": True, "data": _copilot.list_scenarios()}
+
+
+@router.get("/copilot/session/{session_id}")
+async def copilot_session(session_id: str) -> Dict[str, Any]:
+    return _copilot.get_session_state(session_id)
+
+
+@router.post("/copilot/init")
+async def copilot_init(req: CopilotInitRequest) -> Dict[str, Any]:
+    return await _copilot.init_session(req.sessionId, req.scenarioId)
+
+
+@router.post("/copilot/recalculate")
+async def copilot_recalculate(req: CopilotRecalculateRequest) -> Dict[str, Any]:
+    weights = [{"productId": w.productId, "weight": w.weight} for w in req.weights]
+    return await _copilot.recalculate(req.sessionId, weights)
+
+
+@router.post("/copilot/preset")
+async def copilot_preset(req: CopilotPresetRequest) -> Dict[str, Any]:
+    return await _copilot.apply_preset(req.sessionId, req.presetId)
+
+
+@router.post("/copilot/reset")
+async def copilot_reset(req: CopilotSessionRequest) -> Dict[str, Any]:
+    return await _copilot.reset_to_original(req.sessionId)
+
+
+@router.post("/copilot/add-asset")
+async def copilot_add_asset(req: CopilotAssetRequest) -> Dict[str, Any]:
+    return await _copilot.add_asset(req.sessionId, req.productId, req.weight)
+
+
+@router.post("/copilot/remove-asset")
+async def copilot_remove_asset(req: CopilotAssetRequest) -> Dict[str, Any]:
+    return await _copilot.remove_asset(req.sessionId, req.productId)
+
+
+@router.post("/copilot/confirm")
+async def copilot_confirm(req: CopilotConfirmRequest) -> Dict[str, Any]:
+    return await _copilot.confirm_purchase(req.sessionId, req.confirmed)

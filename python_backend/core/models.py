@@ -3,7 +3,7 @@ from typing import Any, Dict, List, Literal, Optional
 from pydantic import BaseModel, Field
 
 PortfolioKind = Literal["current", "proposed"]
-Intent = Literal["BACKTEST", "SCENARIO", "ASSET", "UNKNOWN"]
+Intent = Literal["BACKTEST", "SCENARIO", "ASSET", "COPILOT", "UNKNOWN"]
 ScenarioType = Literal["rate_hike", "market_drop", "currency_shock"]
 PendingIntent = Literal["BACKTEST", "SCENARIO", "ASSET"]
 
@@ -45,3 +45,38 @@ class AssetRequest(BaseModel):
 class PortfolioRequest(BaseModel):
     sessionId: Optional[str] = None
     variant: Optional[int] = None
+
+
+class CopilotInitRequest(BaseModel):
+    sessionId: str
+    scenarioId: Optional[str] = None
+
+
+class CopilotWeightItem(BaseModel):
+    productId: str
+    weight: float
+
+
+class CopilotRecalculateRequest(BaseModel):
+    sessionId: str
+    weights: List[CopilotWeightItem]
+
+
+class CopilotPresetRequest(BaseModel):
+    sessionId: str
+    presetId: str
+
+
+class CopilotAssetRequest(BaseModel):
+    sessionId: str
+    productId: str
+    weight: float = 0.05
+
+
+class CopilotConfirmRequest(BaseModel):
+    sessionId: str
+    confirmed: bool = True
+
+
+class CopilotSessionRequest(BaseModel):
+    sessionId: str

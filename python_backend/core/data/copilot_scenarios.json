@@ -1,0 +1,221 @@
+{
+  "disclaimer": "Вы самостоятельно изменили рекомендованный ИИ-портфель и подтверждаете инвестиционное решение",
+  "rate_limit": {
+    "max_requests_per_minute": 30,
+    "message": "Лимит на запросы превышен. Подождите несколько секунд и попробуйте снова."
+  },
+  "errors": {
+    "model_unavailable": "Не удалось пересчитать портфель. Попробуйте позже",
+    "model_error": "Ошибка модели. Показано последнее успешное состояние",
+    "max_assets": "В MVP можно добавить не более 5 активов",
+    "unknown_scenario": "Сценарий черновика не найден",
+    "session_empty": "Сначала откройте ИИ-черновик"
+  },
+  "risk_profiles": {
+    "low": {
+      "label": "Консервативный",
+      "max_volatility": 0.115,
+      "max_single_weight": 0.35,
+      "max_risk_score": 3.2,
+      "volatility_spike_threshold": 0.025
+    },
+    "medium": {
+      "label": "Умеренный",
+      "max_volatility": 0.165,
+      "max_single_weight": 0.40,
+      "max_risk_score": 5.5,
+      "volatility_spike_threshold": 0.035
+    },
+    "high": {
+      "label": "Агрессивный",
+      "max_volatility": 0.22,
+      "max_single_weight": 0.45,
+      "max_risk_score": 8.0,
+      "volatility_spike_threshold": 0.05
+    }
+  },
+  "warnings": {
+    "risk_above_profile": "Портфель стал более рискованным, чем ваш профиль",
+    "concentration": "Доля одного актива превышает рекомендуемый уровень",
+    "volatility_spike": "Ожидаемая волатильность существенно выросла",
+    "diversification_drop": "Диверсификация портфеля ухудшилась",
+    "return_drop": "Ожидаемая доходность снизилась относительно ИИ-черновика"
+  },
+  "asset_stubs": {
+    "bpif_liquidity": { "expected_return": 0.108, "volatility": 0.035, "risk_score": 1.2, "metric_sensitivity": 0.95, "category": "bond_like" },
+    "bpif_ru_bonds": { "expected_return": 0.112, "volatility": 0.058, "risk_score": 1.8, "metric_sensitivity": 1.0, "category": "bond_like" },
+    "bpif_moex_index": { "expected_return": 0.168, "volatility": 0.198, "risk_score": 6.2, "metric_sensitivity": 1.22, "category": "equity" },
+    "bpif_gold_exchange": { "expected_return": 0.132, "volatility": 0.145, "risk_score": 4.1, "metric_sensitivity": 1.14, "category": "commodity" },
+    "bpif_esg_ru": { "expected_return": 0.155, "volatility": 0.185, "risk_score": 5.8, "metric_sensitivity": 1.18, "category": "equity" },
+    "account_vtb": { "expected_return": 0.095, "volatility": 0.012, "risk_score": 0.6, "metric_sensitivity": 0.88, "category": "cash" },
+    "deposit_vtb": { "expected_return": 0.102, "volatility": 0.008, "risk_score": 0.4, "metric_sensitivity": 0.9, "category": "cash" },
+    "gold_oms": { "expected_return": 0.118, "volatility": 0.132, "risk_score": 3.5, "metric_sensitivity": 1.12, "category": "commodity" },
+    "gold_coins": { "expected_return": 0.115, "volatility": 0.128, "risk_score": 3.3, "metric_sensitivity": 1.1, "category": "commodity" },
+    "opif_vim_save": { "expected_return": 0.128, "volatility": 0.092, "risk_score": 2.4, "metric_sensitivity": 1.05, "category": "mixed" },
+    "opif_vim_rentier": { "expected_return": 0.122, "volatility": 0.078, "risk_score": 2.0, "metric_sensitivity": 1.02, "category": "mixed" },
+    "opif_vim_key": { "expected_return": 0.148, "volatility": 0.162, "risk_score": 5.0, "metric_sensitivity": 1.16, "category": "equity" },
+    "iszh_fixed_income": { "expected_return": 0.106, "volatility": 0.042, "risk_score": 1.4, "metric_sensitivity": 0.96, "category": "insurance" },
+    "iszh_basis": { "expected_return": 0.114, "volatility": 0.055, "risk_score": 1.7, "metric_sensitivity": 0.98, "category": "insurance" },
+    "intellect_conservative": { "expected_return": 0.104, "volatility": 0.048, "risk_score": 1.5, "metric_sensitivity": 0.94, "category": "mixed" },
+    "intellect_ai": { "expected_return": 0.192, "volatility": 0.228, "risk_score": 7.4, "metric_sensitivity": 1.28, "category": "equity" },
+    "intellect_eternal": { "expected_return": 0.138, "volatility": 0.118, "risk_score": 3.8, "metric_sensitivity": 1.08, "category": "mixed" },
+    "zpif_vim_re": { "expected_return": 0.142, "volatility": 0.105, "risk_score": 3.2, "metric_sensitivity": 1.1, "category": "real_estate" },
+    "zpif_rent2": { "expected_return": 0.136, "volatility": 0.098, "risk_score": 2.9, "metric_sensitivity": 1.08, "category": "real_estate" },
+    "pds": { "expected_return": 0.098, "volatility": 0.018, "risk_score": 0.8, "metric_sensitivity": 0.92, "category": "pension" },
+    "diamonds": { "expected_return": 0.125, "volatility": 0.175, "risk_score": 4.8, "metric_sensitivity": 1.15, "category": "alternative" }
+  },
+  "draft_scenarios": [
+    {
+      "id": "draft_balanced_medium",
+      "title": "Сбалансированный мультипродукт",
+      "description": "Базовый ИИ-черновик для умеренного профиля: облигации, индекс, ликвидность и золото.",
+      "risk_profile": "medium",
+      "portfolio_variant": 0,
+      "intro_message": "Модель сформировала черновик «Сбалансированный мультипродукт». Подкорректируйте доли — метрики пересчитаются автоматически.",
+      "suggested_actions": ["Увеличить золото", "Снизить риск", "Купить"]
+    },
+    {
+      "id": "draft_income_conservative",
+      "title": "Доход и ликвидность",
+      "description": "Консервативный черновик с упором на облигации и накопительный счёт.",
+      "risk_profile": "low",
+      "portfolio_variant": 1,
+      "intro_message": "Черновик «Доход и ликвидность» для консервативного профиля. Можно добавить депозит или снизить долю облигаций.",
+      "suggested_actions": ["Добавить депозит", "Убрать ИСЖ", "Купить"]
+    },
+    {
+      "id": "draft_defensive_low",
+      "title": "Защитный баланс",
+      "description": "Низкий риск: облигации, ликвидность, золото на ОМС и стратегия Интеллект.",
+      "risk_profile": "low",
+      "portfolio_variant": 2,
+      "intro_message": "Защитный черновик с акцентом на сохранение капитала. Любое увеличение акций повысит предупреждения.",
+      "suggested_actions": ["Добавить золото ОМС", "Снизить индекс", "Купить"]
+    },
+    {
+      "id": "draft_growth_high",
+      "title": "Рост и альтернативы",
+      "description": "Агрессивный черновик: индекс, ESG, ИИ-стратегия и недвижимость.",
+      "risk_profile": "high",
+      "portfolio_variant": 3,
+      "intro_message": "Агрессивный черновик «Рост и альтернативы». Высокая доходность, но следите за концентрацией в одном активе.",
+      "suggested_actions": ["Снизить недвижимость", "Добавить золото", "Купить"]
+    },
+    {
+      "id": "draft_short_term",
+      "title": "Краткосрочный доход",
+      "description": "Краткий горизонт: депозит, ликвидные БПИФ и ПДС.",
+      "risk_profile": "low",
+      "portfolio_variant": 4,
+      "intro_message": "Краткосрочный черновик на 3 года. Подходит для первоначального взноса — можно усилить депозитную долю.",
+      "suggested_actions": ["Увеличить депозит", "Добавить ликвидность", "Купить"]
+    },
+    {
+      "id": "draft_gold_focus",
+      "title": "Золотой якорь",
+      "description": "Кастомный черновик: золото + облигации + ликвидность для хеджирования.",
+      "risk_profile": "medium",
+      "custom_weights": [
+        ["bpif_gold_exchange", 0.25],
+        ["gold_oms", 0.15],
+        ["bpif_ru_bonds", 0.30],
+        ["bpif_liquidity", 0.20],
+        ["account_vtb", 0.10]
+      ],
+      "intro_message": "Специальный черновик «Золотой якорь» — повышенная доля драгметаллов при умеренном риске.",
+      "suggested_actions": ["Увеличить золото", "Снизить облигации", "Купить"]
+    },
+    {
+      "id": "draft_intellect_mix",
+      "title": "Интеллект + фонды",
+      "description": "Готовые стратегии Интеллект в сочетании с БПИФ.",
+      "risk_profile": "medium",
+      "custom_weights": [
+        ["intellect_eternal", 0.20],
+        ["intellect_ai", 0.15],
+        ["bpif_moex_index", 0.25],
+        ["bpif_ru_bonds", 0.25],
+        ["bpif_liquidity", 0.15]
+      ],
+      "intro_message": "Черновик с готовыми стратегиями «Интеллект». Попробуйте убрать ИИ-стратегию и посмотреть, как изменится риск.",
+      "suggested_actions": ["Убрать ИИ-стратегию", "Сбалансировать", "Купить"]
+    },
+    {
+      "id": "draft_real_estate",
+      "title": "Арендный доход",
+      "description": "ЗПИФ недвижимости + облигации и кэш.",
+      "risk_profile": "medium",
+      "custom_weights": [
+        ["zpif_vim_re", 0.25],
+        ["zpif_rent2", 0.15],
+        ["bpif_ru_bonds", 0.30],
+        ["bpif_liquidity", 0.20],
+        ["account_vtb", 0.10]
+      ],
+      "intro_message": "Черновик с акцентом на ЗПИФ недвижимости. Концентрация в альтернативах может вызвать предупреждения.",
+      "suggested_actions": ["Снизить ЗПИФ", "Добавить ликвидность", "Купить"]
+    },
+    {
+      "id": "draft_insurance_wrap",
+      "title": "Страховая оболочка",
+      "description": "ИСЖ/НСЖ + консервативные фонды для семейных целей.",
+      "risk_profile": "low",
+      "custom_weights": [
+        ["iszh_basis", 0.20],
+        ["iszh_fixed_income", 0.15],
+        ["nszh_family", 0.15],
+        ["bpif_ru_bonds", 0.25],
+        ["bpif_liquidity", 0.25]
+      ],
+      "intro_message": "Семейный черновик со страховыми продуктами. Риск низкий, но доходность скромнее рынка.",
+      "suggested_actions": ["Добавить ОПИФ", "Снизить страховку", "Купить"]
+    },
+    {
+      "id": "draft_aggressive_tech",
+      "title": "Технологический рывок",
+      "description": "Максимальный акцент на акции, ESG и ИИ — только для агрессивного профиля.",
+      "risk_profile": "high",
+      "custom_weights": [
+        ["bpif_moex_index", 0.35],
+        ["bpif_esg_ru", 0.20],
+        ["intellect_ai", 0.25],
+        ["opif_vim_key", 0.15],
+        ["bpif_gold_exchange", 0.05]
+      ],
+      "intro_message": "Агрессивный tech-черновик. При снижении доли акций риск быстро падает — попробуйте на ползунках.",
+      "suggested_actions": ["Снизить акции", "Добавить облигации", "Купить"]
+    }
+  ],
+  "quick_presets": [
+    {
+      "id": "preset_more_return",
+      "label": "Повысить доходность",
+      "adjustments": { "bpif_moex_index": 0.05, "bpif_esg_ru": 0.03, "opif_vim_key": 0.02, "intellect_ai": 0.02 },
+      "reduce_from": ["bpif_liquidity", "account_vtb", "bpif_ru_bonds", "deposit_vtb", "pds"]
+    },
+    {
+      "id": "preset_less_risk",
+      "label": "Снизить риск",
+      "adjustments": { "bpif_liquidity": 0.08, "account_vtb": 0.05, "bpif_ru_bonds": 0.05 },
+      "reduce_from": ["bpif_moex_index", "intellect_ai", "bpif_esg_ru", "zpif_vim_re"]
+    },
+    {
+      "id": "preset_add_deposit",
+      "label": "Добавить депозит",
+      "add_product": "deposit_vtb",
+      "initial_weight": 0.10,
+      "reduce_from": ["bpif_moex_index", "bpif_ru_bonds", "bpif_liquidity"]
+    },
+    {
+      "id": "preset_remove_ai",
+      "label": "Убрать ИИ-стратегию",
+      "remove_product": "intellect_ai",
+      "redistribute_to": ["bpif_ru_bonds", "bpif_liquidity"]
+    },
+    {
+      "id": "preset_balance",
+      "label": "Сбалансировать",
+      "mode": "equal_weights"
+    }
+  ]
+}

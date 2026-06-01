@@ -39,6 +39,10 @@
         display: flex;
         flex-direction: column;
         overflow: hidden;
+        transition: max-width 0.25s ease;
+      }
+      .app.copilot-open {
+        max-width: 1240px;
       }
       .header {
         flex-shrink: 0;
@@ -81,8 +85,16 @@
         gap: 12px;
         overflow: hidden;
       }
+      .workspace {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        gap: 12px;
+        overflow: hidden;
+      }
       .chat-panel {
         flex: 1;
+        min-width: 0;
         min-height: 0;
         background: var(--vtb-card);
         border-radius: 16px;
@@ -138,6 +150,7 @@
       }
       .badge-dialog { background: #e3eef8; color: #004080; }
       .badge-passport { background: #e0f4fa; color: #006994; }
+      .badge-copilot { background: #ede7f6; color: #4527a0; }
       .chips {
         display: flex;
         flex-wrap: wrap;
@@ -305,6 +318,197 @@
       .toast-box { position: fixed; top: 16px; right: 16px; z-index: 999; display: flex; flex-direction: column; gap: 8px; }
       .toast { background: var(--vtb-navy); color: #fff; padding: 10px 14px; border-radius: 10px; font-size: 13px; opacity: 0; transform: translateY(-8px); transition: 0.2s; }
       .toast.show { opacity: 1; transform: translateY(0); }
+
+      /* Co-pilot panel — колонка справа от чата */
+      .copilot-panel {
+        width: 0;
+        min-width: 0;
+        overflow: hidden;
+        opacity: 0;
+        background: #fff;
+        border-radius: 16px;
+        border: 1px solid var(--vtb-line);
+        box-shadow: 0 8px 32px rgba(69, 39, 160, 0.1);
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+        overflow: hidden;
+        transition: width 0.25s ease, opacity 0.2s ease, min-width 0.25s ease;
+      }
+      .app.copilot-open .copilot-panel {
+        width: min(400px, 38vw);
+        min-width: 320px;
+        opacity: 1;
+      }
+      .copilot-head {
+        flex-shrink: 0;
+        background: linear-gradient(135deg, #4527a0 0%, #6a1b9a 100%);
+        color: #fff;
+        padding: 16px 18px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .copilot-head h2 { margin: 0; font-size: 17px; font-weight: 600; }
+      .copilot-head p { margin: 4px 0 0; font-size: 12px; opacity: 0.9; }
+      .copilot-close {
+        border: none;
+        background: rgba(255,255,255,0.2);
+        color: #fff;
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 18px;
+        line-height: 1;
+      }
+      .copilot-body {
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
+        padding: 14px 16px 20px;
+      }
+      .copilot-metrics {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+      .copilot-metric {
+        background: #f6f4fb;
+        border: 1px solid #e8e0f5;
+        border-radius: 10px;
+        padding: 10px;
+      }
+      .copilot-metric .label { font-size: 10px; text-transform: uppercase; color: var(--vtb-muted); letter-spacing: 0.04em; }
+      .copilot-metric .value { font-size: 18px; font-weight: 600; margin-top: 2px; }
+      .copilot-metric .delta { font-size: 11px; margin-top: 2px; }
+      .delta-good { color: var(--ok); }
+      .delta-bad { color: var(--danger); }
+      .delta-neutral { color: var(--vtb-muted); }
+      .delta-warn { color: #f57c00; }
+      .copilot-warnings {
+        margin-bottom: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .copilot-warn {
+        font-size: 12px;
+        padding: 8px 10px;
+        border-radius: 8px;
+        border-left: 3px solid;
+      }
+      .copilot-warn.yellow { background: #fff8e1; border-color: #f9a825; color: #6d4c00; }
+      .copilot-warn.red { background: #ffebee; border-color: #c62828; color: #7f0000; }
+      .asset-slider-row {
+        background: #fafcfe;
+        border: 1px solid var(--vtb-line);
+        border-radius: 12px;
+        padding: 10px 12px;
+        margin-bottom: 8px;
+      }
+      .asset-slider-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 8px;
+        margin-bottom: 6px;
+      }
+      .asset-slider-top .name { font-size: 13px; font-weight: 500; flex: 1; }
+      .asset-slider-top .pct { font-size: 14px; font-weight: 600; color: var(--vtb-navy); min-width: 42px; text-align: right; }
+      .asset-slider-delta { font-size: 11px; color: var(--vtb-muted); }
+      .asset-slider-amount { font-size: 12px; font-weight: 600; color: var(--vtb-navy); margin-top: 2px; }
+      .asset-slider-amount-delta { font-size: 11px; margin-left: 6px; font-weight: 500; }
+      .asset-slider-row input[type=range] { width: 100%; accent-color: #6a1b9a; }
+      .copilot-actions-bar {
+        flex-shrink: 0;
+        border-top: 1px solid var(--vtb-line);
+        padding: 12px 16px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        background: #fff;
+      }
+      .copilot-btn {
+        border: 1px solid #c5b3e6;
+        background: #fff;
+        color: #4527a0;
+        padding: 8px 14px;
+        border-radius: 999px;
+        font-size: 12px;
+        cursor: pointer;
+      }
+      .copilot-btn.primary {
+        background: linear-gradient(135deg, #4527a0 0%, #6a1b9a 100%);
+        color: #fff;
+        border: none;
+        font-weight: 600;
+      }
+      .copilot-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+      .copilot-confirmed-banner {
+        display: none;
+        margin-bottom: 12px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        background: #e8f5e9;
+        border: 1px solid #a5d6a7;
+        color: #1b5e20;
+        font-size: 13px;
+        line-height: 1.4;
+      }
+      .copilot-panel.is-confirmed .copilot-confirmed-banner { display: block; }
+      .copilot-panel.is-confirmed input[type=range] { pointer-events: none; opacity: 0.55; }
+      .copilot-panel.is-confirmed .copilot-scenario-select { pointer-events: none; opacity: 0.65; }
+      .copilot-scenario-select {
+        width: 100%;
+        border: 1px solid var(--vtb-line);
+        border-radius: 10px;
+        padding: 8px 10px;
+        font-size: 13px;
+        margin-bottom: 12px;
+      }
+      .confirm-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 600;
+        background: rgba(0,0,0,0.5);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+      }
+      .confirm-modal.open { display: flex; }
+      .confirm-box {
+        background: #fff;
+        border-radius: 16px;
+        max-width: 420px;
+        width: 100%;
+        padding: 20px;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+      .confirm-box h3 { margin: 0 0 12px; color: var(--vtb-navy); }
+      .header-copilot-btn {
+        margin-left: auto;
+        border: 1px solid rgba(255,255,255,0.35);
+        background: rgba(255,255,255,0.12);
+        color: #fff;
+        padding: 8px 14px;
+        border-radius: 999px;
+        font-size: 12px;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+      .header-copilot-btn:hover { background: rgba(255,255,255,0.22); }
+      @media (max-width: 900px) {
+        .app.copilot-open { max-width: 100%; }
+        .app.copilot-open .copilot-panel {
+          width: min(340px, 42vw);
+          min-width: 280px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -314,25 +518,64 @@
         <div class="logo">ВТБ</div>
         <div class="header-text">
           <h1>Инвестиционный ассистент</h1>
-          <p>Бэктест · Сценарии · Математический паспорт продукта</p>
+          <p>Бэктест · Сценарии · Анти-Гугл · ИИ-черновик</p>
         </div>
+        <button type="button" id="openCopilotBtn" class="header-copilot-btn">ИИ-черновик</button>
       </header>
 
       <main class="main">
-        <div class="chat-panel">
-          <div id="chatLog" class="chat-log"></div>
-          <div class="compose">
-            <div class="compose-row">
-              <textarea id="chatInput" rows="2" placeholder="Например: бэктест за 3 года или паспорт БПИФ «Ликвидность»"></textarea>
-              <button id="chatSend" class="send-btn" type="button">Отправить</button>
+        <div class="workspace">
+          <div class="chat-panel">
+            <div id="chatLog" class="chat-log"></div>
+            <div class="compose">
+              <div class="compose-row">
+                <textarea id="chatInput" rows="2" placeholder="Например: бэктест за 3 года или паспорт БПИФ «Ликвидность»"></textarea>
+                <button id="chatSend" class="send-btn" type="button">Отправить</button>
+              </div>
             </div>
           </div>
+          <aside id="copilotPanel" class="copilot-panel" aria-hidden="true" aria-label="ИИ-черновик Co-pilot">
+            <div class="copilot-head">
+              <div>
+                <h2 id="copilotTitle">ИИ-черновик</h2>
+                <p id="copilotSubtitle">Интерактивный Co-pilot</p>
+              </div>
+              <button type="button" class="copilot-close" id="copilotClose" aria-label="Закрыть">×</button>
+            </div>
+            <div class="copilot-body" id="copilotBody">
+              <div id="copilotConfirmedBanner" class="copilot-confirmed-banner">
+                Портфель подтверждён. Итоговые доли и метрики зафиксированы.
+              </div>
+              <select id="copilotScenarioSelect" class="copilot-scenario-select"></select>
+              <div id="copilotMetrics" class="copilot-metrics"></div>
+              <div id="copilotWarnings" class="copilot-warnings"></div>
+              <div id="copilotSliders"></div>
+            </div>
+            <div class="copilot-actions-bar">
+              <button type="button" class="copilot-btn" id="copilotReset">Сбросить</button>
+              <button type="button" class="copilot-btn" id="copilotPresetLessRisk">Снизить риск</button>
+              <button type="button" class="copilot-btn" id="copilotPresetReturn">↑ Доходность</button>
+              <button type="button" class="copilot-btn primary" id="copilotBuyBtn">Купить</button>
+            </div>
+          </aside>
         </div>
         <p class="footer-note">Информация носит справочный характер и не является индивидуальной инвестиционной рекомендацией.</p>
       </main>
     </div>
 
     <input type="hidden" id="sessionId" value="" />
+
+    <div id="confirmModal" class="confirm-modal" aria-hidden="true">
+      <div class="confirm-box">
+        <h3>Подтверждение покупки</h3>
+        <div id="confirmContent"></div>
+        <p class="disc" id="confirmDisclaimer"></p>
+        <div style="display:flex;gap:10px;margin-top:16px">
+          <button type="button" class="copilot-btn primary" id="confirmYes">Подтверждаю</button>
+          <button type="button" class="copilot-btn" id="confirmNo">Отмена</button>
+        </div>
+      </div>
+    </div>
 
     <script>
       (function initSession() {
@@ -387,8 +630,8 @@
         return escHtml(String(v));
       }
 
-      function renderChips(actions) {
-        if (!actions?.length) return "";
+      function renderChips(actions, intent) {
+        if (intent === "COPILOT" || !actions?.length) return "";
         return `<div class="chips">${actions.map((a) => `<button type="button" class="chip" data-action="${escHtml(a)}">${escHtml(a)}</button>`).join("")}</div>`;
       }
 
@@ -425,6 +668,7 @@
 
       function badgeForIntent(intent) {
         if (intent === "ASSET") return `<span class="msg-badge badge-passport">Анти-Гугл</span>`;
+        if (intent === "COPILOT") return `<span class="msg-badge badge-copilot">ИИ-черновик</span>`;
         if (intent === "BACKTEST" || intent === "SCENARIO") return `<span class="msg-badge badge-dialog">Диалог</span>`;
         return "";
       }
@@ -526,6 +770,346 @@
         }
         return html;
       }
+
+      /* ── Co-pilot ── */
+      const appEl = document.querySelector(".app");
+      const copilotPanel = document.getElementById("copilotPanel");
+      const copilotSliders = document.getElementById("copilotSliders");
+      const copilotMetrics = document.getElementById("copilotMetrics");
+      const copilotWarnings = document.getElementById("copilotWarnings");
+      const copilotTitle = document.getElementById("copilotTitle");
+      const copilotSubtitle = document.getElementById("copilotSubtitle");
+      const copilotScenarioSelect = document.getElementById("copilotScenarioSelect");
+      let copilotState = { products: [], metrics: null, metric_deltas: {}, warnings: [], scenario: null, placementAmount: 0 };
+      let copilotRecalcTimer = null;
+      let copilotBusy = false;
+
+      function sessionId() {
+        return document.getElementById("sessionId").value;
+      }
+
+      async function copilotFetch(path, body) {
+        const res = await fetch(path, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ sessionId: sessionId(), ...body }),
+        });
+        return res.json();
+      }
+
+      function pctWeight(w) {
+        return `${Math.round(Number(w) * 100)}%`;
+      }
+
+      function formatRub(n) {
+        const v = Number(n);
+        if (Number.isNaN(v)) return "—";
+        return new Intl.NumberFormat("ru-RU", {
+          style: "currency",
+          currency: "RUB",
+          maximumFractionDigits: 0,
+        }).format(v);
+      }
+
+      function formatAmountDelta(delta) {
+        const d = Number(delta || 0);
+        if (Math.abs(d) < 500) return "";
+        const sign = d > 0 ? "+" : "−";
+        return `<span class="asset-slider-amount-delta">${sign}${formatRub(Math.abs(d))}</span>`;
+      }
+
+      function redistributeWeights(products, changedIdx, newWeight) {
+        const w = Math.max(0, Math.min(1, newWeight));
+        const out = products.map((p) => ({ ...p, weight: Number(p.weight || 0) }));
+        out[changedIdx].weight = w;
+        const others = out.filter((_, i) => i !== changedIdx);
+        const rest = Math.max(0, 1 - w);
+        const othersSum = others.reduce((a, p) => a + p.weight, 0);
+        if (others.length === 0) return out;
+        if (othersSum <= 0) {
+          const even = rest / others.length;
+          others.forEach((p) => { p.weight = even; });
+        } else {
+          others.forEach((p) => { p.weight = p.weight * (rest / othersSum); });
+        }
+        let i = 0;
+        return out.map((p, idx) => (idx === changedIdx ? p : { ...p, weight: others[i++].weight }));
+      }
+
+      function syncSliderRow(row, product, idx) {
+        const pct = Math.round(product.weight * 100);
+        row.querySelector('input[type="range"]').value = pct;
+        row.querySelector(".pct").textContent = `${pct}%`;
+        const amtEl = row.querySelector(".asset-slider-amount");
+        if (amtEl) {
+          const origAmt = product.original_amount ?? product.amount;
+          const delta = (product.amount ?? 0) - origAmt;
+          amtEl.innerHTML = `${formatRub(product.amount)}${formatAmountDelta(delta)}`;
+        }
+      }
+
+      function updateLocalAmounts() {
+        const placement = Number(copilotState.placementAmount) || 0;
+        if (!placement) return;
+        copilotState.products.forEach((p, idx) => {
+          p.amount = Math.round(placement * Number(p.weight || 0));
+          const row = copilotSliders.querySelector(`.asset-slider-row[data-idx="${idx}"]`);
+          if (row) syncSliderRow(row, p, idx);
+        });
+      }
+
+      function fmtMetricDelta(key, deltaObj) {
+        if (!deltaObj) return "";
+        const d = Number(deltaObj.delta || 0);
+        if (Math.abs(d) < 0.001) return `<span class="delta-neutral">без изменений</span>`;
+        const cls = deltaObj.sentiment === "good" ? "delta-good" : (deltaObj.sentiment === "bad" ? "delta-bad" : "delta-neutral");
+        const sign = d > 0 ? "+" : "";
+        if (key === "expected_return" || key === "volatility") {
+          return `<span class="${cls}">${sign}${(d * 100).toFixed(1)} п.п.</span>`;
+        }
+        return `<span class="${cls}">${sign}${d.toFixed(2)}</span>`;
+      }
+
+      function renderCopilotMetrics(metrics, deltas) {
+        if (!metrics) { copilotMetrics.innerHTML = ""; return; }
+        const rows = [
+          ["expected_return", "Доходность", (v) => `${(Number(v) * 100).toFixed(1)}%`],
+          ["volatility", "Волатильность", (v) => `${(Number(v) * 100).toFixed(1)}%`],
+          ["sharpe_ratio", "Sharpe", (v) => String(v)],
+          ["risk_score", "Риск", (v) => String(v)],
+        ];
+        copilotMetrics.innerHTML = rows.map(([k, label, fmt]) =>
+          `<div class="copilot-metric">
+            <div class="label">${escHtml(label)}</div>
+            <div class="value">${escHtml(fmt(metrics[k]))}</div>
+            <div class="delta">${fmtMetricDelta(k, deltas?.[k])}</div>
+          </div>`
+        ).join("");
+      }
+
+      function renderCopilotWarnings(warnings) {
+        if (!warnings?.length) { copilotWarnings.innerHTML = ""; return; }
+        copilotWarnings.innerHTML = warnings.map((w) =>
+          `<div class="copilot-warn ${escHtml(w.level || "yellow")}">${escHtml(w.message)}</div>`
+        ).join("");
+      }
+
+      function renderCopilotSliders(products) {
+        copilotState.products = products.map((p) => ({ ...p }));
+
+        copilotSliders.innerHTML = copilotState.products.map((p, idx) => {
+          const w = Number(p.weight || 0);
+          const delta = Number(p.weight_delta || 0);
+          const deltaTxt = Math.abs(delta) < 0.001 ? "" : ` (${delta > 0 ? "+" : ""}${Math.round(delta * 100)}% к модели)`;
+          return `
+            <div class="asset-slider-row" data-idx="${idx}">
+              <div class="asset-slider-top">
+                <div>
+                  <div class="name">${escHtml(p.productName)}</div>
+                  <div class="asset-slider-delta">Модель: ${pctWeight(p.original_weight ?? p.weight)}${escHtml(deltaTxt)}</div>
+                  <div class="asset-slider-amount">${formatRub(p.amount)}${formatAmountDelta(p.amount_delta)}</div>
+                </div>
+                <span class="pct">${Math.round(w * 100)}%</span>
+              </div>
+              <input type="range" min="0" max="100" step="1" value="${Math.round(w * 100)}" data-idx="${idx}" />
+            </div>`;
+        }).join("");
+
+        copilotSliders.querySelectorAll('input[type="range"]').forEach((el) => {
+          el.addEventListener("input", (e) => {
+            const i = Number(e.target.dataset.idx);
+            const val = Number(e.target.value) / 100;
+            copilotState.products = redistributeWeights(copilotState.products, i, val);
+            copilotState.products.forEach((p, idx) => {
+              const row = copilotSliders.querySelector(`.asset-slider-row[data-idx="${idx}"]`);
+              if (row) syncSliderRow(row, p, idx);
+            });
+            updateLocalAmounts();
+            scheduleCopilotRecalc();
+          });
+        });
+      }
+
+      function scheduleCopilotRecalc() {
+        clearTimeout(copilotRecalcTimer);
+        copilotRecalcTimer = setTimeout(() => copilotRecalculate(), 350);
+      }
+
+      async function copilotRecalculate() {
+        if (copilotBusy) return;
+        const weights = copilotState.products.map((p) => ({ productId: p.productId, weight: Number(p.weight) }));
+
+        copilotBusy = true;
+        try {
+          const data = await copilotFetch("/api/copilot/recalculate", { weights });
+          if (!data.success) {
+            if (data.error_code !== "rate_limit") {
+              showToast(data.message || "Не удалось пересчитать");
+            }
+            return;
+          }
+          copilotState.metrics = data.metrics;
+          copilotState.metric_deltas = data.metric_deltas || {};
+          copilotState.warnings = data.warnings || [];
+          if (data.products) renderCopilotSliders(data.products);
+          renderCopilotMetrics(data.metrics, data.metric_deltas);
+          renderCopilotWarnings(data.warnings);
+        } catch (_e) {
+          showToast("Не удалось пересчитать портфель");
+        } finally {
+          copilotBusy = false;
+        }
+      }
+
+      async function loadCopilotScenarios() {
+        try {
+          const res = await fetch("/api/copilot/scenarios");
+          const json = await res.json();
+          const list = json.data || [];
+          copilotScenarioSelect.innerHTML = list.map((s) =>
+            `<option value="${escHtml(s.id)}">${escHtml(s.title)} (${escHtml(s.risk_profile)})</option>`
+          ).join("");
+        } catch (_e) {
+          copilotScenarioSelect.innerHTML = `<option value="">Сценарии недоступны</option>`;
+        }
+      }
+
+      function openCopilotPanel() {
+        appEl.classList.add("copilot-open");
+        copilotPanel.setAttribute("aria-hidden", "false");
+      }
+
+      function closeCopilotPanel() {
+        appEl.classList.remove("copilot-open");
+        copilotPanel.setAttribute("aria-hidden", "true");
+      }
+
+      async function openCopilot(scenarioId) {
+        openCopilotPanel();
+        try {
+          const data = await copilotFetch("/api/copilot/init", { scenarioId: scenarioId || copilotScenarioSelect.value || undefined });
+          if (!data.success) {
+            showToast(data.message || "Не удалось открыть черновик");
+            return;
+          }
+          applyCopilotData(data);
+        } catch (_e) {
+          showToast("Co-pilot недоступен");
+        }
+      }
+
+      function setCopilotConfirmed(confirmed) {
+        copilotPanel.classList.toggle("is-confirmed", !!confirmed);
+        copilotState.confirmed = !!confirmed;
+        const buyBtn = document.getElementById("copilotBuyBtn");
+        buyBtn.disabled = !!confirmed;
+        buyBtn.textContent = confirmed ? "Оформлено" : "Купить";
+        document.getElementById("copilotPresetLessRisk").disabled = !!confirmed;
+        document.getElementById("copilotPresetReturn").disabled = !!confirmed;
+        document.getElementById("copilotReset").disabled = !!confirmed;
+      }
+
+      function applyCopilotData(data) {
+        copilotState.scenario = data.scenario;
+        copilotState.metrics = data.metrics;
+        copilotState.metric_deltas = data.metric_deltas || {};
+        copilotState.warnings = data.warnings || [];
+        copilotState.placementAmount = data.draft?.placementAmount || data.placementAmount;
+        const products = data.products || data.confirmation?.products;
+        if (data.scenario) {
+          copilotTitle.textContent = data.scenario.title || "ИИ-черновик";
+          const total = copilotState.placementAmount
+            ? ` · ${formatRub(copilotState.placementAmount)}`
+            : "";
+          const status = data.confirmed ? " · Подтверждено" : "";
+          copilotSubtitle.textContent = `Профиль: ${data.scenario.risk_profile_label || data.scenario.risk_profile || "—"}${total}${status}`;
+          if (copilotScenarioSelect.querySelector(`option[value="${data.scenario.id}"]`)) {
+            copilotScenarioSelect.value = data.scenario.id;
+          }
+        }
+        renderCopilotMetrics(data.metrics, data.metric_deltas);
+        renderCopilotWarnings(data.warnings);
+        if (products) renderCopilotSliders(products);
+        setCopilotConfirmed(!!data.confirmed);
+      }
+
+      function closeCopilot() {
+        closeCopilotPanel();
+      }
+
+      async function showConfirmModal() {
+        clearTimeout(copilotRecalcTimer);
+        await copilotRecalculate();
+        const state = await fetch(`/api/copilot/session/${encodeURIComponent(sessionId())}`).then((r) => r.json());
+        if (!state.success) { showToast("Сначала откройте черновик"); return; }
+        applyCopilotData(state);
+        const m = state.metrics || {};
+        const items = (state.products || []).map((p) =>
+          `<li>${escHtml(p.productName)} — ${pctWeight(p.weight)} · ${formatRub(p.amount)}</li>`
+        ).join("");
+        const warns = (state.warnings || []).map((w) => `<li class="danger">${escHtml(w.message)}</li>`).join("");
+        document.getElementById("confirmContent").innerHTML = `
+          <ul style="margin:0;padding-left:18px;font-size:13px">${items}</ul>
+          <div class="section"><strong>Итоговые метрики</strong><ul>
+            <li>Доходность: ${fmtPct(m.expected_return)}</li>
+            <li>Волатильность: ${fmtPct(m.volatility)}</li>
+            <li>Sharpe: ${escHtml(String(m.sharpe_ratio ?? "—"))}</li>
+            <li>Риск: ${escHtml(String(m.risk_score ?? "—"))}</li>
+          </ul></div>
+          ${warns ? `<div class="section"><strong>Предупреждения</strong><ul>${warns}</ul></div>` : ""}`;
+        document.getElementById("confirmDisclaimer").textContent =
+          "Вы самостоятельно изменили рекомендованный ИИ-портфель и подтверждаете инвестиционное решение";
+        document.getElementById("confirmModal").classList.add("open");
+      }
+
+      document.getElementById("openCopilotBtn").addEventListener("click", () => openCopilot());
+      document.getElementById("copilotClose").addEventListener("click", closeCopilot);
+      copilotScenarioSelect.addEventListener("change", () => openCopilot(copilotScenarioSelect.value));
+      document.getElementById("copilotBuyBtn").addEventListener("click", showConfirmModal);
+      document.getElementById("confirmNo").addEventListener("click", () => {
+        document.getElementById("confirmModal").classList.remove("open");
+      });
+      document.getElementById("confirmYes").addEventListener("click", async () => {
+        document.getElementById("confirmModal").classList.remove("open");
+        const data = await copilotFetch("/api/copilot/confirm", { confirmed: true });
+        if (data.success) {
+          applyCopilotData(data);
+          openCopilotPanel();
+          showToast(data.reply || "Заявка принята");
+          pushBot(`${badgeForIntent("COPILOT")}${escHtml(data.reply || "Покупка подтверждена.")}`);
+        } else {
+          showToast(data.message || "Ошибка подтверждения");
+        }
+      });
+      document.getElementById("copilotPresetLessRisk").addEventListener("click", async () => {
+        const data = await copilotFetch("/api/copilot/preset", { presetId: "preset_less_risk" });
+        if (data.success) applyCopilotData(data);
+        else showToast(data.message || "Пресет не применён");
+      });
+      document.getElementById("copilotReset").addEventListener("click", async () => {
+        const data = await copilotFetch("/api/copilot/reset", {});
+        if (data.success) {
+          applyCopilotData(data);
+          showToast("Доли возвращены к ИИ-черновику");
+        } else {
+          showToast(data.message || "Не удалось сбросить");
+        }
+      });
+      document.getElementById("copilotPresetReturn").addEventListener("click", async () => {
+        const data = await copilotFetch("/api/copilot/preset", { presetId: "preset_more_return" });
+        if (data.success) applyCopilotData(data);
+        else showToast(data.message || "Пресет не применён");
+      });
+
+      loadCopilotScenarios().then(async () => {
+        try {
+          const data = await fetch(`/api/copilot/session/${encodeURIComponent(sessionId())}`).then((r) => r.json());
+          if (data.success) {
+            applyCopilotData(data);
+            openCopilotPanel();
+          }
+        } catch (_e) { /* no saved session */ }
+      });
 
       function renderBacktestChart(data) {
         const chartId = "bt_" + Date.now();
@@ -633,7 +1217,7 @@
         chatSend.disabled = false;
 
         if (!data || data.success === false) {
-          pushBot(`${badgeForIntent(data?.intent || "")}${escHtml(data?.reply || data?.message || "Не удалось выполнить запрос.")}${renderChips(data?.actions)}`);
+          pushBot(`${badgeForIntent(data?.intent || "")}${escHtml(data?.reply || data?.message || "Не удалось выполнить запрос.")}${renderChips(data?.actions, data?.intent)}`);
           return;
         }
 
@@ -645,13 +1229,17 @@
           }
           body += renderDialogExtras(data);
           if (data.passport) body += renderPassportCard(data.passport);
-          body += renderChips(data.actions);
+          if (!data.open_copilot) body += renderChips(data.actions, intent);
           pushBot(body);
 
           if (data.data?.dates && data.data?.portfolio_values) renderBacktestChart(data.data);
           if (data.data?.total_impact_percent !== undefined) renderScenarioChart(data.data);
+          if (data.open_copilot) {
+            applyCopilotData(data);
+            openCopilotPanel();
+          }
         } catch (_e) {
-          pushBot(`${badgeForIntent(data?.intent || "")}${escHtml(data?.reply || data?.message || "Ответ получен, но не удалось отобразить.")}${renderChips(data?.actions)}`);
+          pushBot(`${badgeForIntent(data?.intent || "")}${escHtml(data?.reply || data?.message || "Ответ получен, но не удалось отобразить.")}${renderChips(data?.actions, data?.intent)}`);
         }
       }
 
@@ -671,8 +1259,9 @@
           <li><b>Бэктест</b> — проверить историю вашего портфеля</li>
           <li><b>Сценарий</b> — смоделировать ставку, рынок или валюту</li>
           <li><b>Анти-Гугл</b> — математический паспорт любого продукта из линейки ВТБ</li>
+          <li><b>ИИ-черновик</b> — вручную скорректировать предложенный портфель</li>
         </ul>
-        ${renderChips(["Бэктест", "Сценарий", "Математический паспорт", "Паспорт: Золото.Биржевой"])}
+        ${renderChips(["Бэктест", "Сценарий", "ИИ-черновик", "Математический паспорт"])}
       `);
     </script>
   </body>

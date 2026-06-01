@@ -1,0 +1,3992 @@
+{
+  "updated_at": "2026-06-01T14:28:49.487715+00:00",
+  "sessions": {
+    "persist-test": {
+      "scenario_id": "draft_balanced_medium",
+      "scenario_title": "Сбалансированный мультипродукт",
+      "risk_profile": "medium",
+      "original_draft": {
+        "portfolioId": "copilot_draft_balanced_medium",
+        "portfolioName": "Сбалансированный мультипродукт",
+        "currency": "RUB",
+        "investmentHorizon": "5_years",
+        "placementAmount": 3000000,
+        "expectedReturn": {
+          "target": 14.5,
+          "inflationAdjusted": true
+        },
+        "riskProfile": "medium",
+        "summary": {
+          "description": "Базовый ИИ-черновик для умеренного профиля: облигации, индекс, ликвидность и золото."
+        },
+        "products": [
+          {
+            "productId": "bpif_ru_bonds",
+            "productName": "БПИФ «Российские облигации»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.3333,
+            "amount": 999900
+          },
+          {
+            "productId": "bpif_moex_index",
+            "productName": "БПИФ «Индекс МосБиржи»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.2778,
+            "amount": 833400
+          },
+          {
+            "productId": "bpif_liquidity",
+            "productName": "БПИФ «Ликвидность»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1667,
+            "amount": 500100
+          },
+          {
+            "productId": "bpif_gold_exchange",
+            "productName": "БПИФ «Золото.Биржевой»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1111,
+            "amount": 333300
+          },
+          {
+            "productId": "account_vtb",
+            "productName": "Накопительный ВТБ Счет",
+            "category": "Денежные продукты",
+            "kind": "account",
+            "weight": 0.1111,
+            "amount": 333300
+          }
+        ],
+        "goal": {
+          "enabled": true,
+          "goalName": "Образование ребенка",
+          "targetAmount": 5000000,
+          "currentInvestment": 1500000,
+          "investmentTermYears": 10,
+          "goalAchievable": false,
+          "recommendedMonthlyContribution": 25000
+        },
+        "rebalance": {
+          "enabled": true,
+          "frequency": "quarterly"
+        },
+        "generatedAt": "2026-05-30T10:30:21.345302+00:00"
+      },
+      "current_portfolio": {
+        "portfolioId": "copilot_draft_balanced_medium",
+        "portfolioName": "Сбалансированный мультипродукт",
+        "currency": "RUB",
+        "investmentHorizon": "5_years",
+        "placementAmount": 3000000,
+        "expectedReturn": {
+          "target": 14.5,
+          "inflationAdjusted": true
+        },
+        "riskProfile": "medium",
+        "summary": {
+          "description": "Базовый ИИ-черновик для умеренного профиля: облигации, индекс, ликвидность и золото."
+        },
+        "products": [
+          {
+            "productId": "bpif_ru_bonds",
+            "productName": "БПИФ «Российские облигации»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.2976,
+            "amount": 999900
+          },
+          {
+            "productId": "bpif_moex_index",
+            "productName": "БПИФ «Индекс МосБиржи»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.3552,
+            "amount": 1193400
+          },
+          {
+            "productId": "bpif_liquidity",
+            "productName": "БПИФ «Ликвидность»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1488,
+            "amount": 500100
+          },
+          {
+            "productId": "bpif_gold_exchange",
+            "productName": "БПИФ «Золото.Биржевой»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.0992,
+            "amount": 333300
+          },
+          {
+            "productId": "account_vtb",
+            "productName": "Накопительный ВТБ Счет",
+            "category": "Денежные продукты",
+            "kind": "account",
+            "weight": 0.0992,
+            "amount": 333300
+          }
+        ],
+        "goal": {
+          "enabled": true,
+          "goalName": "Образование ребенка",
+          "targetAmount": 5000000,
+          "currentInvestment": 1500000,
+          "investmentTermYears": 10,
+          "goalAchievable": false,
+          "recommendedMonthlyContribution": 25000
+        },
+        "rebalance": {
+          "enabled": true,
+          "frequency": "quarterly"
+        },
+        "generatedAt": "2026-05-30T10:30:21.345302+00:00"
+      },
+      "current_products": [
+        {
+          "productId": "bpif_ru_bonds",
+          "productName": "БПИФ «Российские облигации»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.2976,
+          "amount": 999900
+        },
+        {
+          "productId": "bpif_moex_index",
+          "productName": "БПИФ «Индекс МосБиржи»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.3552,
+          "amount": 1193400
+        },
+        {
+          "productId": "bpif_liquidity",
+          "productName": "БПИФ «Ликвидность»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.1488,
+          "amount": 500100
+        },
+        {
+          "productId": "bpif_gold_exchange",
+          "productName": "БПИФ «Золото.Биржевой»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.0992,
+          "amount": 333300
+        },
+        {
+          "productId": "account_vtb",
+          "productName": "Накопительный ВТБ Счет",
+          "category": "Денежные продукты",
+          "kind": "account",
+          "weight": 0.0992,
+          "amount": 333300
+        }
+      ],
+      "baseline_metrics": {
+        "expected_return": 0.1272,
+        "volatility": 0.0608,
+        "sharpe_ratio": 2.09,
+        "risk_score": 3.0445,
+        "diversification": 0.759,
+        "max_single_weight": 0.3333,
+        "category_mix": {
+          "bond_like": 0.5,
+          "equity": 0.2778,
+          "commodity": 0.1111,
+          "cash": 0.1111
+        }
+      },
+      "last_metrics": {
+        "expected_return": 0.1321,
+        "volatility": 0.0759,
+        "sharpe_ratio": 1.74,
+        "risk_score": 3.4229,
+        "diversification": 0.743,
+        "max_single_weight": 0.3552,
+        "category_mix": {
+          "bond_like": 0.4395,
+          "equity": 0.3658,
+          "commodity": 0.0958,
+          "cash": 0.0989
+        }
+      },
+      "recalc_history": [
+        {
+          "at": "2026-05-30T10:30:21.779754+00:00",
+          "weights": [
+            {
+              "bpif_ru_bonds": 0.2976
+            },
+            {
+              "bpif_moex_index": 0.3552
+            },
+            {
+              "bpif_liquidity": 0.1488
+            },
+            {
+              "bpif_gold_exchange": 0.0992
+            },
+            {
+              "account_vtb": 0.0992
+            }
+          ],
+          "metrics": {
+            "expected_return": 0.1321,
+            "volatility": 0.0759,
+            "sharpe_ratio": 1.74,
+            "risk_score": 3.4229,
+            "diversification": 0.743,
+            "max_single_weight": 0.3552,
+            "category_mix": {
+              "bond_like": 0.4395,
+              "equity": 0.3658,
+              "commodity": 0.0958,
+              "cash": 0.0989
+            }
+          },
+          "warnings_count": 0
+        }
+      ],
+      "last_change": {
+        "at": "2026-05-30T10:30:21.779754+00:00",
+        "weights": [
+          {
+            "bpif_ru_bonds": 0.2976
+          },
+          {
+            "bpif_moex_index": 0.3552
+          },
+          {
+            "bpif_liquidity": 0.1488
+          },
+          {
+            "bpif_gold_exchange": 0.0992
+          },
+          {
+            "account_vtb": 0.0992
+          }
+        ],
+        "metrics": {
+          "expected_return": 0.1321,
+          "volatility": 0.0759,
+          "sharpe_ratio": 1.74,
+          "risk_score": 3.4229,
+          "diversification": 0.743,
+          "max_single_weight": 0.3552,
+          "category_mix": {
+            "bond_like": 0.4395,
+            "equity": 0.3658,
+            "commodity": 0.0958,
+            "cash": 0.0989
+          }
+        },
+        "warnings_count": 0
+      },
+      "confirmed": false,
+      "final_portfolio": null,
+      "last_success_at": "2026-05-30T10:30:21.779754+00:00",
+      "last_warnings": []
+    },
+    "t": {
+      "scenario_id": "draft_balanced_medium",
+      "scenario_title": "Сбалансированный мультипродукт",
+      "risk_profile": "medium",
+      "original_draft": {
+        "portfolioId": "copilot_draft_balanced_medium",
+        "portfolioName": "Сбалансированный мультипродукт",
+        "currency": "RUB",
+        "investmentHorizon": "5_years",
+        "placementAmount": 3000000,
+        "expectedReturn": {
+          "target": 14.5,
+          "inflationAdjusted": true
+        },
+        "riskProfile": "medium",
+        "summary": {
+          "description": "Базовый ИИ-черновик для умеренного профиля: облигации, индекс, ликвидность и золото."
+        },
+        "products": [
+          {
+            "productId": "bpif_ru_bonds",
+            "productName": "БПИФ «Российские облигации»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.3333,
+            "amount": 999900
+          },
+          {
+            "productId": "bpif_moex_index",
+            "productName": "БПИФ «Индекс МосБиржи»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.2778,
+            "amount": 833400
+          },
+          {
+            "productId": "bpif_liquidity",
+            "productName": "БПИФ «Ликвидность»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1667,
+            "amount": 500100
+          },
+          {
+            "productId": "bpif_gold_exchange",
+            "productName": "БПИФ «Золото.Биржевой»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1111,
+            "amount": 333300
+          },
+          {
+            "productId": "account_vtb",
+            "productName": "Накопительный ВТБ Счет",
+            "category": "Денежные продукты",
+            "kind": "account",
+            "weight": 0.1111,
+            "amount": 333300
+          }
+        ],
+        "goal": {
+          "enabled": true,
+          "goalName": "Образование ребенка",
+          "targetAmount": 5000000,
+          "currentInvestment": 1500000,
+          "investmentTermYears": 10,
+          "goalAchievable": false,
+          "recommendedMonthlyContribution": 25000
+        },
+        "rebalance": {
+          "enabled": true,
+          "frequency": "quarterly"
+        },
+        "generatedAt": "2026-05-30T10:31:02.722579+00:00"
+      },
+      "current_portfolio": {
+        "portfolioId": "copilot_draft_balanced_medium",
+        "portfolioName": "Сбалансированный мультипродукт",
+        "currency": "RUB",
+        "investmentHorizon": "5_years",
+        "placementAmount": 3000000,
+        "expectedReturn": {
+          "target": 14.5,
+          "inflationAdjusted": true
+        },
+        "riskProfile": "medium",
+        "summary": {
+          "description": "Базовый ИИ-черновик для умеренного профиля: облигации, индекс, ликвидность и золото."
+        },
+        "products": [
+          {
+            "productId": "bpif_ru_bonds",
+            "productName": "БПИФ «Российские облигации»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.3163,
+            "amount": 948900
+          },
+          {
+            "productId": "bpif_moex_index",
+            "productName": "БПИФ «Индекс МосБиржи»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.3352,
+            "amount": 1005600
+          },
+          {
+            "productId": "bpif_liquidity",
+            "productName": "БПИФ «Ликвидность»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1459,
+            "amount": 437700
+          },
+          {
+            "productId": "bpif_gold_exchange",
+            "productName": "БПИФ «Золото.Биржевой»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1136,
+            "amount": 340800
+          },
+          {
+            "productId": "account_vtb",
+            "productName": "Накопительный ВТБ Счет",
+            "category": "Денежные продукты",
+            "kind": "account",
+            "weight": 0.0891,
+            "amount": 267300
+          }
+        ],
+        "goal": {
+          "enabled": true,
+          "goalName": "Образование ребенка",
+          "targetAmount": 5000000,
+          "currentInvestment": 1500000,
+          "investmentTermYears": 10,
+          "goalAchievable": false,
+          "recommendedMonthlyContribution": 25000
+        },
+        "rebalance": {
+          "enabled": true,
+          "frequency": "quarterly"
+        },
+        "generatedAt": "2026-05-30T10:31:02.722579+00:00"
+      },
+      "current_products": [
+        {
+          "productId": "bpif_ru_bonds",
+          "productName": "БПИФ «Российские облигации»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.3163,
+          "amount": 948900
+        },
+        {
+          "productId": "bpif_moex_index",
+          "productName": "БПИФ «Индекс МосБиржи»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.3352,
+          "amount": 1005600
+        },
+        {
+          "productId": "bpif_liquidity",
+          "productName": "БПИФ «Ликвидность»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.1459,
+          "amount": 437700
+        },
+        {
+          "productId": "bpif_gold_exchange",
+          "productName": "БПИФ «Золото.Биржевой»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.1136,
+          "amount": 340800
+        },
+        {
+          "productId": "account_vtb",
+          "productName": "Накопительный ВТБ Счет",
+          "category": "Денежные продукты",
+          "kind": "account",
+          "weight": 0.0891,
+          "amount": 267300
+        }
+      ],
+      "baseline_metrics": {
+        "expected_return": 0.1272,
+        "volatility": 0.0608,
+        "sharpe_ratio": 2.09,
+        "risk_score": 3.0445,
+        "diversification": 0.759,
+        "max_single_weight": 0.3333,
+        "category_mix": {
+          "bond_like": 0.5,
+          "equity": 0.2778,
+          "commodity": 0.1111,
+          "cash": 0.1111
+        }
+      },
+      "last_metrics": {
+        "expected_return": 0.1313,
+        "volatility": 0.0721,
+        "sharpe_ratio": 1.82,
+        "risk_score": 3.3681,
+        "diversification": 0.745,
+        "max_single_weight": 0.3352,
+        "category_mix": {
+          "bond_like": 0.4556,
+          "equity": 0.3421,
+          "commodity": 0.1121,
+          "cash": 0.0902
+        }
+      },
+      "recalc_history": [
+        {
+          "at": "2026-05-30T10:31:03.155698+00:00",
+          "weights": [
+            {
+              "bpif_ru_bonds": 0.3163
+            },
+            {
+              "bpif_moex_index": 0.3352
+            },
+            {
+              "bpif_liquidity": 0.1459
+            },
+            {
+              "bpif_gold_exchange": 0.1136
+            },
+            {
+              "account_vtb": 0.0891
+            }
+          ],
+          "metrics": {
+            "expected_return": 0.1313,
+            "volatility": 0.0721,
+            "sharpe_ratio": 1.82,
+            "risk_score": 3.3681,
+            "diversification": 0.745,
+            "max_single_weight": 0.3352,
+            "category_mix": {
+              "bond_like": 0.4556,
+              "equity": 0.3421,
+              "commodity": 0.1121,
+              "cash": 0.0902
+            }
+          },
+          "warnings_count": 0
+        }
+      ],
+      "last_change": {
+        "at": "2026-05-30T10:31:03.155698+00:00",
+        "weights": [
+          {
+            "bpif_ru_bonds": 0.3163
+          },
+          {
+            "bpif_moex_index": 0.3352
+          },
+          {
+            "bpif_liquidity": 0.1459
+          },
+          {
+            "bpif_gold_exchange": 0.1136
+          },
+          {
+            "account_vtb": 0.0891
+          }
+        ],
+        "metrics": {
+          "expected_return": 0.1313,
+          "volatility": 0.0721,
+          "sharpe_ratio": 1.82,
+          "risk_score": 3.3681,
+          "diversification": 0.745,
+          "max_single_weight": 0.3352,
+          "category_mix": {
+            "bond_like": 0.4556,
+            "equity": 0.3421,
+            "commodity": 0.1121,
+            "cash": 0.0902
+          }
+        },
+        "warnings_count": 0
+      },
+      "confirmed": false,
+      "final_portfolio": null,
+      "last_success_at": "2026-05-30T10:31:03.155698+00:00",
+      "last_warnings": []
+    },
+    "session-1780137336206-v33uubvt": {
+      "scenario_id": "draft_defensive_low",
+      "scenario_title": "Защитный баланс",
+      "risk_profile": "low",
+      "original_draft": {
+        "portfolioId": "copilot_draft_defensive_low",
+        "portfolioName": "Защитный баланс",
+        "currency": "RUB",
+        "investmentHorizon": "3_years",
+        "placementAmount": 1800000,
+        "expectedReturn": {
+          "target": 10.4,
+          "inflationAdjusted": true
+        },
+        "riskProfile": "low",
+        "summary": {
+          "description": "Низкий риск: облигации, ликвидность, золото на ОМС и стратегия Интеллект."
+        },
+        "products": [
+          {
+            "productId": "bpif_ru_bonds",
+            "productName": "БПИФ «Российские облигации»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.35,
+            "amount": 630000
+          },
+          {
+            "productId": "bpif_liquidity",
+            "productName": "БПИФ «Ликвидность»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.25,
+            "amount": 450000
+          },
+          {
+            "productId": "gold_oms",
+            "productName": "Золото на ОМС",
+            "category": "Драгметаллы",
+            "kind": "precious_metal",
+            "weight": 0.15,
+            "amount": 270000
+          },
+          {
+            "productId": "account_vtb",
+            "productName": "Накопительный ВТБ Счет",
+            "category": "Денежные продукты",
+            "kind": "account",
+            "weight": 0.15,
+            "amount": 270000
+          },
+          {
+            "productId": "intellect_conservative",
+            "productName": "Интеллект. Консервативный портфель",
+            "category": "Готовые стратегии",
+            "kind": "intellect",
+            "weight": 0.1,
+            "amount": 180000
+          }
+        ],
+        "goal": {
+          "enabled": false,
+          "goalName": "Резерв",
+          "targetAmount": 0,
+          "currentInvestment": 0,
+          "investmentTermYears": 0,
+          "goalAchievable": true,
+          "recommendedMonthlyContribution": 0
+        },
+        "rebalance": {
+          "enabled": true,
+          "frequency": "semi_annual"
+        },
+        "generatedAt": "2026-05-30T10:43:49.262833+00:00"
+      },
+      "current_portfolio": {
+        "portfolioId": "copilot_draft_defensive_low",
+        "portfolioName": "Защитный баланс",
+        "currency": "RUB",
+        "investmentHorizon": "3_years",
+        "placementAmount": 1800000,
+        "expectedReturn": {
+          "target": 10.4,
+          "inflationAdjusted": true
+        },
+        "riskProfile": "low",
+        "summary": {
+          "description": "Низкий риск: облигации, ликвидность, золото на ОМС и стратегия Интеллект."
+        },
+        "products": [
+          {
+            "productId": "bpif_ru_bonds",
+            "productName": "БПИФ «Российские облигации»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.35,
+            "amount": 630000
+          },
+          {
+            "productId": "bpif_liquidity",
+            "productName": "БПИФ «Ликвидность»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.25,
+            "amount": 450000
+          },
+          {
+            "productId": "gold_oms",
+            "productName": "Золото на ОМС",
+            "category": "Драгметаллы",
+            "kind": "precious_metal",
+            "weight": 0.15,
+            "amount": 270000
+          },
+          {
+            "productId": "account_vtb",
+            "productName": "Накопительный ВТБ Счет",
+            "category": "Денежные продукты",
+            "kind": "account",
+            "weight": 0.15,
+            "amount": 270000
+          },
+          {
+            "productId": "intellect_conservative",
+            "productName": "Интеллект. Консервативный портфель",
+            "category": "Готовые стратегии",
+            "kind": "intellect",
+            "weight": 0.1,
+            "amount": 180000
+          }
+        ],
+        "goal": {
+          "enabled": false,
+          "goalName": "Резерв",
+          "targetAmount": 0,
+          "currentInvestment": 0,
+          "investmentTermYears": 0,
+          "goalAchievable": true,
+          "recommendedMonthlyContribution": 0
+        },
+        "rebalance": {
+          "enabled": true,
+          "frequency": "semi_annual"
+        },
+        "generatedAt": "2026-05-30T10:43:49.262833+00:00"
+      },
+      "current_products": [
+        {
+          "productId": "bpif_ru_bonds",
+          "productName": "БПИФ «Российские облигации»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.35,
+          "amount": 630000
+        },
+        {
+          "productId": "bpif_liquidity",
+          "productName": "БПИФ «Ликвидность»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.25,
+          "amount": 450000
+        },
+        {
+          "productId": "gold_oms",
+          "productName": "Золото на ОМС",
+          "category": "Драгметаллы",
+          "kind": "precious_metal",
+          "weight": 0.15,
+          "amount": 270000
+        },
+        {
+          "productId": "account_vtb",
+          "productName": "Накопительный ВТБ Счет",
+          "category": "Денежные продукты",
+          "kind": "account",
+          "weight": 0.15,
+          "amount": 270000
+        },
+        {
+          "productId": "intellect_conservative",
+          "productName": "Интеллект. Консервативный портфель",
+          "category": "Готовые стратегии",
+          "kind": "intellect",
+          "weight": 0.1,
+          "amount": 180000
+        }
+      ],
+      "baseline_metrics": {
+        "expected_return": 0.1085,
+        "volatility": 0.0301,
+        "sharpe_ratio": 3.6,
+        "risk_score": 1.695,
+        "diversification": 0.76,
+        "max_single_weight": 0.35,
+        "category_mix": {
+          "bond_like": 0.6,
+          "commodity": 0.15,
+          "cash": 0.15,
+          "mixed": 0.1
+        }
+      },
+      "last_metrics": {
+        "expected_return": 0.1085,
+        "volatility": 0.0301,
+        "sharpe_ratio": 3.6,
+        "risk_score": 1.695,
+        "diversification": 0.76,
+        "max_single_weight": 0.35,
+        "category_mix": {
+          "bond_like": 0.6,
+          "commodity": 0.15,
+          "cash": 0.15,
+          "mixed": 0.1
+        }
+      },
+      "recalc_history": [],
+      "last_change": null,
+      "confirmed": false,
+      "final_portfolio": null,
+      "last_success_at": "2026-05-30T10:43:49.263459+00:00"
+    },
+    "session-1780137851905-q6uzf5bq": {
+      "scenario_id": "draft_defensive_low",
+      "scenario_title": "Защитный баланс",
+      "risk_profile": "low",
+      "original_draft": {
+        "portfolioId": "copilot_draft_defensive_low",
+        "portfolioName": "Защитный баланс",
+        "currency": "RUB",
+        "investmentHorizon": "3_years",
+        "placementAmount": 1800000,
+        "expectedReturn": {
+          "target": 10.4,
+          "inflationAdjusted": true
+        },
+        "riskProfile": "low",
+        "summary": {
+          "description": "Низкий риск: облигации, ликвидность, золото на ОМС и стратегия Интеллект."
+        },
+        "products": [
+          {
+            "productId": "bpif_ru_bonds",
+            "productName": "БПИФ «Российские облигации»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.35,
+            "amount": 630000
+          },
+          {
+            "productId": "bpif_liquidity",
+            "productName": "БПИФ «Ликвидность»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.25,
+            "amount": 450000
+          },
+          {
+            "productId": "gold_oms",
+            "productName": "Золото на ОМС",
+            "category": "Драгметаллы",
+            "kind": "precious_metal",
+            "weight": 0.15,
+            "amount": 270000
+          },
+          {
+            "productId": "account_vtb",
+            "productName": "Накопительный ВТБ Счет",
+            "category": "Денежные продукты",
+            "kind": "account",
+            "weight": 0.15,
+            "amount": 270000
+          },
+          {
+            "productId": "intellect_conservative",
+            "productName": "Интеллект. Консервативный портфель",
+            "category": "Готовые стратегии",
+            "kind": "intellect",
+            "weight": 0.1,
+            "amount": 180000
+          }
+        ],
+        "goal": {
+          "enabled": false,
+          "goalName": "Резерв",
+          "targetAmount": 0,
+          "currentInvestment": 0,
+          "investmentTermYears": 0,
+          "goalAchievable": true,
+          "recommendedMonthlyContribution": 0
+        },
+        "rebalance": {
+          "enabled": true,
+          "frequency": "semi_annual"
+        },
+        "generatedAt": "2026-05-30T10:47:17.696426+00:00"
+      },
+      "current_portfolio": {
+        "portfolioId": "copilot_draft_defensive_low",
+        "portfolioName": "Защитный баланс",
+        "currency": "RUB",
+        "investmentHorizon": "3_years",
+        "placementAmount": 1800000,
+        "expectedReturn": {
+          "target": 10.4,
+          "inflationAdjusted": true
+        },
+        "riskProfile": "low",
+        "summary": {
+          "description": "Низкий риск: облигации, ликвидность, золото на ОМС и стратегия Интеллект."
+        },
+        "products": [
+          {
+            "productId": "bpif_ru_bonds",
+            "productName": "БПИФ «Российские облигации»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.0,
+            "amount": 0
+          },
+          {
+            "productId": "bpif_liquidity",
+            "productName": "БПИФ «Ликвидность»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.0,
+            "amount": 0
+          },
+          {
+            "productId": "gold_oms",
+            "productName": "Золото на ОМС",
+            "category": "Драгметаллы",
+            "kind": "precious_metal",
+            "weight": 0.0,
+            "amount": 0
+          },
+          {
+            "productId": "account_vtb",
+            "productName": "Накопительный ВТБ Счет",
+            "category": "Денежные продукты",
+            "kind": "account",
+            "weight": 1.0,
+            "amount": 1800000
+          },
+          {
+            "productId": "intellect_conservative",
+            "productName": "Интеллект. Консервативный портфель",
+            "category": "Готовые стратегии",
+            "kind": "intellect",
+            "weight": 0.0,
+            "amount": 0
+          }
+        ],
+        "goal": {
+          "enabled": false,
+          "goalName": "Резерв",
+          "targetAmount": 0,
+          "currentInvestment": 0,
+          "investmentTermYears": 0,
+          "goalAchievable": true,
+          "recommendedMonthlyContribution": 0
+        },
+        "rebalance": {
+          "enabled": true,
+          "frequency": "semi_annual"
+        },
+        "generatedAt": "2026-05-30T10:47:17.696426+00:00"
+      },
+      "current_products": [
+        {
+          "productId": "bpif_ru_bonds",
+          "productName": "БПИФ «Российские облигации»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.0,
+          "amount": 0
+        },
+        {
+          "productId": "bpif_liquidity",
+          "productName": "БПИФ «Ликвидность»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.0,
+          "amount": 0
+        },
+        {
+          "productId": "gold_oms",
+          "productName": "Золото на ОМС",
+          "category": "Драгметаллы",
+          "kind": "precious_metal",
+          "weight": 0.0,
+          "amount": 0
+        },
+        {
+          "productId": "account_vtb",
+          "productName": "Накопительный ВТБ Счет",
+          "category": "Денежные продукты",
+          "kind": "account",
+          "weight": 1.0,
+          "amount": 1800000
+        },
+        {
+          "productId": "intellect_conservative",
+          "productName": "Интеллект. Консервативный портфель",
+          "category": "Готовые стратегии",
+          "kind": "intellect",
+          "weight": 0.0,
+          "amount": 0
+        }
+      ],
+      "baseline_metrics": {
+        "expected_return": 0.1085,
+        "volatility": 0.0301,
+        "sharpe_ratio": 3.6,
+        "risk_score": 1.695,
+        "diversification": 0.76,
+        "max_single_weight": 0.35,
+        "category_mix": {
+          "bond_like": 0.6,
+          "commodity": 0.15,
+          "cash": 0.15,
+          "mixed": 0.1
+        }
+      },
+      "last_metrics": {
+        "expected_return": 0.0952,
+        "volatility": 0.0118,
+        "sharpe_ratio": 8.09,
+        "risk_score": 0.6139,
+        "diversification": 0.0,
+        "max_single_weight": 1.0,
+        "category_mix": {
+          "bond_like": 0.0136,
+          "commodity": 0.0,
+          "cash": 0.9798,
+          "mixed": 0.0065
+        }
+      },
+      "recalc_history": [
+        {
+          "at": "2026-05-30T10:47:22.402242+00:00",
+          "weights": [
+            {
+              "bpif_ru_bonds": 0.0
+            },
+            {
+              "bpif_liquidity": 0.3846
+            },
+            {
+              "gold_oms": 0.2308
+            },
+            {
+              "account_vtb": 0.2308
+            },
+            {
+              "intellect_conservative": 0.1538
+            }
+          ],
+          "metrics": {
+            "expected_return": 0.1069,
+            "volatility": 0.0356,
+            "sharpe_ratio": 3.0,
+            "risk_score": 1.6703,
+            "diversification": 0.722,
+            "max_single_weight": 0.3846,
+            "category_mix": {
+              "bond_like": 0.3817,
+              "commodity": 0.2429,
+              "cash": 0.2233,
+              "mixed": 0.1521
+            }
+          },
+          "warnings_count": 1
+        },
+        {
+          "at": "2026-05-30T10:47:26.901774+00:00",
+          "weights": [
+            {
+              "bpif_ru_bonds": 0.0
+            },
+            {
+              "bpif_liquidity": 0.4545
+            },
+            {
+              "gold_oms": 0.2727
+            },
+            {
+              "account_vtb": 0.2727
+            },
+            {
+              "intellect_conservative": 0.0
+            }
+          ],
+          "metrics": {
+            "expected_return": 0.1075,
+            "volatility": 0.0413,
+            "sharpe_ratio": 2.6,
+            "risk_score": 1.7103,
+            "diversification": 0.645,
+            "max_single_weight": 0.4545,
+            "category_mix": {
+              "bond_like": 0.4462,
+              "commodity": 0.2887,
+              "cash": 0.2591,
+              "mixed": 0.006
+            }
+          },
+          "warnings_count": 2
+        },
+        {
+          "at": "2026-05-30T10:47:29.250732+00:00",
+          "weights": [
+            {
+              "bpif_ru_bonds": 0.0
+            },
+            {
+              "bpif_liquidity": 0.0
+            },
+            {
+              "gold_oms": 0.5
+            },
+            {
+              "account_vtb": 0.5
+            },
+            {
+              "intellect_conservative": 0.0
+            }
+          ],
+          "metrics": {
+            "expected_return": 0.1075,
+            "volatility": 0.0705,
+            "sharpe_ratio": 1.53,
+            "risk_score": 2.1561,
+            "diversification": 0.5,
+            "max_single_weight": 0.5,
+            "category_mix": {
+              "bond_like": 0.0123,
+              "commodity": 0.5322,
+              "cash": 0.4497,
+              "mixed": 0.0059
+            }
+          },
+          "warnings_count": 3
+        },
+        {
+          "at": "2026-05-30T10:47:31.166263+00:00",
+          "weights": [
+            {
+              "bpif_ru_bonds": 0.0
+            },
+            {
+              "bpif_liquidity": 0.0
+            },
+            {
+              "gold_oms": 0.0
+            },
+            {
+              "account_vtb": 1.0
+            },
+            {
+              "intellect_conservative": 0.0
+            }
+          ],
+          "metrics": {
+            "expected_return": 0.0952,
+            "volatility": 0.0118,
+            "sharpe_ratio": 8.09,
+            "risk_score": 0.6139,
+            "diversification": 0.0,
+            "max_single_weight": 1.0,
+            "category_mix": {
+              "bond_like": 0.0136,
+              "commodity": 0.0,
+              "cash": 0.9798,
+              "mixed": 0.0065
+            }
+          },
+          "warnings_count": 2
+        },
+        {
+          "at": "2026-05-30T10:47:36.079556+00:00",
+          "weights": [
+            {
+              "bpif_ru_bonds": 0.0
+            },
+            {
+              "bpif_liquidity": 0.0
+            },
+            {
+              "gold_oms": 0.0
+            },
+            {
+              "account_vtb": 1.0
+            },
+            {
+              "intellect_conservative": 0.0
+            }
+          ],
+          "metrics": {
+            "expected_return": 0.0952,
+            "volatility": 0.0118,
+            "sharpe_ratio": 8.09,
+            "risk_score": 0.6139,
+            "diversification": 0.0,
+            "max_single_weight": 1.0,
+            "category_mix": {
+              "bond_like": 0.0136,
+              "commodity": 0.0,
+              "cash": 0.9798,
+              "mixed": 0.0065
+            }
+          },
+          "warnings_count": 2
+        }
+      ],
+      "last_change": {
+        "at": "2026-05-30T10:47:36.079556+00:00",
+        "weights": [
+          {
+            "bpif_ru_bonds": 0.0
+          },
+          {
+            "bpif_liquidity": 0.0
+          },
+          {
+            "gold_oms": 0.0
+          },
+          {
+            "account_vtb": 1.0
+          },
+          {
+            "intellect_conservative": 0.0
+          }
+        ],
+        "metrics": {
+          "expected_return": 0.0952,
+          "volatility": 0.0118,
+          "sharpe_ratio": 8.09,
+          "risk_score": 0.6139,
+          "diversification": 0.0,
+          "max_single_weight": 1.0,
+          "category_mix": {
+            "bond_like": 0.0136,
+            "commodity": 0.0,
+            "cash": 0.9798,
+            "mixed": 0.0065
+          }
+        },
+        "warnings_count": 2
+      },
+      "confirmed": true,
+      "final_portfolio": {
+        "portfolioId": "copilot_draft_defensive_low",
+        "portfolioName": "Защитный баланс",
+        "currency": "RUB",
+        "investmentHorizon": "3_years",
+        "placementAmount": 1800000,
+        "expectedReturn": {
+          "target": 10.4,
+          "inflationAdjusted": true
+        },
+        "riskProfile": "low",
+        "summary": {
+          "description": "Низкий риск: облигации, ликвидность, золото на ОМС и стратегия Интеллект."
+        },
+        "products": [
+          {
+            "productId": "bpif_ru_bonds",
+            "productName": "БПИФ «Российские облигации»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.0,
+            "amount": 0
+          },
+          {
+            "productId": "bpif_liquidity",
+            "productName": "БПИФ «Ликвидность»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.0,
+            "amount": 0
+          },
+          {
+            "productId": "gold_oms",
+            "productName": "Золото на ОМС",
+            "category": "Драгметаллы",
+            "kind": "precious_metal",
+            "weight": 0.0,
+            "amount": 0
+          },
+          {
+            "productId": "account_vtb",
+            "productName": "Накопительный ВТБ Счет",
+            "category": "Денежные продукты",
+            "kind": "account",
+            "weight": 1.0,
+            "amount": 1800000
+          },
+          {
+            "productId": "intellect_conservative",
+            "productName": "Интеллект. Консервативный портфель",
+            "category": "Готовые стратегии",
+            "kind": "intellect",
+            "weight": 0.0,
+            "amount": 0
+          }
+        ],
+        "goal": {
+          "enabled": false,
+          "goalName": "Резерв",
+          "targetAmount": 0,
+          "currentInvestment": 0,
+          "investmentTermYears": 0,
+          "goalAchievable": true,
+          "recommendedMonthlyContribution": 0
+        },
+        "rebalance": {
+          "enabled": true,
+          "frequency": "semi_annual"
+        },
+        "generatedAt": "2026-05-30T10:47:17.696426+00:00",
+        "confirmedAt": "2026-05-30T10:47:38.446672+00:00",
+        "userModified": true
+      },
+      "last_success_at": "2026-05-30T10:47:36.079556+00:00",
+      "last_warnings": [
+        {
+          "code": "concentration",
+          "level": "yellow",
+          "message": "Доля одного актива превышает рекомендуемый уровень"
+        },
+        {
+          "code": "diversification_drop",
+          "level": "red",
+          "message": "Диверсификация портфеля ухудшилась"
+        }
+      ]
+    },
+    "session-1780242431922-czhaf1qw": {
+      "scenario_id": "draft_balanced_medium",
+      "scenario_title": "Сбалансированный мультипродукт",
+      "risk_profile": "medium",
+      "original_draft": {
+        "portfolioId": "copilot_draft_balanced_medium",
+        "portfolioName": "Сбалансированный мультипродукт",
+        "currency": "RUB",
+        "investmentHorizon": "5_years",
+        "placementAmount": 3000000,
+        "expectedReturn": {
+          "target": 14.5,
+          "inflationAdjusted": true
+        },
+        "riskProfile": "medium",
+        "summary": {
+          "description": "Базовый ИИ-черновик для умеренного профиля: облигации, индекс, ликвидность и золото."
+        },
+        "products": [
+          {
+            "productId": "bpif_ru_bonds",
+            "productName": "БПИФ «Российские облигации»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.3333,
+            "amount": 999900
+          },
+          {
+            "productId": "bpif_moex_index",
+            "productName": "БПИФ «Индекс МосБиржи»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.2778,
+            "amount": 833400
+          },
+          {
+            "productId": "bpif_liquidity",
+            "productName": "БПИФ «Ликвидность»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1667,
+            "amount": 500100
+          },
+          {
+            "productId": "bpif_gold_exchange",
+            "productName": "БПИФ «Золото.Биржевой»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1111,
+            "amount": 333300
+          },
+          {
+            "productId": "account_vtb",
+            "productName": "Накопительный ВТБ Счет",
+            "category": "Денежные продукты",
+            "kind": "account",
+            "weight": 0.1111,
+            "amount": 333300
+          }
+        ],
+        "goal": {
+          "enabled": true,
+          "goalName": "Образование ребенка",
+          "targetAmount": 5000000,
+          "currentInvestment": 1500000,
+          "investmentTermYears": 10,
+          "goalAchievable": false,
+          "recommendedMonthlyContribution": 25000
+        },
+        "rebalance": {
+          "enabled": true,
+          "frequency": "quarterly"
+        },
+        "generatedAt": "2026-05-31T15:47:34.790890+00:00"
+      },
+      "current_portfolio": {
+        "portfolioId": "copilot_draft_balanced_medium",
+        "portfolioName": "Сбалансированный мультипродукт",
+        "currency": "RUB",
+        "investmentHorizon": "5_years",
+        "placementAmount": 3000000,
+        "expectedReturn": {
+          "target": 14.5,
+          "inflationAdjusted": true
+        },
+        "riskProfile": "medium",
+        "summary": {
+          "description": "Базовый ИИ-черновик для умеренного профиля: облигации, индекс, ликвидность и золото."
+        },
+        "products": [
+          {
+            "productId": "bpif_ru_bonds",
+            "productName": "БПИФ «Российские облигации»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1873,
+            "amount": 561900
+          },
+          {
+            "productId": "bpif_moex_index",
+            "productName": "БПИФ «Индекс МосБиржи»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.2268,
+            "amount": 680400
+          },
+          {
+            "productId": "bpif_liquidity",
+            "productName": "БПИФ «Ликвидность»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.3032,
+            "amount": 909600
+          },
+          {
+            "productId": "bpif_gold_exchange",
+            "productName": "БПИФ «Золото.Биржевой»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1013,
+            "amount": 303900
+          },
+          {
+            "productId": "account_vtb",
+            "productName": "Накопительный ВТБ Счет",
+            "category": "Денежные продукты",
+            "kind": "account",
+            "weight": 0.1814,
+            "amount": 544200
+          }
+        ],
+        "goal": {
+          "enabled": true,
+          "goalName": "Образование ребенка",
+          "targetAmount": 5000000,
+          "currentInvestment": 1500000,
+          "investmentTermYears": 10,
+          "goalAchievable": false,
+          "recommendedMonthlyContribution": 25000
+        },
+        "rebalance": {
+          "enabled": true,
+          "frequency": "quarterly"
+        },
+        "generatedAt": "2026-05-31T15:47:34.790890+00:00"
+      },
+      "current_products": [
+        {
+          "productId": "bpif_ru_bonds",
+          "productName": "БПИФ «Российские облигации»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.1873,
+          "amount": 561900
+        },
+        {
+          "productId": "bpif_moex_index",
+          "productName": "БПИФ «Индекс МосБиржи»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.2268,
+          "amount": 680400
+        },
+        {
+          "productId": "bpif_liquidity",
+          "productName": "БПИФ «Ликвидность»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.3032,
+          "amount": 909600
+        },
+        {
+          "productId": "bpif_gold_exchange",
+          "productName": "БПИФ «Золото.Биржевой»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.1013,
+          "amount": 303900
+        },
+        {
+          "productId": "account_vtb",
+          "productName": "Накопительный ВТБ Счет",
+          "category": "Денежные продукты",
+          "kind": "account",
+          "weight": 0.1814,
+          "amount": 544200
+        }
+      ],
+      "baseline_metrics": {
+        "expected_return": 0.1272,
+        "volatility": 0.0608,
+        "sharpe_ratio": 2.09,
+        "risk_score": 3.0445,
+        "diversification": 0.759,
+        "max_single_weight": 0.3333,
+        "category_mix": {
+          "bond_like": 0.5,
+          "equity": 0.2778,
+          "commodity": 0.1111,
+          "cash": 0.1111
+        }
+      },
+      "last_metrics": {
+        "expected_return": 0.1222,
+        "volatility": 0.0489,
+        "sharpe_ratio": 2.5,
+        "risk_score": 2.6161,
+        "diversification": 0.778,
+        "max_single_weight": 0.3032,
+        "category_mix": {
+          "bond_like": 0.4976,
+          "equity": 0.2218,
+          "commodity": 0.1028,
+          "cash": 0.1779
+        }
+      },
+      "recalc_history": [
+        {
+          "at": "2026-05-31T15:47:40.411161+00:00",
+          "weights": [
+            {
+              "bpif_ru_bonds": 0.15
+            },
+            {
+              "bpif_moex_index": 0.3542
+            },
+            {
+              "bpif_liquidity": 0.2125
+            },
+            {
+              "bpif_gold_exchange": 0.1416
+            },
+            {
+              "account_vtb": 0.1416
+            }
+          ],
+          "metrics": {
+            "expected_return": 0.1322,
+            "volatility": 0.0762,
+            "sharpe_ratio": 1.74,
+            "risk_score": 3.4514,
+            "diversification": 0.767,
+            "max_single_weight": 0.3542,
+            "category_mix": {
+              "bond_like": 0.3549,
+              "equity": 0.3655,
+              "commodity": 0.1437,
+              "cash": 0.1359
+            }
+          },
+          "warnings_count": 0
+        },
+        {
+          "at": "2026-05-31T15:47:46.223948+00:00",
+          "weights": [
+            {
+              "bpif_ru_bonds": 0.1762
+            },
+            {
+              "bpif_moex_index": 0.2724
+            },
+            {
+              "bpif_liquidity": 0.2577
+            },
+            {
+              "bpif_gold_exchange": 0.1248
+            },
+            {
+              "account_vtb": 0.1688
+            }
+          ],
+          "metrics": {
+            "expected_return": 0.1261,
+            "volatility": 0.059,
+            "sharpe_ratio": 2.14,
+            "risk_score": 2.9511,
+            "diversification": 0.784,
+            "max_single_weight": 0.2724,
+            "category_mix": {
+              "bond_like": 0.434,
+              "equity": 0.2742,
+              "commodity": 0.1281,
+              "cash": 0.1637
+            }
+          },
+          "warnings_count": 0
+        },
+        {
+          "at": "2026-05-31T15:47:56.969728+00:00",
+          "weights": [
+            {
+              "bpif_ru_bonds": 0.1556
+            },
+            {
+              "bpif_moex_index": 0.3297
+            },
+            {
+              "bpif_liquidity": 0.239
+            },
+            {
+              "bpif_gold_exchange": 0.1276
+            },
+            {
+              "account_vtb": 0.1481
+            }
+          ],
+          "metrics": {
+            "expected_return": 0.1302,
+            "volatility": 0.0708,
+            "sharpe_ratio": 1.84,
+            "risk_score": 3.2778,
+            "diversification": 0.772,
+            "max_single_weight": 0.3297,
+            "category_mix": {
+              "bond_like": 0.3888,
+              "equity": 0.3392,
+              "commodity": 0.1292,
+              "cash": 0.1428
+            }
+          },
+          "warnings_count": 0
+        },
+        {
+          "at": "2026-05-31T15:47:57.837976+00:00",
+          "weights": [
+            {
+              "bpif_ru_bonds": 0.1346
+            },
+            {
+              "bpif_moex_index": 0.3882
+            },
+            {
+              "bpif_liquidity": 0.2198
+            },
+            {
+              "bpif_gold_exchange": 0.1305
+            },
+            {
+              "account_vtb": 0.1269
+            }
+          ],
+          "metrics": {
+            "expected_return": 0.1343,
+            "volatility": 0.0828,
+            "sharpe_ratio": 1.62,
+            "risk_score": 3.6005,
+            "diversification": 0.75,
+            "max_single_weight": 0.3882,
+            "category_mix": {
+              "bond_like": 0.344,
+              "equity": 0.4034,
+              "commodity": 0.1303,
+              "cash": 0.1223
+            }
+          },
+          "warnings_count": 0
+        },
+        {
+          "at": "2026-05-31T15:47:58.033613+00:00",
+          "weights": [
+            {
+              "bpif_ru_bonds": 0.1346
+            },
+            {
+              "bpif_moex_index": 0.3882
+            },
+            {
+              "bpif_liquidity": 0.2198
+            },
+            {
+              "bpif_gold_exchange": 0.1305
+            },
+            {
+              "account_vtb": 0.1269
+            }
+          ],
+          "metrics": {
+            "expected_return": 0.1343,
+            "volatility": 0.0828,
+            "sharpe_ratio": 1.62,
+            "risk_score": 3.6005,
+            "diversification": 0.75,
+            "max_single_weight": 0.3882,
+            "category_mix": {
+              "bond_like": 0.344,
+              "equity": 0.4034,
+              "commodity": 0.1303,
+              "cash": 0.1223
+            }
+          },
+          "warnings_count": 0
+        },
+        {
+          "at": "2026-05-31T15:47:59.087535+00:00",
+          "weights": [
+            {
+              "bpif_ru_bonds": 0.1626
+            },
+            {
+              "bpif_moex_index": 0.3024
+            },
+            {
+              "bpif_liquidity": 0.2641
+            },
+            {
+              "bpif_gold_exchange": 0.115
+            },
+            {
+              "account_vtb": 0.1559
+            }
+          ],
+          "metrics": {
+            "expected_return": 0.128,
+            "volatility": 0.0648,
+            "sharpe_ratio": 1.97,
+            "risk_score": 3.089,
+            "diversification": 0.775,
+            "max_single_weight": 0.3024,
+            "category_mix": {
+              "bond_like": 0.4236,
+              "equity": 0.3091,
+              "commodity": 0.116,
+              "cash": 0.1512
+            }
+          },
+          "warnings_count": 0
+        },
+        {
+          "at": "2026-05-31T15:47:59.289170+00:00",
+          "weights": [
+            {
+              "bpif_ru_bonds": 0.1626
+            },
+            {
+              "bpif_moex_index": 0.3024
+            },
+            {
+              "bpif_liquidity": 0.2641
+            },
+            {
+              "bpif_gold_exchange": 0.115
+            },
+            {
+              "account_vtb": 0.1559
+            }
+          ],
+          "metrics": {
+            "expected_return": 0.128,
+            "volatility": 0.0648,
+            "sharpe_ratio": 1.97,
+            "risk_score": 3.089,
+            "diversification": 0.775,
+            "max_single_weight": 0.3024,
+            "category_mix": {
+              "bond_like": 0.4236,
+              "equity": 0.3091,
+              "commodity": 0.116,
+              "cash": 0.1512
+            }
+          },
+          "warnings_count": 0
+        },
+        {
+          "at": "2026-05-31T15:47:59.474111+00:00",
+          "weights": [
+            {
+              "bpif_ru_bonds": 0.1626
+            },
+            {
+              "bpif_moex_index": 0.3024
+            },
+            {
+              "bpif_liquidity": 0.2641
+            },
+            {
+              "bpif_gold_exchange": 0.115
+            },
+            {
+              "account_vtb": 0.1559
+            }
+          ],
+          "metrics": {
+            "expected_return": 0.128,
+            "volatility": 0.0648,
+            "sharpe_ratio": 1.97,
+            "risk_score": 3.089,
+            "diversification": 0.775,
+            "max_single_weight": 0.3024,
+            "category_mix": {
+              "bond_like": 0.4236,
+              "equity": 0.3091,
+              "commodity": 0.116,
+              "cash": 0.1512
+            }
+          },
+          "warnings_count": 0
+        },
+        {
+          "at": "2026-05-31T15:47:59.635862+00:00",
+          "weights": [
+            {
+              "bpif_ru_bonds": 0.1873
+            },
+            {
+              "bpif_moex_index": 0.2268
+            },
+            {
+              "bpif_liquidity": 0.3032
+            },
+            {
+              "bpif_gold_exchange": 0.1013
+            },
+            {
+              "account_vtb": 0.1814
+            }
+          ],
+          "metrics": {
+            "expected_return": 0.1222,
+            "volatility": 0.0489,
+            "sharpe_ratio": 2.5,
+            "risk_score": 2.6161,
+            "diversification": 0.778,
+            "max_single_weight": 0.3032,
+            "category_mix": {
+              "bond_like": 0.4976,
+              "equity": 0.2218,
+              "commodity": 0.1028,
+              "cash": 0.1779
+            }
+          },
+          "warnings_count": 0
+        }
+      ],
+      "last_change": {
+        "at": "2026-05-31T15:47:59.635862+00:00",
+        "weights": [
+          {
+            "bpif_ru_bonds": 0.1873
+          },
+          {
+            "bpif_moex_index": 0.2268
+          },
+          {
+            "bpif_liquidity": 0.3032
+          },
+          {
+            "bpif_gold_exchange": 0.1013
+          },
+          {
+            "account_vtb": 0.1814
+          }
+        ],
+        "metrics": {
+          "expected_return": 0.1222,
+          "volatility": 0.0489,
+          "sharpe_ratio": 2.5,
+          "risk_score": 2.6161,
+          "diversification": 0.778,
+          "max_single_weight": 0.3032,
+          "category_mix": {
+            "bond_like": 0.4976,
+            "equity": 0.2218,
+            "commodity": 0.1028,
+            "cash": 0.1779
+          }
+        },
+        "warnings_count": 0
+      },
+      "confirmed": false,
+      "final_portfolio": null,
+      "last_success_at": "2026-05-31T15:47:59.635862+00:00",
+      "last_warnings": []
+    },
+    "reset-test": {
+      "scenario_id": "draft_balanced_medium",
+      "scenario_title": "Сбалансированный мультипродукт",
+      "risk_profile": "medium",
+      "original_draft": {
+        "portfolioId": "copilot_draft_balanced_medium",
+        "portfolioName": "Сбалансированный мультипродукт",
+        "currency": "RUB",
+        "investmentHorizon": "5_years",
+        "placementAmount": 3000000,
+        "expectedReturn": {
+          "target": 14.5,
+          "inflationAdjusted": true
+        },
+        "riskProfile": "medium",
+        "summary": {
+          "description": "Базовый ИИ-черновик для умеренного профиля: облигации, индекс, ликвидность и золото."
+        },
+        "products": [
+          {
+            "productId": "bpif_ru_bonds",
+            "productName": "БПИФ «Российские облигации»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.3333,
+            "amount": 999900
+          },
+          {
+            "productId": "bpif_moex_index",
+            "productName": "БПИФ «Индекс МосБиржи»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.2778,
+            "amount": 833400
+          },
+          {
+            "productId": "bpif_liquidity",
+            "productName": "БПИФ «Ликвидность»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1667,
+            "amount": 500100
+          },
+          {
+            "productId": "bpif_gold_exchange",
+            "productName": "БПИФ «Золото.Биржевой»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1111,
+            "amount": 333300
+          },
+          {
+            "productId": "account_vtb",
+            "productName": "Накопительный ВТБ Счет",
+            "category": "Денежные продукты",
+            "kind": "account",
+            "weight": 0.1111,
+            "amount": 333300
+          }
+        ],
+        "goal": {
+          "enabled": true,
+          "goalName": "Образование ребенка",
+          "targetAmount": 5000000,
+          "currentInvestment": 1500000,
+          "investmentTermYears": 10,
+          "goalAchievable": false,
+          "recommendedMonthlyContribution": 25000
+        },
+        "rebalance": {
+          "enabled": true,
+          "frequency": "quarterly"
+        },
+        "generatedAt": "2026-05-31T15:54:26.947712+00:00"
+      },
+      "current_portfolio": {
+        "portfolioId": "copilot_draft_balanced_medium",
+        "portfolioName": "Сбалансированный мультипродукт",
+        "currency": "RUB",
+        "investmentHorizon": "5_years",
+        "placementAmount": 3000000,
+        "expectedReturn": {
+          "target": 14.5,
+          "inflationAdjusted": true
+        },
+        "riskProfile": "medium",
+        "summary": {
+          "description": "Базовый ИИ-черновик для умеренного профиля: облигации, индекс, ликвидность и золото."
+        },
+        "products": [
+          {
+            "productId": "bpif_ru_bonds",
+            "productName": "БПИФ «Российские облигации»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.3333,
+            "amount": 999900
+          },
+          {
+            "productId": "bpif_moex_index",
+            "productName": "БПИФ «Индекс МосБиржи»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.2778,
+            "amount": 833400
+          },
+          {
+            "productId": "bpif_liquidity",
+            "productName": "БПИФ «Ликвидность»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1667,
+            "amount": 500100
+          },
+          {
+            "productId": "bpif_gold_exchange",
+            "productName": "БПИФ «Золото.Биржевой»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1111,
+            "amount": 333300
+          },
+          {
+            "productId": "account_vtb",
+            "productName": "Накопительный ВТБ Счет",
+            "category": "Денежные продукты",
+            "kind": "account",
+            "weight": 0.1111,
+            "amount": 333300
+          }
+        ],
+        "goal": {
+          "enabled": true,
+          "goalName": "Образование ребенка",
+          "targetAmount": 5000000,
+          "currentInvestment": 1500000,
+          "investmentTermYears": 10,
+          "goalAchievable": false,
+          "recommendedMonthlyContribution": 25000
+        },
+        "rebalance": {
+          "enabled": true,
+          "frequency": "quarterly"
+        },
+        "generatedAt": "2026-05-31T15:54:26.947712+00:00"
+      },
+      "current_products": [
+        {
+          "productId": "bpif_ru_bonds",
+          "productName": "БПИФ «Российские облигации»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.3333,
+          "amount": 999900
+        },
+        {
+          "productId": "bpif_moex_index",
+          "productName": "БПИФ «Индекс МосБиржи»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.2778,
+          "amount": 833400
+        },
+        {
+          "productId": "bpif_liquidity",
+          "productName": "БПИФ «Ликвидность»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.1667,
+          "amount": 500100
+        },
+        {
+          "productId": "bpif_gold_exchange",
+          "productName": "БПИФ «Золото.Биржевой»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.1111,
+          "amount": 333300
+        },
+        {
+          "productId": "account_vtb",
+          "productName": "Накопительный ВТБ Счет",
+          "category": "Денежные продукты",
+          "kind": "account",
+          "weight": 0.1111,
+          "amount": 333300
+        }
+      ],
+      "baseline_metrics": {
+        "expected_return": 0.1272,
+        "volatility": 0.0608,
+        "sharpe_ratio": 2.09,
+        "risk_score": 3.0445,
+        "diversification": 0.759,
+        "max_single_weight": 0.3333,
+        "category_mix": {
+          "bond_like": 0.5,
+          "equity": 0.2778,
+          "commodity": 0.1111,
+          "cash": 0.1111
+        }
+      },
+      "last_metrics": {
+        "expected_return": 0.1272,
+        "volatility": 0.0608,
+        "sharpe_ratio": 2.09,
+        "risk_score": 3.0445,
+        "diversification": 0.759,
+        "max_single_weight": 0.3333,
+        "category_mix": {
+          "bond_like": 0.5,
+          "equity": 0.2778,
+          "commodity": 0.1111,
+          "cash": 0.1111
+        }
+      },
+      "recalc_history": [
+        {
+          "at": "2026-05-31T15:54:27.385560+00:00",
+          "weights": [
+            {
+              "bpif_ru_bonds": 0.4
+            },
+            {
+              "bpif_moex_index": 0.15
+            },
+            {
+              "bpif_liquidity": 0.15
+            },
+            {
+              "bpif_gold_exchange": 0.15
+            },
+            {
+              "account_vtb": 0.15
+            }
+          ],
+          "metrics": {
+            "expected_return": 0.119,
+            "volatility": 0.0418,
+            "sharpe_ratio": 2.84,
+            "risk_score": 2.4461,
+            "diversification": 0.75,
+            "max_single_weight": 0.4,
+            "category_mix": {
+              "bond_like": 0.5658,
+              "equity": 0.1252,
+              "commodity": 0.1597,
+              "cash": 0.1493
+            }
+          },
+          "warnings_count": 0
+        },
+        {
+          "at": "2026-05-31T15:54:27.830596+00:00",
+          "weights": [
+            {
+              "bpif_ru_bonds": 0.3333
+            },
+            {
+              "bpif_moex_index": 0.2778
+            },
+            {
+              "bpif_liquidity": 0.1667
+            },
+            {
+              "bpif_gold_exchange": 0.1111
+            },
+            {
+              "account_vtb": 0.1111
+            }
+          ],
+          "metrics": {
+            "expected_return": 0.1272,
+            "volatility": 0.0608,
+            "sharpe_ratio": 2.09,
+            "risk_score": 3.0445,
+            "diversification": 0.759,
+            "max_single_weight": 0.3333,
+            "category_mix": {
+              "bond_like": 0.5,
+              "equity": 0.2778,
+              "commodity": 0.1111,
+              "cash": 0.1111
+            }
+          },
+          "warnings_count": 0
+        }
+      ],
+      "last_change": {
+        "at": "2026-05-31T15:54:27.830596+00:00",
+        "weights": [
+          {
+            "bpif_ru_bonds": 0.3333
+          },
+          {
+            "bpif_moex_index": 0.2778
+          },
+          {
+            "bpif_liquidity": 0.1667
+          },
+          {
+            "bpif_gold_exchange": 0.1111
+          },
+          {
+            "account_vtb": 0.1111
+          }
+        ],
+        "metrics": {
+          "expected_return": 0.1272,
+          "volatility": 0.0608,
+          "sharpe_ratio": 2.09,
+          "risk_score": 3.0445,
+          "diversification": 0.759,
+          "max_single_weight": 0.3333,
+          "category_mix": {
+            "bond_like": 0.5,
+            "equity": 0.2778,
+            "commodity": 0.1111,
+            "cash": 0.1111
+          }
+        },
+        "warnings_count": 0
+      },
+      "confirmed": false,
+      "final_portfolio": null,
+      "last_success_at": "2026-05-31T15:54:27.830596+00:00",
+      "last_warnings": []
+    },
+    "session-1780242891654-ln9gtaq8": {
+      "scenario_id": "draft_balanced_medium",
+      "scenario_title": "Сбалансированный мультипродукт",
+      "risk_profile": "medium",
+      "original_draft": {
+        "portfolioId": "copilot_draft_balanced_medium",
+        "portfolioName": "Сбалансированный мультипродукт",
+        "currency": "RUB",
+        "investmentHorizon": "5_years",
+        "placementAmount": 3000000,
+        "expectedReturn": {
+          "target": 14.5,
+          "inflationAdjusted": true
+        },
+        "riskProfile": "medium",
+        "summary": {
+          "description": "Базовый ИИ-черновик для умеренного профиля: облигации, индекс, ликвидность и золото."
+        },
+        "products": [
+          {
+            "productId": "bpif_ru_bonds",
+            "productName": "БПИФ «Российские облигации»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.3333,
+            "amount": 999900
+          },
+          {
+            "productId": "bpif_moex_index",
+            "productName": "БПИФ «Индекс МосБиржи»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.2778,
+            "amount": 833400
+          },
+          {
+            "productId": "bpif_liquidity",
+            "productName": "БПИФ «Ликвидность»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1667,
+            "amount": 500100
+          },
+          {
+            "productId": "bpif_gold_exchange",
+            "productName": "БПИФ «Золото.Биржевой»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1111,
+            "amount": 333300
+          },
+          {
+            "productId": "account_vtb",
+            "productName": "Накопительный ВТБ Счет",
+            "category": "Денежные продукты",
+            "kind": "account",
+            "weight": 0.1111,
+            "amount": 333300
+          }
+        ],
+        "goal": {
+          "enabled": true,
+          "goalName": "Образование ребенка",
+          "targetAmount": 5000000,
+          "currentInvestment": 1500000,
+          "investmentTermYears": 10,
+          "goalAchievable": false,
+          "recommendedMonthlyContribution": 25000
+        },
+        "rebalance": {
+          "enabled": true,
+          "frequency": "quarterly"
+        },
+        "generatedAt": "2026-05-31T15:54:56.776704+00:00"
+      },
+      "current_portfolio": {
+        "portfolioId": "copilot_draft_balanced_medium",
+        "portfolioName": "Сбалансированный мультипродукт",
+        "currency": "RUB",
+        "investmentHorizon": "5_years",
+        "placementAmount": 3000000,
+        "expectedReturn": {
+          "target": 14.5,
+          "inflationAdjusted": true
+        },
+        "riskProfile": "medium",
+        "summary": {
+          "description": "Базовый ИИ-черновик для умеренного профиля: облигации, индекс, ликвидность и золото."
+        },
+        "products": [
+          {
+            "productId": "bpif_ru_bonds",
+            "productName": "БПИФ «Российские облигации»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.5301,
+            "amount": 1590000
+          },
+          {
+            "productId": "bpif_moex_index",
+            "productName": "БПИФ «Индекс МосБиржи»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1958,
+            "amount": 587400
+          },
+          {
+            "productId": "bpif_liquidity",
+            "productName": "БПИФ «Ликвидность»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1175,
+            "amount": 352500
+          },
+          {
+            "productId": "bpif_gold_exchange",
+            "productName": "БПИФ «Золото.Биржевой»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.0783,
+            "amount": 234900
+          },
+          {
+            "productId": "account_vtb",
+            "productName": "Накопительный ВТБ Счет",
+            "category": "Денежные продукты",
+            "kind": "account",
+            "weight": 0.0783,
+            "amount": 234900
+          }
+        ],
+        "goal": {
+          "enabled": true,
+          "goalName": "Образование ребенка",
+          "targetAmount": 5000000,
+          "currentInvestment": 1500000,
+          "investmentTermYears": 10,
+          "goalAchievable": false,
+          "recommendedMonthlyContribution": 25000
+        },
+        "rebalance": {
+          "enabled": true,
+          "frequency": "quarterly"
+        },
+        "generatedAt": "2026-05-31T15:54:56.776704+00:00"
+      },
+      "current_products": [
+        {
+          "productId": "bpif_ru_bonds",
+          "productName": "БПИФ «Российские облигации»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.5301,
+          "amount": 1590000
+        },
+        {
+          "productId": "bpif_moex_index",
+          "productName": "БПИФ «Индекс МосБиржи»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.1958,
+          "amount": 587400
+        },
+        {
+          "productId": "bpif_liquidity",
+          "productName": "БПИФ «Ликвидность»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.1175,
+          "amount": 352500
+        },
+        {
+          "productId": "bpif_gold_exchange",
+          "productName": "БПИФ «Золото.Биржевой»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.0783,
+          "amount": 234900
+        },
+        {
+          "productId": "account_vtb",
+          "productName": "Накопительный ВТБ Счет",
+          "category": "Денежные продукты",
+          "kind": "account",
+          "weight": 0.0783,
+          "amount": 234900
+        }
+      ],
+      "baseline_metrics": {
+        "expected_return": 0.1272,
+        "volatility": 0.0608,
+        "sharpe_ratio": 2.09,
+        "risk_score": 3.0445,
+        "diversification": 0.759,
+        "max_single_weight": 0.3333,
+        "category_mix": {
+          "bond_like": 0.5,
+          "equity": 0.2778,
+          "commodity": 0.1111,
+          "cash": 0.1111
+        }
+      },
+      "last_metrics": {
+        "expected_return": 0.1217,
+        "volatility": 0.0489,
+        "sharpe_ratio": 2.49,
+        "risk_score": 2.5937,
+        "diversification": 0.655,
+        "max_single_weight": 0.5301,
+        "category_mix": {
+          "bond_like": 0.6607,
+          "equity": 0.1807,
+          "commodity": 0.0749,
+          "cash": 0.0836
+        }
+      },
+      "recalc_history": [
+        {
+          "at": "2026-05-31T15:55:00.868434+00:00",
+          "weights": [
+            {
+              "bpif_ru_bonds": 0.5301
+            },
+            {
+              "bpif_moex_index": 0.1958
+            },
+            {
+              "bpif_liquidity": 0.1175
+            },
+            {
+              "bpif_gold_exchange": 0.0783
+            },
+            {
+              "account_vtb": 0.0783
+            }
+          ],
+          "metrics": {
+            "expected_return": 0.1217,
+            "volatility": 0.0489,
+            "sharpe_ratio": 2.49,
+            "risk_score": 2.5937,
+            "diversification": 0.655,
+            "max_single_weight": 0.5301,
+            "category_mix": {
+              "bond_like": 0.6607,
+              "equity": 0.1807,
+              "commodity": 0.0749,
+              "cash": 0.0836
+            }
+          },
+          "warnings_count": 2
+        }
+      ],
+      "last_change": {
+        "at": "2026-05-31T15:55:00.868434+00:00",
+        "weights": [
+          {
+            "bpif_ru_bonds": 0.5301
+          },
+          {
+            "bpif_moex_index": 0.1958
+          },
+          {
+            "bpif_liquidity": 0.1175
+          },
+          {
+            "bpif_gold_exchange": 0.0783
+          },
+          {
+            "account_vtb": 0.0783
+          }
+        ],
+        "metrics": {
+          "expected_return": 0.1217,
+          "volatility": 0.0489,
+          "sharpe_ratio": 2.49,
+          "risk_score": 2.5937,
+          "diversification": 0.655,
+          "max_single_weight": 0.5301,
+          "category_mix": {
+            "bond_like": 0.6607,
+            "equity": 0.1807,
+            "commodity": 0.0749,
+            "cash": 0.0836
+          }
+        },
+        "warnings_count": 2
+      },
+      "confirmed": false,
+      "final_portfolio": null,
+      "last_success_at": "2026-05-31T15:55:00.868434+00:00",
+      "last_warnings": [
+        {
+          "code": "concentration",
+          "level": "yellow",
+          "message": "Доля одного актива превышает рекомендуемый уровень"
+        },
+        {
+          "code": "diversification_drop",
+          "level": "red",
+          "message": "Диверсификация портфеля ухудшилась"
+        }
+      ]
+    },
+    "session-1780242905975-iqu45n9a": {
+      "scenario_id": "draft_balanced_medium",
+      "scenario_title": "Сбалансированный мультипродукт",
+      "risk_profile": "medium",
+      "original_draft": {
+        "portfolioId": "copilot_draft_balanced_medium",
+        "portfolioName": "Сбалансированный мультипродукт",
+        "currency": "RUB",
+        "investmentHorizon": "5_years",
+        "placementAmount": 3000000,
+        "expectedReturn": {
+          "target": 14.5,
+          "inflationAdjusted": true
+        },
+        "riskProfile": "medium",
+        "summary": {
+          "description": "Базовый ИИ-черновик для умеренного профиля: облигации, индекс, ликвидность и золото."
+        },
+        "products": [
+          {
+            "productId": "bpif_ru_bonds",
+            "productName": "БПИФ «Российские облигации»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.3333,
+            "amount": 999900
+          },
+          {
+            "productId": "bpif_moex_index",
+            "productName": "БПИФ «Индекс МосБиржи»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.2778,
+            "amount": 833400
+          },
+          {
+            "productId": "bpif_liquidity",
+            "productName": "БПИФ «Ликвидность»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1667,
+            "amount": 500100
+          },
+          {
+            "productId": "bpif_gold_exchange",
+            "productName": "БПИФ «Золото.Биржевой»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1111,
+            "amount": 333300
+          },
+          {
+            "productId": "account_vtb",
+            "productName": "Накопительный ВТБ Счет",
+            "category": "Денежные продукты",
+            "kind": "account",
+            "weight": 0.1111,
+            "amount": 333300
+          }
+        ],
+        "goal": {
+          "enabled": true,
+          "goalName": "Образование ребенка",
+          "targetAmount": 5000000,
+          "currentInvestment": 1500000,
+          "investmentTermYears": 10,
+          "goalAchievable": false,
+          "recommendedMonthlyContribution": 25000
+        },
+        "rebalance": {
+          "enabled": true,
+          "frequency": "quarterly"
+        },
+        "generatedAt": "2026-05-31T15:55:06.874203+00:00"
+      },
+      "current_portfolio": {
+        "portfolioId": "copilot_draft_balanced_medium",
+        "portfolioName": "Сбалансированный мультипродукт",
+        "currency": "RUB",
+        "investmentHorizon": "5_years",
+        "placementAmount": 3000000,
+        "expectedReturn": {
+          "target": 14.5,
+          "inflationAdjusted": true
+        },
+        "riskProfile": "medium",
+        "summary": {
+          "description": "Базовый ИИ-черновик для умеренного профиля: облигации, индекс, ликвидность и золото."
+        },
+        "products": [
+          {
+            "productId": "bpif_ru_bonds",
+            "productName": "БПИФ «Российские облигации»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.3333,
+            "amount": 999900
+          },
+          {
+            "productId": "bpif_moex_index",
+            "productName": "БПИФ «Индекс МосБиржи»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.2778,
+            "amount": 833400
+          },
+          {
+            "productId": "bpif_liquidity",
+            "productName": "БПИФ «Ликвидность»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1667,
+            "amount": 500100
+          },
+          {
+            "productId": "bpif_gold_exchange",
+            "productName": "БПИФ «Золото.Биржевой»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1111,
+            "amount": 333300
+          },
+          {
+            "productId": "account_vtb",
+            "productName": "Накопительный ВТБ Счет",
+            "category": "Денежные продукты",
+            "kind": "account",
+            "weight": 0.1111,
+            "amount": 333300
+          }
+        ],
+        "goal": {
+          "enabled": true,
+          "goalName": "Образование ребенка",
+          "targetAmount": 5000000,
+          "currentInvestment": 1500000,
+          "investmentTermYears": 10,
+          "goalAchievable": false,
+          "recommendedMonthlyContribution": 25000
+        },
+        "rebalance": {
+          "enabled": true,
+          "frequency": "quarterly"
+        },
+        "generatedAt": "2026-05-31T15:55:06.874203+00:00"
+      },
+      "current_products": [
+        {
+          "productId": "bpif_ru_bonds",
+          "productName": "БПИФ «Российские облигации»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.3333,
+          "amount": 999900
+        },
+        {
+          "productId": "bpif_moex_index",
+          "productName": "БПИФ «Индекс МосБиржи»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.2778,
+          "amount": 833400
+        },
+        {
+          "productId": "bpif_liquidity",
+          "productName": "БПИФ «Ликвидность»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.1667,
+          "amount": 500100
+        },
+        {
+          "productId": "bpif_gold_exchange",
+          "productName": "БПИФ «Золото.Биржевой»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.1111,
+          "amount": 333300
+        },
+        {
+          "productId": "account_vtb",
+          "productName": "Накопительный ВТБ Счет",
+          "category": "Денежные продукты",
+          "kind": "account",
+          "weight": 0.1111,
+          "amount": 333300
+        }
+      ],
+      "baseline_metrics": {
+        "expected_return": 0.1272,
+        "volatility": 0.0608,
+        "sharpe_ratio": 2.09,
+        "risk_score": 3.0445,
+        "diversification": 0.759,
+        "max_single_weight": 0.3333,
+        "category_mix": {
+          "bond_like": 0.5,
+          "equity": 0.2778,
+          "commodity": 0.1111,
+          "cash": 0.1111
+        }
+      },
+      "last_metrics": {
+        "expected_return": 0.1272,
+        "volatility": 0.0608,
+        "sharpe_ratio": 2.09,
+        "risk_score": 3.0445,
+        "diversification": 0.759,
+        "max_single_weight": 0.3333,
+        "category_mix": {
+          "bond_like": 0.5,
+          "equity": 0.2778,
+          "commodity": 0.1111,
+          "cash": 0.1111
+        }
+      },
+      "recalc_history": [
+        {
+          "at": "2026-05-31T15:55:12.324960+00:00",
+          "weights": [
+            {
+              "bpif_ru_bonds": 0.3333
+            },
+            {
+              "bpif_moex_index": 0.2778
+            },
+            {
+              "bpif_liquidity": 0.1667
+            },
+            {
+              "bpif_gold_exchange": 0.1111
+            },
+            {
+              "account_vtb": 0.1111
+            }
+          ],
+          "metrics": {
+            "expected_return": 0.1272,
+            "volatility": 0.0608,
+            "sharpe_ratio": 2.09,
+            "risk_score": 3.0445,
+            "diversification": 0.759,
+            "max_single_weight": 0.3333,
+            "category_mix": {
+              "bond_like": 0.5,
+              "equity": 0.2778,
+              "commodity": 0.1111,
+              "cash": 0.1111
+            }
+          },
+          "warnings_count": 0
+        },
+        {
+          "at": "2026-05-31T15:55:16.240317+00:00",
+          "weights": [
+            {
+              "bpif_ru_bonds": 0.7499
+            },
+            {
+              "bpif_moex_index": 0.1042
+            },
+            {
+              "bpif_liquidity": 0.0625
+            },
+            {
+              "bpif_gold_exchange": 0.0417
+            },
+            {
+              "account_vtb": 0.0417
+            }
+          ],
+          "metrics": {
+            "expected_return": 0.1153,
+            "volatility": 0.0473,
+            "sharpe_ratio": 2.44,
+            "risk_score": 2.0729,
+            "diversification": 0.419,
+            "max_single_weight": 0.7499,
+            "category_mix": {
+              "bond_like": 0.8467,
+              "equity": 0.0684,
+              "commodity": 0.0331,
+              "cash": 0.0518
+            }
+          },
+          "warnings_count": 2
+        },
+        {
+          "at": "2026-05-31T15:55:16.921181+00:00",
+          "weights": [
+            {
+              "bpif_ru_bonds": 0.3333
+            },
+            {
+              "bpif_moex_index": 0.2778
+            },
+            {
+              "bpif_liquidity": 0.1667
+            },
+            {
+              "bpif_gold_exchange": 0.1111
+            },
+            {
+              "account_vtb": 0.1111
+            }
+          ],
+          "metrics": {
+            "expected_return": 0.1272,
+            "volatility": 0.0608,
+            "sharpe_ratio": 2.09,
+            "risk_score": 3.0445,
+            "diversification": 0.759,
+            "max_single_weight": 0.3333,
+            "category_mix": {
+              "bond_like": 0.5,
+              "equity": 0.2778,
+              "commodity": 0.1111,
+              "cash": 0.1111
+            }
+          },
+          "warnings_count": 0
+        },
+        {
+          "at": "2026-05-31T15:55:19.259845+00:00",
+          "weights": [
+            {
+              "bpif_ru_bonds": 0.2954
+            },
+            {
+              "bpif_moex_index": 0.36
+            },
+            {
+              "bpif_liquidity": 0.1477
+            },
+            {
+              "bpif_gold_exchange": 0.0985
+            },
+            {
+              "account_vtb": 0.0985
+            }
+          ],
+          "metrics": {
+            "expected_return": 0.1324,
+            "volatility": 0.0768,
+            "sharpe_ratio": 1.72,
+            "risk_score": 3.4457,
+            "diversification": 0.742,
+            "max_single_weight": 0.36,
+            "category_mix": {
+              "bond_like": 0.4358,
+              "equity": 0.3711,
+              "commodity": 0.0949,
+              "cash": 0.0982
+            }
+          },
+          "warnings_count": 0
+        },
+        {
+          "at": "2026-05-31T15:55:20.009538+00:00",
+          "weights": [
+            {
+              "bpif_ru_bonds": 0.2954
+            },
+            {
+              "bpif_moex_index": 0.36
+            },
+            {
+              "bpif_liquidity": 0.1477
+            },
+            {
+              "bpif_gold_exchange": 0.0985
+            },
+            {
+              "account_vtb": 0.0985
+            }
+          ],
+          "metrics": {
+            "expected_return": 0.1324,
+            "volatility": 0.0768,
+            "sharpe_ratio": 1.72,
+            "risk_score": 3.4457,
+            "diversification": 0.742,
+            "max_single_weight": 0.36,
+            "category_mix": {
+              "bond_like": 0.4358,
+              "equity": 0.3711,
+              "commodity": 0.0949,
+              "cash": 0.0982
+            }
+          },
+          "warnings_count": 0
+        },
+        {
+          "at": "2026-05-31T15:55:23.779348+00:00",
+          "weights": [
+            {
+              "bpif_ru_bonds": 0.2785
+            },
+            {
+              "bpif_moex_index": 0.3394
+            },
+            {
+              "bpif_liquidity": 0.1392
+            },
+            {
+              "bpif_gold_exchange": 0.0929
+            },
+            {
+              "account_vtb": 0.15
+            }
+          ],
+          "metrics": {
+            "expected_return": 0.1304,
+            "volatility": 0.0726,
+            "sharpe_ratio": 1.8,
+            "risk_score": 3.2911,
+            "diversification": 0.757,
+            "max_single_weight": 0.3394,
+            "category_mix": {
+              "bond_like": 0.4159,
+              "equity": 0.3503,
+              "commodity": 0.0897,
+              "cash": 0.1442
+            }
+          },
+          "warnings_count": 0
+        },
+        {
+          "at": "2026-05-31T15:55:25.403472+00:00",
+          "weights": [
+            {
+              "bpif_ru_bonds": 0.3333
+            },
+            {
+              "bpif_moex_index": 0.2778
+            },
+            {
+              "bpif_liquidity": 0.1667
+            },
+            {
+              "bpif_gold_exchange": 0.1111
+            },
+            {
+              "account_vtb": 0.1111
+            }
+          ],
+          "metrics": {
+            "expected_return": 0.1272,
+            "volatility": 0.0608,
+            "sharpe_ratio": 2.09,
+            "risk_score": 3.0445,
+            "diversification": 0.759,
+            "max_single_weight": 0.3333,
+            "category_mix": {
+              "bond_like": 0.5,
+              "equity": 0.2778,
+              "commodity": 0.1111,
+              "cash": 0.1111
+            }
+          },
+          "warnings_count": 0
+        }
+      ],
+      "last_change": {
+        "at": "2026-05-31T15:55:25.403472+00:00",
+        "weights": [
+          {
+            "bpif_ru_bonds": 0.3333
+          },
+          {
+            "bpif_moex_index": 0.2778
+          },
+          {
+            "bpif_liquidity": 0.1667
+          },
+          {
+            "bpif_gold_exchange": 0.1111
+          },
+          {
+            "account_vtb": 0.1111
+          }
+        ],
+        "metrics": {
+          "expected_return": 0.1272,
+          "volatility": 0.0608,
+          "sharpe_ratio": 2.09,
+          "risk_score": 3.0445,
+          "diversification": 0.759,
+          "max_single_weight": 0.3333,
+          "category_mix": {
+            "bond_like": 0.5,
+            "equity": 0.2778,
+            "commodity": 0.1111,
+            "cash": 0.1111
+          }
+        },
+        "warnings_count": 0
+      },
+      "confirmed": false,
+      "final_portfolio": null,
+      "last_success_at": "2026-05-31T15:55:25.403472+00:00",
+      "last_warnings": []
+    },
+    "session-1780311237161-dqtrll7j": {
+      "scenario_id": "draft_balanced_medium",
+      "scenario_title": "Сбалансированный мультипродукт",
+      "risk_profile": "medium",
+      "original_draft": {
+        "portfolioId": "copilot_draft_balanced_medium",
+        "portfolioName": "Сбалансированный мультипродукт",
+        "currency": "RUB",
+        "investmentHorizon": "5_years",
+        "placementAmount": 3000000,
+        "expectedReturn": {
+          "target": 14.5,
+          "inflationAdjusted": true
+        },
+        "riskProfile": "medium",
+        "summary": {
+          "description": "Базовый ИИ-черновик для умеренного профиля: облигации, индекс, ликвидность и золото."
+        },
+        "products": [
+          {
+            "productId": "bpif_ru_bonds",
+            "productName": "БПИФ «Российские облигации»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.3333,
+            "amount": 999900
+          },
+          {
+            "productId": "bpif_moex_index",
+            "productName": "БПИФ «Индекс МосБиржи»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.2778,
+            "amount": 833400
+          },
+          {
+            "productId": "bpif_liquidity",
+            "productName": "БПИФ «Ликвидность»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1667,
+            "amount": 500100
+          },
+          {
+            "productId": "bpif_gold_exchange",
+            "productName": "БПИФ «Золото.Биржевой»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1111,
+            "amount": 333300
+          },
+          {
+            "productId": "account_vtb",
+            "productName": "Накопительный ВТБ Счет",
+            "category": "Денежные продукты",
+            "kind": "account",
+            "weight": 0.1111,
+            "amount": 333300
+          }
+        ],
+        "goal": {
+          "enabled": true,
+          "goalName": "Образование ребенка",
+          "targetAmount": 5000000,
+          "currentInvestment": 1500000,
+          "investmentTermYears": 10,
+          "goalAchievable": false,
+          "recommendedMonthlyContribution": 25000
+        },
+        "rebalance": {
+          "enabled": true,
+          "frequency": "quarterly"
+        },
+        "generatedAt": "2026-06-01T10:54:25.838826+00:00"
+      },
+      "current_portfolio": {
+        "portfolioId": "copilot_draft_balanced_medium",
+        "portfolioName": "Сбалансированный мультипродукт",
+        "currency": "RUB",
+        "investmentHorizon": "5_years",
+        "placementAmount": 3000000,
+        "expectedReturn": {
+          "target": 14.5,
+          "inflationAdjusted": true
+        },
+        "riskProfile": "medium",
+        "summary": {
+          "description": "Базовый ИИ-черновик для умеренного профиля: облигации, индекс, ликвидность и золото."
+        },
+        "products": [
+          {
+            "productId": "bpif_ru_bonds",
+            "productName": "БПИФ «Российские облигации»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.3333,
+            "amount": 999900
+          },
+          {
+            "productId": "bpif_moex_index",
+            "productName": "БПИФ «Индекс МосБиржи»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.2778,
+            "amount": 833400
+          },
+          {
+            "productId": "bpif_liquidity",
+            "productName": "БПИФ «Ликвидность»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1667,
+            "amount": 500100
+          },
+          {
+            "productId": "bpif_gold_exchange",
+            "productName": "БПИФ «Золото.Биржевой»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1111,
+            "amount": 333300
+          },
+          {
+            "productId": "account_vtb",
+            "productName": "Накопительный ВТБ Счет",
+            "category": "Денежные продукты",
+            "kind": "account",
+            "weight": 0.1111,
+            "amount": 333300
+          }
+        ],
+        "goal": {
+          "enabled": true,
+          "goalName": "Образование ребенка",
+          "targetAmount": 5000000,
+          "currentInvestment": 1500000,
+          "investmentTermYears": 10,
+          "goalAchievable": false,
+          "recommendedMonthlyContribution": 25000
+        },
+        "rebalance": {
+          "enabled": true,
+          "frequency": "quarterly"
+        },
+        "generatedAt": "2026-06-01T10:54:25.838826+00:00"
+      },
+      "current_products": [
+        {
+          "productId": "bpif_ru_bonds",
+          "productName": "БПИФ «Российские облигации»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.3333,
+          "amount": 999900
+        },
+        {
+          "productId": "bpif_moex_index",
+          "productName": "БПИФ «Индекс МосБиржи»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.2778,
+          "amount": 833400
+        },
+        {
+          "productId": "bpif_liquidity",
+          "productName": "БПИФ «Ликвидность»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.1667,
+          "amount": 500100
+        },
+        {
+          "productId": "bpif_gold_exchange",
+          "productName": "БПИФ «Золото.Биржевой»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.1111,
+          "amount": 333300
+        },
+        {
+          "productId": "account_vtb",
+          "productName": "Накопительный ВТБ Счет",
+          "category": "Денежные продукты",
+          "kind": "account",
+          "weight": 0.1111,
+          "amount": 333300
+        }
+      ],
+      "baseline_metrics": {
+        "expected_return": 0.1272,
+        "volatility": 0.0608,
+        "sharpe_ratio": 2.09,
+        "risk_score": 3.0445,
+        "diversification": 0.759,
+        "max_single_weight": 0.3333,
+        "category_mix": {
+          "bond_like": 0.5,
+          "equity": 0.2778,
+          "commodity": 0.1111,
+          "cash": 0.1111
+        }
+      },
+      "last_metrics": {
+        "expected_return": 0.1272,
+        "volatility": 0.0608,
+        "sharpe_ratio": 2.09,
+        "risk_score": 3.0445,
+        "diversification": 0.759,
+        "max_single_weight": 0.3333,
+        "category_mix": {
+          "bond_like": 0.5,
+          "equity": 0.2778,
+          "commodity": 0.1111,
+          "cash": 0.1111
+        }
+      },
+      "recalc_history": [],
+      "last_change": null,
+      "confirmed": false,
+      "final_portfolio": null,
+      "last_success_at": "2026-06-01T10:54:25.839253+00:00"
+    },
+    "session-1780311607729-s4r4hhm0": {
+      "scenario_id": "draft_balanced_medium",
+      "scenario_title": "Сбалансированный мультипродукт",
+      "risk_profile": "medium",
+      "original_draft": {
+        "portfolioId": "copilot_draft_balanced_medium",
+        "portfolioName": "Сбалансированный мультипродукт",
+        "currency": "RUB",
+        "investmentHorizon": "5_years",
+        "placementAmount": 3000000,
+        "expectedReturn": {
+          "target": 14.5,
+          "inflationAdjusted": true
+        },
+        "riskProfile": "medium",
+        "summary": {
+          "description": "Базовый ИИ-черновик для умеренного профиля: облигации, индекс, ликвидность и золото."
+        },
+        "products": [
+          {
+            "productId": "bpif_ru_bonds",
+            "productName": "БПИФ «Российские облигации»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.3333,
+            "amount": 999900
+          },
+          {
+            "productId": "bpif_moex_index",
+            "productName": "БПИФ «Индекс МосБиржи»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.2778,
+            "amount": 833400
+          },
+          {
+            "productId": "bpif_liquidity",
+            "productName": "БПИФ «Ликвидность»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1667,
+            "amount": 500100
+          },
+          {
+            "productId": "bpif_gold_exchange",
+            "productName": "БПИФ «Золото.Биржевой»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1111,
+            "amount": 333300
+          },
+          {
+            "productId": "account_vtb",
+            "productName": "Накопительный ВТБ Счет",
+            "category": "Денежные продукты",
+            "kind": "account",
+            "weight": 0.1111,
+            "amount": 333300
+          }
+        ],
+        "goal": {
+          "enabled": true,
+          "goalName": "Образование ребенка",
+          "targetAmount": 5000000,
+          "currentInvestment": 1500000,
+          "investmentTermYears": 10,
+          "goalAchievable": false,
+          "recommendedMonthlyContribution": 25000
+        },
+        "rebalance": {
+          "enabled": true,
+          "frequency": "quarterly"
+        },
+        "generatedAt": "2026-06-01T11:25:26.688167+00:00"
+      },
+      "current_portfolio": {
+        "portfolioId": "copilot_draft_balanced_medium",
+        "portfolioName": "Сбалансированный мультипродукт",
+        "currency": "RUB",
+        "investmentHorizon": "5_years",
+        "placementAmount": 3000000,
+        "expectedReturn": {
+          "target": 14.5,
+          "inflationAdjusted": true
+        },
+        "riskProfile": "medium",
+        "summary": {
+          "description": "Базовый ИИ-черновик для умеренного профиля: облигации, индекс, ликвидность и золото."
+        },
+        "products": [
+          {
+            "productId": "bpif_ru_bonds",
+            "productName": "БПИФ «Российские облигации»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.3333,
+            "amount": 999900
+          },
+          {
+            "productId": "bpif_moex_index",
+            "productName": "БПИФ «Индекс МосБиржи»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.2778,
+            "amount": 833400
+          },
+          {
+            "productId": "bpif_liquidity",
+            "productName": "БПИФ «Ликвидность»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1667,
+            "amount": 500100
+          },
+          {
+            "productId": "bpif_gold_exchange",
+            "productName": "БПИФ «Золото.Биржевой»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1111,
+            "amount": 333300
+          },
+          {
+            "productId": "account_vtb",
+            "productName": "Накопительный ВТБ Счет",
+            "category": "Денежные продукты",
+            "kind": "account",
+            "weight": 0.1111,
+            "amount": 333300
+          }
+        ],
+        "goal": {
+          "enabled": true,
+          "goalName": "Образование ребенка",
+          "targetAmount": 5000000,
+          "currentInvestment": 1500000,
+          "investmentTermYears": 10,
+          "goalAchievable": false,
+          "recommendedMonthlyContribution": 25000
+        },
+        "rebalance": {
+          "enabled": true,
+          "frequency": "quarterly"
+        },
+        "generatedAt": "2026-06-01T11:25:26.688167+00:00"
+      },
+      "current_products": [
+        {
+          "productId": "bpif_ru_bonds",
+          "productName": "БПИФ «Российские облигации»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.3333,
+          "amount": 999900
+        },
+        {
+          "productId": "bpif_moex_index",
+          "productName": "БПИФ «Индекс МосБиржи»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.2778,
+          "amount": 833400
+        },
+        {
+          "productId": "bpif_liquidity",
+          "productName": "БПИФ «Ликвидность»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.1667,
+          "amount": 500100
+        },
+        {
+          "productId": "bpif_gold_exchange",
+          "productName": "БПИФ «Золото.Биржевой»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.1111,
+          "amount": 333300
+        },
+        {
+          "productId": "account_vtb",
+          "productName": "Накопительный ВТБ Счет",
+          "category": "Денежные продукты",
+          "kind": "account",
+          "weight": 0.1111,
+          "amount": 333300
+        }
+      ],
+      "baseline_metrics": {
+        "expected_return": 0.1272,
+        "volatility": 0.0608,
+        "sharpe_ratio": 2.09,
+        "risk_score": 3.0445,
+        "diversification": 0.759,
+        "max_single_weight": 0.3333,
+        "category_mix": {
+          "bond_like": 0.5,
+          "equity": 0.2778,
+          "commodity": 0.1111,
+          "cash": 0.1111
+        }
+      },
+      "last_metrics": {
+        "expected_return": 0.1272,
+        "volatility": 0.0608,
+        "sharpe_ratio": 2.09,
+        "risk_score": 3.0445,
+        "diversification": 0.759,
+        "max_single_weight": 0.3333,
+        "category_mix": {
+          "bond_like": 0.5,
+          "equity": 0.2778,
+          "commodity": 0.1111,
+          "cash": 0.1111
+        }
+      },
+      "recalc_history": [],
+      "last_change": null,
+      "confirmed": false,
+      "final_portfolio": null,
+      "last_success_at": "2026-06-01T11:25:26.688674+00:00"
+    },
+    "session-1780313465507-dmtyo0lb": {
+      "scenario_id": "draft_insurance_wrap",
+      "scenario_title": "Страховая оболочка",
+      "risk_profile": "low",
+      "original_draft": {
+        "portfolioId": "copilot_draft_insurance_wrap",
+        "portfolioName": "Страховая оболочка",
+        "currency": "RUB",
+        "investmentHorizon": "5_years",
+        "placementAmount": 3000000,
+        "expectedReturn": {
+          "target": 14.5,
+          "inflationAdjusted": true
+        },
+        "riskProfile": "low",
+        "summary": {
+          "description": "ИСЖ/НСЖ + консервативные фонды для семейных целей."
+        },
+        "goal": {
+          "enabled": true,
+          "goalName": "Образование ребенка",
+          "targetAmount": 5000000,
+          "currentInvestment": 1500000,
+          "investmentTermYears": 10,
+          "goalAchievable": false,
+          "recommendedMonthlyContribution": 25000
+        },
+        "rebalance": {
+          "enabled": true,
+          "frequency": "quarterly"
+        },
+        "products": [
+          {
+            "productId": "iszh_basis",
+            "productName": "ИСЖ \"Базис Актив 2.0.\"",
+            "category": "Страхование",
+            "kind": "iszh",
+            "weight": 0.2,
+            "amount": 600000
+          },
+          {
+            "productId": "iszh_fixed_income",
+            "productName": "ИСЖ \"Фиксированный доход\"",
+            "category": "Страхование",
+            "kind": "iszh",
+            "weight": 0.15,
+            "amount": 450000
+          },
+          {
+            "productId": "nszh_family",
+            "productName": "НСЖ \"Забота о семье\"",
+            "category": "Страхование",
+            "kind": "nszh",
+            "weight": 0.15,
+            "amount": 450000
+          },
+          {
+            "productId": "bpif_ru_bonds",
+            "productName": "БПИФ «Российские облигации»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.25,
+            "amount": 750000
+          },
+          {
+            "productId": "bpif_liquidity",
+            "productName": "БПИФ «Ликвидность»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.25,
+            "amount": 750000
+          }
+        ]
+      },
+      "current_portfolio": {
+        "portfolioId": "copilot_draft_insurance_wrap",
+        "portfolioName": "Страховая оболочка",
+        "currency": "RUB",
+        "investmentHorizon": "5_years",
+        "placementAmount": 3000000,
+        "expectedReturn": {
+          "target": 14.5,
+          "inflationAdjusted": true
+        },
+        "riskProfile": "low",
+        "summary": {
+          "description": "ИСЖ/НСЖ + консервативные фонды для семейных целей."
+        },
+        "goal": {
+          "enabled": true,
+          "goalName": "Образование ребенка",
+          "targetAmount": 5000000,
+          "currentInvestment": 1500000,
+          "investmentTermYears": 10,
+          "goalAchievable": false,
+          "recommendedMonthlyContribution": 25000
+        },
+        "rebalance": {
+          "enabled": true,
+          "frequency": "quarterly"
+        },
+        "products": [
+          {
+            "productId": "iszh_basis",
+            "productName": "ИСЖ \"Базис Актив 2.0.\"",
+            "category": "Страхование",
+            "kind": "iszh",
+            "weight": 0.2,
+            "amount": 600000
+          },
+          {
+            "productId": "iszh_fixed_income",
+            "productName": "ИСЖ \"Фиксированный доход\"",
+            "category": "Страхование",
+            "kind": "iszh",
+            "weight": 0.15,
+            "amount": 450000
+          },
+          {
+            "productId": "nszh_family",
+            "productName": "НСЖ \"Забота о семье\"",
+            "category": "Страхование",
+            "kind": "nszh",
+            "weight": 0.15,
+            "amount": 450000
+          },
+          {
+            "productId": "bpif_ru_bonds",
+            "productName": "БПИФ «Российские облигации»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.25,
+            "amount": 750000
+          },
+          {
+            "productId": "bpif_liquidity",
+            "productName": "БПИФ «Ликвидность»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.25,
+            "amount": 750000
+          }
+        ]
+      },
+      "current_products": [
+        {
+          "productId": "iszh_basis",
+          "productName": "ИСЖ \"Базис Актив 2.0.\"",
+          "category": "Страхование",
+          "kind": "iszh",
+          "weight": 0.2,
+          "amount": 600000
+        },
+        {
+          "productId": "iszh_fixed_income",
+          "productName": "ИСЖ \"Фиксированный доход\"",
+          "category": "Страхование",
+          "kind": "iszh",
+          "weight": 0.15,
+          "amount": 450000
+        },
+        {
+          "productId": "nszh_family",
+          "productName": "НСЖ \"Забота о семье\"",
+          "category": "Страхование",
+          "kind": "nszh",
+          "weight": 0.15,
+          "amount": 450000
+        },
+        {
+          "productId": "bpif_ru_bonds",
+          "productName": "БПИФ «Российские облигации»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.25,
+          "amount": 750000
+        },
+        {
+          "productId": "bpif_liquidity",
+          "productName": "БПИФ «Ликвидность»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.25,
+          "amount": 750000
+        }
+      ],
+      "baseline_metrics": {
+        "expected_return": 0.1117,
+        "volatility": 0.0259,
+        "sharpe_ratio": 4.31,
+        "risk_score": 1.75,
+        "diversification": 0.79,
+        "max_single_weight": 0.25,
+        "category_mix": {
+          "insurance": 0.35,
+          "mixed": 0.15,
+          "bond_like": 0.5
+        }
+      },
+      "last_metrics": {
+        "expected_return": 0.1117,
+        "volatility": 0.0259,
+        "sharpe_ratio": 4.31,
+        "risk_score": 1.75,
+        "diversification": 0.79,
+        "max_single_weight": 0.25,
+        "category_mix": {
+          "insurance": 0.35,
+          "mixed": 0.15,
+          "bond_like": 0.5
+        }
+      },
+      "recalc_history": [],
+      "last_change": null,
+      "confirmed": false,
+      "final_portfolio": null,
+      "last_success_at": "2026-06-01T11:32:23.569822+00:00"
+    },
+    "session-1780323970060-qxsgs8nh": {
+      "scenario_id": "draft_balanced_medium",
+      "scenario_title": "Сбалансированный мультипродукт",
+      "risk_profile": "medium",
+      "original_draft": {
+        "portfolioId": "copilot_draft_balanced_medium",
+        "portfolioName": "Сбалансированный мультипродукт",
+        "currency": "RUB",
+        "investmentHorizon": "5_years",
+        "placementAmount": 3000000,
+        "expectedReturn": {
+          "target": 14.5,
+          "inflationAdjusted": true
+        },
+        "riskProfile": "medium",
+        "summary": {
+          "description": "Базовый ИИ-черновик для умеренного профиля: облигации, индекс, ликвидность и золото."
+        },
+        "products": [
+          {
+            "productId": "bpif_ru_bonds",
+            "productName": "БПИФ «Российские облигации»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.3333,
+            "amount": 999900
+          },
+          {
+            "productId": "bpif_moex_index",
+            "productName": "БПИФ «Индекс МосБиржи»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.2778,
+            "amount": 833400
+          },
+          {
+            "productId": "bpif_liquidity",
+            "productName": "БПИФ «Ликвидность»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1667,
+            "amount": 500100
+          },
+          {
+            "productId": "bpif_gold_exchange",
+            "productName": "БПИФ «Золото.Биржевой»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1111,
+            "amount": 333300
+          },
+          {
+            "productId": "account_vtb",
+            "productName": "Накопительный ВТБ Счет",
+            "category": "Денежные продукты",
+            "kind": "account",
+            "weight": 0.1111,
+            "amount": 333300
+          }
+        ],
+        "goal": {
+          "enabled": true,
+          "goalName": "Образование ребенка",
+          "targetAmount": 5000000,
+          "currentInvestment": 1500000,
+          "investmentTermYears": 10,
+          "goalAchievable": false,
+          "recommendedMonthlyContribution": 25000
+        },
+        "rebalance": {
+          "enabled": true,
+          "frequency": "quarterly"
+        },
+        "generatedAt": "2026-06-01T14:28:36.723439+00:00"
+      },
+      "current_portfolio": {
+        "portfolioId": "copilot_draft_balanced_medium",
+        "portfolioName": "Сбалансированный мультипродукт",
+        "currency": "RUB",
+        "investmentHorizon": "5_years",
+        "placementAmount": 3000000,
+        "expectedReturn": {
+          "target": 14.5,
+          "inflationAdjusted": true
+        },
+        "riskProfile": "medium",
+        "summary": {
+          "description": "Базовый ИИ-черновик для умеренного профиля: облигации, индекс, ликвидность и золото."
+        },
+        "products": [
+          {
+            "productId": "bpif_ru_bonds",
+            "productName": "БПИФ «Российские облигации»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.29,
+            "amount": 870000
+          },
+          {
+            "productId": "bpif_moex_index",
+            "productName": "БПИФ «Индекс МосБиржи»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.2958,
+            "amount": 887400
+          },
+          {
+            "productId": "bpif_liquidity",
+            "productName": "БПИФ «Ликвидность»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1775,
+            "amount": 532500
+          },
+          {
+            "productId": "bpif_gold_exchange",
+            "productName": "БПИФ «Золото.Биржевой»",
+            "category": "Фонды",
+            "kind": "bpif",
+            "weight": 0.1183,
+            "amount": 354900
+          },
+          {
+            "productId": "account_vtb",
+            "productName": "Накопительный ВТБ Счет",
+            "category": "Денежные продукты",
+            "kind": "account",
+            "weight": 0.1183,
+            "amount": 354900
+          }
+        ],
+        "goal": {
+          "enabled": true,
+          "goalName": "Образование ребенка",
+          "targetAmount": 5000000,
+          "currentInvestment": 1500000,
+          "investmentTermYears": 10,
+          "goalAchievable": false,
+          "recommendedMonthlyContribution": 25000
+        },
+        "rebalance": {
+          "enabled": true,
+          "frequency": "quarterly"
+        },
+        "generatedAt": "2026-06-01T14:28:36.723439+00:00"
+      },
+      "current_products": [
+        {
+          "productId": "bpif_ru_bonds",
+          "productName": "БПИФ «Российские облигации»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.29,
+          "amount": 870000
+        },
+        {
+          "productId": "bpif_moex_index",
+          "productName": "БПИФ «Индекс МосБиржи»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.2958,
+          "amount": 887400
+        },
+        {
+          "productId": "bpif_liquidity",
+          "productName": "БПИФ «Ликвидность»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.1775,
+          "amount": 532500
+        },
+        {
+          "productId": "bpif_gold_exchange",
+          "productName": "БПИФ «Золото.Биржевой»",
+          "category": "Фонды",
+          "kind": "bpif",
+          "weight": 0.1183,
+          "amount": 354900
+        },
+        {
+          "productId": "account_vtb",
+          "productName": "Накопительный ВТБ Счет",
+          "category": "Денежные продукты",
+          "kind": "account",
+          "weight": 0.1183,
+          "amount": 354900
+        }
+      ],
+      "baseline_metrics": {
+        "expected_return": 0.1272,
+        "volatility": 0.0608,
+        "sharpe_ratio": 2.09,
+        "risk_score": 3.0445,
+        "diversification": 0.759,
+        "max_single_weight": 0.3333,
+        "category_mix": {
+          "bond_like": 0.5,
+          "equity": 0.2778,
+          "commodity": 0.1111,
+          "cash": 0.1111
+        }
+      },
+      "last_metrics": {
+        "expected_return": 0.1284,
+        "volatility": 0.0642,
+        "sharpe_ratio": 2.0,
+        "risk_score": 3.1414,
+        "diversification": 0.769,
+        "max_single_weight": 0.2958,
+        "category_mix": {
+          "bond_like": 0.4653,
+          "equity": 0.2987,
+          "commodity": 0.1189,
+          "cash": 0.117
+        }
+      },
+      "recalc_history": [
+        {
+          "at": "2026-06-01T14:28:49.487680+00:00",
+          "weights": [
+            {
+              "bpif_ru_bonds": 0.29
+            },
+            {
+              "bpif_moex_index": 0.2958
+            },
+            {
+              "bpif_liquidity": 0.1775
+            },
+            {
+              "bpif_gold_exchange": 0.1183
+            },
+            {
+              "account_vtb": 0.1183
+            }
+          ],
+          "metrics": {
+            "expected_return": 0.1284,
+            "volatility": 0.0642,
+            "sharpe_ratio": 2.0,
+            "risk_score": 3.1414,
+            "diversification": 0.769,
+            "max_single_weight": 0.2958,
+            "category_mix": {
+              "bond_like": 0.4653,
+              "equity": 0.2987,
+              "commodity": 0.1189,
+              "cash": 0.117
+            }
+          },
+          "warnings_count": 0
+        }
+      ],
+      "last_change": {
+        "at": "2026-06-01T14:28:49.487680+00:00",
+        "weights": [
+          {
+            "bpif_ru_bonds": 0.29
+          },
+          {
+            "bpif_moex_index": 0.2958
+          },
+          {
+            "bpif_liquidity": 0.1775
+          },
+          {
+            "bpif_gold_exchange": 0.1183
+          },
+          {
+            "account_vtb": 0.1183
+          }
+        ],
+        "metrics": {
+          "expected_return": 0.1284,
+          "volatility": 0.0642,
+          "sharpe_ratio": 2.0,
+          "risk_score": 3.1414,
+          "diversification": 0.769,
+          "max_single_weight": 0.2958,
+          "category_mix": {
+            "bond_like": 0.4653,
+            "equity": 0.2987,
+            "commodity": 0.1189,
+            "cash": 0.117
+          }
+        },
+        "warnings_count": 0
+      },
+      "confirmed": false,
+      "final_portfolio": null,
+      "last_success_at": "2026-06-01T14:28:49.487680+00:00",
+      "last_warnings": []
+    }
+  }
+}

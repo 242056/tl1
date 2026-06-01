@@ -200,3 +200,28 @@ class VtbModelClient:
                 "explanation_factors": cfg["explanation"],
             },
         }
+
+    async def recalculate_portfolio(
+        self,
+        scenario_id: str,
+        products: List[Dict[str, Any]],
+        *,
+        risk_profile: str = "medium",
+        baseline_products: Optional[List[Dict[str, Any]]] = None,
+    ) -> Dict[str, Any]:
+        """Заглушка пересчёта метрик Co-pilot (< 2 с)."""
+        import asyncio
+
+        from .copilot_metrics import compute_portfolio_metrics
+
+        await asyncio.sleep(0.08)
+
+        metrics = compute_portfolio_metrics(products, baseline_products)
+
+        return {
+            "success": True,
+            "data": {
+                "recalc_ms": 350,
+                "metrics": metrics,
+            },
+        }
